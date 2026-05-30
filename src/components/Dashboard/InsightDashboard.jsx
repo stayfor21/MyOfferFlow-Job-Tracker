@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BarChart3, Info, Lightbulb, Sparkles, Zap } from 'lucide-react';
 import Button from '../UI/Button';
+import CareerGoals from './CareerGoals';
 import { todayString } from '../../utils/jobMetadata';
 import { useTranslation } from '../../i18n.jsx';
 
@@ -15,7 +16,15 @@ function MetricCard({ label, value, helper, color }) {
   );
 }
 
-export default function InsightDashboard({ jobs, columns }) {
+export default function InsightDashboard({
+  jobs,
+  columns,
+  careerGoals,
+  setCareerGoals,
+  manualPlannerTasks,
+  setManualPlannerTasks,
+  completedPlannerTaskIds
+}) {
   const { t } = useTranslation();
   const totalApps = jobs.length;
   const interviews = jobs.filter((j) => j.status === 'interview' || j.status === 'offer').length;
@@ -242,6 +251,15 @@ export default function InsightDashboard({ jobs, columns }) {
           </div>
         </div>
       </div>
+
+      <CareerGoals
+        jobs={jobs}
+        goals={careerGoals}
+        setGoals={setCareerGoals}
+        manualTasks={manualPlannerTasks}
+        setManualTasks={setManualPlannerTasks}
+        completedTaskIds={completedPlannerTaskIds}
+      />
     </motion.section>
   );
 }

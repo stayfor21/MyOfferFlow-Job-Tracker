@@ -45,6 +45,7 @@ export default function App() {
   const [isPlannerOpen, setIsPlannerOpen] = useState(false);
   const [manualPlannerTasks, setManualPlannerTasks] = useLocalStorage('offerflow-planner-tasks', []);
   const [completedPlannerTaskIds, setCompletedPlannerTaskIds] = useLocalStorage('offerflow-planner-completed', []);
+  const [careerGoals, setCareerGoals] = useLocalStorage('offerflow-career-goals', []);
 
   const [showPrepPrompt, setShowPrepPrompt] = useState(false);
   const [isPrepModalOpen, setIsPrepModalOpen] = useState(false);
@@ -340,7 +341,15 @@ export default function App() {
 
         <div id="prep-portal"></div>
 
-        <InsightDashboard jobs={analyticsJobs} columns={COLUMNS} />
+        <InsightDashboard
+          jobs={analyticsJobs}
+          columns={COLUMNS}
+          careerGoals={careerGoals}
+          setCareerGoals={setCareerGoals}
+          manualPlannerTasks={manualPlannerTasks}
+          setManualPlannerTasks={setManualPlannerTasks}
+          completedPlannerTaskIds={completedPlannerTaskIds}
+        />
       </main>
 
       {isModalOpen && (
