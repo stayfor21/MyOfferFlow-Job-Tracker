@@ -18,9 +18,9 @@ import Button from '../UI/Button';
 import CustomSelect from '../UI/CustomSelect';
 import { useTranslation } from '../../i18n.jsx';
 import {
+  addDays,
   getPlannerTasksFromJobs,
   getTodayString,
-  groupPlannerTasks,
   sortPlannerTasks
 } from '../../utils/planner';
 
@@ -35,13 +35,11 @@ const tabs = [
   { id: 'done', labelKey: 'planner.tab.done' }
 ];
 
-const sectionConfig = [
-  { id: 'overdue', labelKey: 'planner.section.overdue' },
-  { id: 'today', labelKey: 'planner.section.today' },
-  { id: 'tomorrow', labelKey: 'planner.section.tomorrow' },
-  { id: 'week', labelKey: 'planner.section.week' },
-  { id: 'later', labelKey: 'planner.section.later' }
-];
+const plannerLocales = {
+  en: 'en-US',
+  de: 'de-DE',
+  ru: 'ru-RU'
+};
 
 const typeMeta = {
   manual: { icon: ClipboardList, tone: 'text-slate-300', chip: 'of-chip-slate' },
@@ -57,6 +55,115 @@ const typeMeta = {
 function getJobLabel(job, fallback) {
   if (!job) return fallback;
   return [job.company, job.position || job.title].filter(Boolean).join(' · ') || fallback;
+}
+
+function getPlannerLocale(language) {
+  return plannerLocales[language] || plannerLocales.en;
+}
+
+function getCalendarDays(startDate, count = 14) {
+  return Array.from({ length: count }, (_, index) => addDays(startDate, index));
+}
+
+function formatWeekdayShort(dateKey, language) {
+  const date = new Date(`${dateKey}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return '';
+  return date.toLocaleDateString(getPlannerLocale(language), { weekday: 'short' }).replace('.', '');
+}
+
+function formatSelectedDayLabel(dateKey, language, t) {
+  const today = getTodayString();
+  if (dateKey === today) return t('planner.calendar.today');
+  if (dateKey === addDays(today, 1)) return t('planner.calendar.tomorrow');
+
+  const date = new Date(`${dateKey}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return dateKey;
+  return date.toLocaleDateString(getPlannerLocale(language), {
+    weekday: 'long',
+    month: 'short',
+    day: 'numeric'
+  });
+}
+
+function getTaskCountLabel(count, t) {
+  return count === 1
+    ? t('planner.calendar.taskSingular', { count })
+    : t('planner.calendar.taskPlural', { count });
+}
+
+function CalendarStrip({
+  days,
+  selectedDate,
+  today,
+  taskCounts,
+  onSelectDay
+}) {
+  const { t, language, formatDate } = useTranslation();
+
+  return (
+    <section className="mb-4 rounded-3xl border border-[var(--border-subtle)] bg-[var(--surface)] p-3">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2">
+          <CalendarDays size={15} className="shrink-0 text-[var(--primary)]" />
+          <p className="truncate text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
+            {t('planner.calendar.title')}
+          </p>
+        </div>
+        <p className="shrink-0 text-[11px] font-medium text-[var(--text-faint)]">
+          {formatDate(selectedDate)}
+        </p>
+      </div>
+      <div className="modal-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+        {days.map((dateKey) => {
+          const count = taskCounts.get(dateKey) || 0;
+          const displayCount = count > 9 ? '9+' : String(count);
+          const isSelected = dateKey === selectedDate;
+          const isToday = dateKey === today;
+          const date = new Date(`${dateKey}T00:00:00`);
+          const dayNumber = Number.isNaN(date.getTime()) ? '' : date.getDate();
+          const countText = getTaskCountLabel(count, t);
+
+          return (
+            <button
+              key={dateKey}
+              type="button"
+              aria-pressed={isSelected}
+              aria-label={`${t('planner.calendar.selectDay')} ${formatSelectedDayLabel(dateKey, language, t)}, ${countText}`}
+              onClick={() => onSelectDay(dateKey)}
+              className={[
+                'h-[68px] w-[68px] shrink-0 rounded-2xl border p-2 text-left transition-[background-color,border-color,box-shadow,color] duration-150 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
+                isSelected
+                  ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] text-[var(--text)] shadow-[0_0_18px_var(--primary-glow)]'
+                  : 'border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)]',
+                isToday && !isSelected ? 'ring-1 ring-[var(--primary-border)]' : ''
+              ].join(' ')}
+            >
+              <span className="block text-[11px] font-semibold uppercase leading-4">
+                {isToday ? t('planner.calendar.todayShort') : formatWeekdayShort(dateKey, language)}
+              </span>
+              <span className="mt-0.5 block text-xl font-bold leading-6 text-[var(--text)]">
+                {dayNumber}
+              </span>
+              <span className="mt-0.5 flex h-[14px] items-center">
+                {count > 0 ? (
+                  <span
+                    className={[
+                      'inline-grid h-[14px] place-items-center rounded-full border border-[var(--primary-border)] bg-[var(--primary-soft)] text-[9px] font-semibold leading-none text-[var(--primary)] tabular-nums',
+                      count > 9 ? 'min-w-[18px] px-[3px]' : 'w-[14px]'
+                    ].join(' ')}
+                  >
+                    {displayCount}
+                  </span>
+                ) : (
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--border-strong)]" />
+                )}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
 }
 
 function normalizeManualTasks(tasks, jobs) {
@@ -200,12 +307,14 @@ export default function SmartPlannerDrawer({
   onOpenJob,
   onOpenPrep
 }) {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const today = getTodayString();
   const [activeTab, setActiveTab] = useState('today');
+  const [selectedPlannerDate, setSelectedPlannerDate] = useState(today);
   const [isAdding, setIsAdding] = useState(false);
   const [form, setForm] = useState({
     title: '',
-    date: getTodayString(),
+    date: today,
     relatedJobId: '',
     priority: 'medium',
     notes: ''
@@ -237,12 +346,23 @@ export default function SmartPlannerDrawer({
   const completedManualTasks = manual.filter((task) => task.completed);
   const activeTasks = sortPlannerTasks([...activeAutoTasks, ...activeManualTasks]);
   const doneTasks = sortPlannerTasks([...completedAutoTasks, ...completedManualTasks]);
-  const groups = groupPlannerTasks(activeTasks);
-  const todayTasks = [...groups.overdue, ...groups.today];
-  const weekTasks = [...groups.overdue, ...groups.today, ...groups.tomorrow, ...groups.week];
-  const visibleGroups = activeTab === 'today'
-    ? { overdue: groups.overdue, today: groups.today }
-    : { overdue: groups.overdue, today: groups.today, tomorrow: groups.tomorrow, week: groups.week };
+  const calendarDays = useMemo(() => getCalendarDays(today, 14), [today]);
+  const taskCountsByDate = useMemo(() => {
+    const counts = new Map();
+    activeTasks.forEach((task) => {
+      if (!task.date) return;
+      counts.set(task.date, (counts.get(task.date) || 0) + 1);
+    });
+    return counts;
+  }, [activeTasks]);
+  const overdueTasks = sortPlannerTasks(activeTasks.filter((task) => task.date && task.date < today));
+  const selectedDayTasks = sortPlannerTasks(activeTasks.filter((task) => task.date === selectedPlannerDate));
+  const todayTasks = activeTasks.filter((task) => task.date === today);
+  const weekEnd = addDays(today, 7);
+  const weekTasks = activeTasks.filter((task) => task.date >= today && task.date <= weekEnd);
+  const todayOverviewCount = todayTasks.length + overdueTasks.length;
+  const selectedDayLabel = formatSelectedDayLabel(selectedPlannerDate, language, t);
+  const showCalendar = activeTab === 'today' || activeTab === 'week';
   const jobOptions = [
     { value: '', label: t('planner.noRelatedJob') },
     ...activeJobs.map((job) => ({ value: job.id, label: getJobLabel(job, t('job.unknownCompany')) }))
@@ -273,7 +393,7 @@ export default function SmartPlannerDrawer({
   const resetForm = () => {
     setForm({
       title: '',
-      date: getTodayString(),
+      date: selectedPlannerDate || getTodayString(),
       relatedJobId: '',
       priority: 'medium',
       notes: ''
@@ -313,6 +433,7 @@ export default function SmartPlannerDrawer({
     resetForm();
     setIsAdding(false);
     setActiveTab('week');
+    setSelectedPlannerDate(form.date || selectedPlannerDate);
   };
 
   const handleAddSuggestion = (task) => {
@@ -324,6 +445,25 @@ export default function SmartPlannerDrawer({
       relatedJobId: task.relatedJobId || ''
     });
     setActiveTab('week');
+    setSelectedPlannerDate(task.date || getTodayString());
+  };
+
+  const handleSelectDay = (dateKey) => {
+    setSelectedPlannerDate(dateKey);
+    if (activeTab === 'today' && dateKey !== today) setActiveTab('week');
+  };
+
+  const handleToggleAdd = () => {
+    setIsAdding((current) => {
+      const next = !current;
+      if (next) {
+        setForm((currentForm) => ({
+          ...currentForm,
+          date: selectedPlannerDate || getTodayString()
+        }));
+      }
+      return next;
+    });
   };
 
   const handleMarkDone = (task) => {
@@ -421,7 +561,10 @@ export default function SmartPlannerDrawer({
                   <button
                     key={tab.id}
                     type="button"
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      if (tab.id === 'today') setSelectedPlannerDate(today);
+                    }}
                     className={[
                       'h-9 shrink-0 rounded-xl border px-3 text-xs font-semibold transition-[background-color,border-color,color] duration-150',
                       activeTab === tab.id
@@ -436,16 +579,26 @@ export default function SmartPlannerDrawer({
             </header>
 
             <div className="modal-scrollbar flex-1 overflow-y-auto p-4 sm:p-5">
+              {showCalendar && (
+                <CalendarStrip
+                  days={calendarDays}
+                  selectedDate={selectedPlannerDate}
+                  today={today}
+                  taskCounts={taskCountsByDate}
+                  onSelectDay={handleSelectDay}
+                />
+              )}
+
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex flex-wrap gap-2 text-xs text-zinc-500">
                   <span className="rounded-full border border-white/[0.08] bg-zinc-950/50 px-2.5 py-1">
-                    {t('planner.section.today')}: {todayTasks.length}
+                    {t('planner.section.today')}: {todayOverviewCount}
                   </span>
                   <span className="rounded-full border border-white/[0.08] bg-zinc-950/50 px-2.5 py-1">
                     {t('planner.tab.week')}: {weekTasks.length}
                   </span>
                 </div>
-                <Button type="button" variant="secondary" size="compact" onClick={() => setIsAdding((current) => !current)}>
+                <Button type="button" variant="secondary" size="compact" onClick={handleToggleAdd}>
                   <Plus size={13} />
                   {t('planner.addTask')}
                 </Button>
@@ -525,17 +678,28 @@ export default function SmartPlannerDrawer({
                 </section>
               ) : (
                 <div className="space-y-5">
-                  {sectionConfig
-                    .filter((section) => Object.prototype.hasOwnProperty.call(visibleGroups, section.id))
-                    .map((section) => (
-                      visibleGroups[section.id]?.length > 0 && (
-                        <section key={section.id} className="space-y-3">
-                          <h3 className="text-sm font-semibold text-zinc-100">{t(section.labelKey)}</h3>
-                          {renderTaskList(visibleGroups[section.id])}
-                        </section>
-                      )
-                    ))}
-                  {Object.values(visibleGroups).every((items) => items.length === 0) && <EmptyState />}
+                  {selectedPlannerDate === today && overdueTasks.length > 0 && (
+                    <section className="space-y-3">
+                      <h3 className="text-sm font-semibold text-zinc-100">{t('planner.section.overdue')}</h3>
+                      {renderTaskList(overdueTasks)}
+                    </section>
+                  )}
+                  <section className="space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="text-sm font-semibold text-zinc-100">{selectedDayLabel}</h3>
+                      <span className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1 text-[11px] font-semibold text-[var(--text-muted)]">
+                        {getTaskCountLabel(selectedDayTasks.length, t)}
+                      </span>
+                    </div>
+                    {selectedDayTasks.length > 0 ? renderTaskList(selectedDayTasks) : (
+                      <div className="rounded-3xl border border-dashed border-white/[0.10] bg-zinc-950/30 p-6 text-center">
+                        <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-white/[0.08] bg-zinc-900/70 text-zinc-500">
+                          <CalendarDays size={18} />
+                        </div>
+                        <p className="text-sm font-semibold text-zinc-200">{t('planner.calendar.emptyDay')}</p>
+                      </div>
+                    )}
+                  </section>
                 </div>
               )}
             </div>

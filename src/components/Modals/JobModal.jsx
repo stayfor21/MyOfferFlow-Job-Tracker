@@ -553,33 +553,43 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           </Section>
         </div>
 
-        <footer className="flex items-center gap-3 border-t border-white/[0.08] bg-[#0b0b0f]/95 p-4 sm:p-5">
-          {isEditing && (
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              aria-label={t('modal.delete')}
-              onClick={() => onDelete(job.id)}
-              className="text-rose-300 hover:bg-rose-500/10 hover:text-rose-200"
-            >
-              <Trash2 size={18} />
-            </Button>
-          )}
-          <div className="ml-auto flex gap-3">
-            {isEditing && (
+        <footer className="w-full max-w-full shrink-0 overflow-x-clip border-t border-[var(--border)] bg-[var(--surface-elevated)] p-4 sm:p-5">
+          <div className="flex w-full max-w-full flex-wrap items-center justify-between gap-3">
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
+              {isEditing && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label={t('modal.delete')}
+                  onClick={() => onDelete(job.id)}
+                  className="shrink-0 text-rose-300 hover:bg-rose-500/10 hover:text-rose-200"
+                >
+                  <Trash2 size={18} />
+                </Button>
+              )}
+              {isEditing && (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => onArchive(job.id, !isArchived)}
+                  className={`max-w-full shrink-0 ${isArchived ? 'of-chip-success hover:border-emerald-400/30 hover:bg-emerald-500/15' : ''}`}
+                >
+                  {isArchived ? <ArchiveRestore size={16} /> : <Archive size={16} />}
+                  {isArchived ? t('archive.unarchiveShort') : t('archive.archiveShort')}
+                </Button>
+              )}
+            </div>
+            <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2 sm:gap-3">
+              <Button type="button" variant="secondary" onClick={onClose}>{t('common.close')}</Button>
               <Button
-                type="button"
-                variant="secondary"
-                onClick={() => onArchive(job.id, !isArchived)}
-                className={isArchived ? 'of-chip-success hover:border-emerald-400/30 hover:bg-emerald-500/15' : ''}
+                type="submit"
+                variant="primary"
+                className="shrink-0"
               >
-                {isArchived ? <ArchiveRestore size={16} /> : <Archive size={16} />}
-                {isArchived ? t('archive.unarchive') : t('archive.archive')}
+                {isEditing ? t('modal.saveChangesShort') : t('modal.saveApplicationShort')}
               </Button>
-            )}
-            <Button type="button" variant="secondary" onClick={onClose}>{t('common.close')}</Button>
-            <Button type="submit" variant="primary">{isEditing ? t('modal.saveChanges') : t('modal.saveApplication')}</Button>
+            </div>
           </div>
         </footer>
       </form>

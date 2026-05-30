@@ -1,16 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, CalendarCheck, Info, Lightbulb, Sparkles, Zap } from 'lucide-react';
+import { BarChart3, Info, Lightbulb, Sparkles, Zap } from 'lucide-react';
 import Button from '../UI/Button';
 import { todayString } from '../../utils/jobMetadata';
 import { useTranslation } from '../../i18n.jsx';
 
 function MetricCard({ label, value, helper, color }) {
   return (
-    <div className="rounded-2xl border border-white/[0.08] bg-zinc-950/45 p-4">
-      <p className="text-xs font-medium text-zinc-500">{label}</p>
+    <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4">
+      <p className="text-xs font-medium text-[var(--text-muted)]">{label}</p>
       <p className={`mt-2 text-2xl font-bold ${color}`}>{value}</p>
-      {helper && <p className="mt-1 text-[11px] font-medium text-zinc-600">{helper}</p>}
+      {helper && <p className="mt-1 text-[11px] font-medium text-[var(--text-faint)]">{helper}</p>}
     </div>
   );
 }
@@ -43,7 +43,7 @@ export default function InsightDashboard({ jobs, columns }) {
     if (activeInterview) {
       return {
         title: t('dashboard.prepareInterview'),
-        body: `${activeInterview.position || activeInterview.title || 'Interview'}${activeInterview.company ? ` at ${activeInterview.company}` : ''}`,
+        body: [activeInterview.position || activeInterview.title || 'Interview', activeInterview.company].filter(Boolean).join(' · '),
         action: t('dashboard.openPrep'),
         onAction: () => window.dispatchEvent(new CustomEvent('open-prep-tool', { detail: activeInterview }))
       };
@@ -102,90 +102,94 @@ export default function InsightDashboard({ jobs, columns }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="mt-16 mb-20 border-t border-zinc-800/80 pt-12"
+      className="mb-20 mt-16 border-t border-[var(--border)] pt-10 sm:pt-12"
     >
-      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div className="flex items-center gap-3">
-          <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-2.5 text-indigo-300">
-            <Zap size={20} />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight">{t('dashboard.title')}</h2>
-            <p className="mt-1 text-sm text-zinc-500">{t('dashboard.subtitle')}</p>
-          </div>
+      <div className="mb-6 flex min-w-0 items-center gap-3">
+        <div className="of-chip of-chip-violet flex h-11 w-11 shrink-0 justify-center rounded-2xl p-0">
+          <Zap size={19} />
         </div>
-
-        <div className="flex items-start gap-3 rounded-3xl border border-indigo-500/20 bg-indigo-500/[0.07] p-4 text-left md:max-w-xl">
-          <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-2 text-indigo-300">
-            <Lightbulb size={17} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[11px] font-semibold uppercase text-zinc-500">{t('dashboard.todayFocus')}</p>
-            <p className="mt-1 text-sm font-semibold text-zinc-100">{todayFocus.title}</p>
-            <p className="mt-1 text-sm leading-6 text-zinc-400">{todayFocus.body}</p>
-            <p className="mt-2 text-xs text-zinc-600">{focusMeta}</p>
-          </div>
-          {todayFocus.action && (
-            <Button type="button" size="compact" variant="primary" onClick={todayFocus.onAction} className="mt-0.5 shrink-0">
-              <Sparkles size={12} />
-              {todayFocus.action}
-            </Button>
-          )}
+        <div className="min-w-0">
+          <h2 className="text-2xl font-bold tracking-tight text-[var(--text)]">{t('dashboard.title')}</h2>
+          <p className="mt-1 max-w-2xl text-sm leading-6 text-[var(--text-muted)]">{t('dashboard.subtitle')}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-        <div className="rounded-[24px] border border-white/[0.08] bg-zinc-900/45 p-5 shadow-2xl shadow-black/15 sm:p-6">
-          <div className="mb-6 text-center">
-            <h3 className="text-base font-semibold text-zinc-100">{t('dashboard.efficiency')}</h3>
-            <p className="mt-1 text-sm text-zinc-500">{t('dashboard.efficiencyHelp')}</p>
-          </div>
-
-          <div className="relative mx-auto flex h-44 w-44 items-center justify-center">
-            <svg viewBox="0 0 176 176" className="h-full w-full -rotate-90">
-              <circle
-                cx="88"
-                cy="88"
-                r="80"
-                stroke="currentColor"
-                strokeWidth="12"
-                fill="transparent"
-                className="text-zinc-800"
-              />
-              <motion.circle
-                cx="88"
-                cy="88"
-                r="80"
-                stroke="currentColor"
-                strokeWidth="12"
-                fill="transparent"
-                strokeDasharray="503"
-                initial={{ strokeDashoffset: 503 }}
-                whileInView={{ strokeDashoffset: 503 - (503 * efficiency) / 100 }}
-                transition={{ duration: 1.5, ease: 'easeInOut', delay: 0.2 }}
-                strokeLinecap="round"
-                className="text-[#635BFF] drop-shadow-[0_0_16px_rgba(99,91,255,0.25)]"
-              />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-4xl font-bold text-zinc-100">{efficiency}%</span>
-              <span className="mt-1 text-xs font-medium text-zinc-500">{t('dashboard.efficiencyRate')}</span>
+      <div className="grid items-stretch gap-6 xl:grid-cols-[minmax(320px,0.72fr)_minmax(560px,1.28fr)]">
+        <div className="grid min-w-0 gap-5 xl:grid-rows-[auto_minmax(0,1fr)]">
+          <div className="min-w-0 rounded-3xl border border-[var(--primary-border)] bg-[var(--primary-soft)] p-4 text-left shadow-sm shadow-black/5 sm:p-[18px]">
+            <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
+              <div className="of-chip of-chip-violet flex h-9 w-9 shrink-0 justify-center rounded-xl p-0">
+                <Lightbulb size={15} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-semibold uppercase leading-4 tracking-wide text-[var(--text-muted)]">{t('dashboard.todayFocus')}</p>
+                <p title={todayFocus.title} className="mt-0.5 line-clamp-2 text-sm font-semibold leading-5 text-[var(--text)]">{todayFocus.title}</p>
+                <p title={todayFocus.body} className="mt-0.5 line-clamp-1 text-[13px] leading-5 text-[var(--text-soft)]">{todayFocus.body}</p>
+              </div>
+              {todayFocus.action && (
+                <Button type="button" size="compact" variant="primary" onClick={todayFocus.onAction} className="col-start-2 w-fit shrink-0 sm:col-start-3 sm:row-start-1">
+                  <Sparkles size={12} />
+                  {todayFocus.action}
+                </Button>
+              )}
+              <p title={focusMeta} className="col-span-2 line-clamp-1 text-[11px] font-medium leading-4 text-[var(--text-muted)] sm:col-span-2 sm:col-start-2">
+                {focusMeta}
+              </p>
             </div>
           </div>
 
-          <div className="mt-6 flex items-start gap-3 rounded-2xl border border-indigo-500/10 bg-indigo-500/5 p-4 text-left">
-            <Info size={16} className="mt-0.5 shrink-0 text-indigo-300" />
-            <p className="text-sm leading-6 text-zinc-400">{getFeedback(efficiency)}</p>
+          <div className="flex min-h-0 flex-col rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-2xl shadow-black/15 sm:p-6">
+            <div className="mb-5 text-center">
+              <h3 className="text-base font-semibold text-[var(--text)]">{t('dashboard.efficiency')}</h3>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">{t('dashboard.efficiencyHelp')}</p>
+            </div>
+
+            <div className="relative mx-auto flex h-40 w-40 items-center justify-center">
+              <svg viewBox="0 0 176 176" className="h-full w-full -rotate-90">
+                <circle
+                  cx="88"
+                  cy="88"
+                  r="80"
+                  stroke="currentColor"
+                  strokeWidth="12"
+                  fill="transparent"
+                  className="text-[var(--border-strong)]"
+                />
+                <motion.circle
+                  cx="88"
+                  cy="88"
+                  r="80"
+                  stroke="currentColor"
+                  strokeWidth="12"
+                  fill="transparent"
+                  strokeDasharray="503"
+                  initial={{ strokeDashoffset: 503 }}
+                  whileInView={{ strokeDashoffset: 503 - (503 * efficiency) / 100 }}
+                  transition={{ duration: 1.5, ease: 'easeInOut', delay: 0.2 }}
+                  strokeLinecap="round"
+                  className="text-[#635BFF] drop-shadow-[0_0_16px_rgba(99,91,255,0.25)]"
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-4xl font-bold text-[var(--text)]">{efficiency}%</span>
+                <span className="mt-1 text-xs font-medium text-[var(--text-muted)]">{t('dashboard.efficiencyRate')}</span>
+              </div>
+            </div>
+
+            <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[var(--primary-border)] bg-[var(--primary-soft)] p-4 text-left">
+              <Info size={16} className="mt-0.5 shrink-0 text-[var(--primary)]" />
+              <p className="text-sm leading-6 text-[var(--text-soft)]">{getFeedback(efficiency)}</p>
+            </div>
           </div>
         </div>
 
-        <div className="rounded-[24px] border border-white/[0.08] bg-zinc-900/45 p-5 shadow-2xl shadow-black/15 sm:p-6 lg:col-span-2">
+        <div className="flex min-h-0 flex-col rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-2xl shadow-black/15 sm:p-6">
           <div className="mb-6 flex items-center justify-between gap-4">
             <div>
-              <h3 className="text-base font-semibold text-zinc-100">{t('dashboard.pipeline')}</h3>
-              <p className="mt-1 text-sm text-zinc-500">{t('dashboard.pipelineHelp')}</p>
+              <h3 className="text-base font-semibold text-[var(--text)]">{t('dashboard.pipeline')}</h3>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">{t('dashboard.pipelineHelp')}</p>
             </div>
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-2.5 text-zinc-500">
+            <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2.5 text-[var(--text-muted)]">
               <BarChart3 size={20} />
             </div>
           </div>
@@ -194,10 +198,10 @@ export default function InsightDashboard({ jobs, columns }) {
             {chartData.map((item, idx) => (
               <div key={item.label} className="space-y-2">
                 <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="font-medium text-zinc-300">{item.label}</span>
-                  <span className="text-zinc-500">{item.count}</span>
+                  <span className="font-medium text-[var(--text-soft)]">{item.label}</span>
+                  <span className="text-[var(--text-muted)]">{item.count}</span>
                 </div>
-                <div className="h-2.5 w-full overflow-hidden rounded-full bg-zinc-800/60">
+                <div className="h-2.5 w-full overflow-hidden rounded-full bg-[var(--surface-muted)]">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${(item.count / maxCount) * 100}%` }}
@@ -210,7 +214,7 @@ export default function InsightDashboard({ jobs, columns }) {
             ))}
           </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <div className="mt-auto grid grid-cols-2 gap-3 pt-8 lg:grid-cols-4">
             <MetricCard
               label={t('dashboard.successRatio')}
               value={`${totalApps > 0 ? ((offers / totalApps) * 100).toFixed(1) : 0}%`}
