@@ -1,20 +1,22 @@
-# OfferFlow - Job Application Tracker
+# MyOfferFlow - Job Application Tracker
 
-OfferFlow is a modern job application tracking dashboard designed to help users manage their hiring pipeline from the first application to the final offer.
+MyOfferFlow is a modern job application tracking dashboard designed to help users manage their hiring pipeline from the first application to the final offer.
 
 It combines a visual Kanban board, smart planning tools, interview preparation, career goals, analytics, reminders, and multilingual support into one focused productivity workspace.
 
-The goal of OfferFlow is simple: help job seekers stay organized, act on time, prepare better, and move through the hiring process with more clarity.
+The goal of MyOfferFlow is simple: help job seekers stay organized, act on time, prepare better, and move through the hiring process with more clarity.
 
 ---
 
 ## Overview
 
-Searching for a job often becomes chaotic: applications are spread across emails, notes, spreadsheets, job boards, and memory. OfferFlow solves this by giving users one structured workspace where every opportunity can be tracked, updated, planned, and analyzed.
+Searching for a job often becomes chaotic: applications are spread across emails, notes, spreadsheets, job boards, and memory. MyOfferFlow solves this by giving users one structured workspace where every opportunity can be tracked, updated, planned, and analyzed.
 
 Users can add job applications, move them through hiring stages, set priorities, mark dream jobs, schedule follow-ups, prepare for interviews, track career goals, and view insights about their job search progress.
 
-OfferFlow is built as a polished SaaS-style dashboard with support for light and dark themes, multilingual UI, smart planner features, and a responsive interface.
+MyOfferFlow is built as a polished SaaS-style dashboard with support for light and dark themes, multilingual UI, smart planner features, and a responsive interface.
+
+Link: https://myofferflow.netlify.app
 
 ---
 
@@ -22,7 +24,7 @@ OfferFlow is built as a polished SaaS-style dashboard with support for light and
 
 ### 1. Kanban Job Pipeline
 
-OfferFlow uses a visual Kanban board to track applications by status.
+MyOfferFlow uses a visual Kanban board to track applications by status.
 
 Default pipeline stages:
 
@@ -112,7 +114,7 @@ The footer is adaptive and designed to avoid overflow in English, German, and Ru
 
 ### 4. Smart Filters
 
-OfferFlow includes a smart filter bar that allows users to quickly focus on specific groups of applications.
+MyOfferFlow includes a smart filter bar that allows users to quickly focus on specific groups of applications.
 
 Available filters include:
 
@@ -164,7 +166,7 @@ The planner is connected to application data, so it can suggest or display tasks
 
 ### 6. Interview Preparation
 
-OfferFlow includes an interview preparation flow that helps users create structured preparation plans for specific applications.
+MyOfferFlow includes an interview preparation flow that helps users create structured preparation plans for specific applications.
 
 The preparation system can use:
 
@@ -202,7 +204,7 @@ The preparation flow is designed to help users prepare with more confidence and 
 
 ### 7. Insight Dashboard
 
-OfferFlow includes a dedicated insights section for understanding job search performance.
+MyOfferFlow includes a dedicated insights section for understanding job search performance.
 
 The dashboard includes:
 
@@ -228,7 +230,7 @@ The design uses a clear visual hierarchy with cards, progress bars, metrics, and
 
 ### 8. Career Goals
 
-OfferFlow includes a Career Goals section where users can set and track job search targets.
+MyOfferFlow includes a Career Goals section where users can set and track job search targets.
 
 Supported goal types include:
 
@@ -273,7 +275,7 @@ This makes the goal system dynamic and connected to real user activity.
 
 ### 9. Light and Dark Themes
 
-OfferFlow supports both light and dark themes.
+MyOfferFlow supports both light and dark themes.
 
 The default theme for new users is light mode.
 
@@ -300,7 +302,7 @@ The light theme is designed to feel clean, modern, and professional, while the d
 
 ### 10. Multilingual Support
 
-OfferFlow supports three interface languages:
+MyOfferFlow supports three interface languages:
 
 - English
 - German
@@ -331,7 +333,7 @@ The application avoids using translated strings as internal identifiers to preve
 
 ### 11. Footer
 
-OfferFlow includes a minimal product footer at the bottom of the dashboard.
+MyOfferFlow includes a minimal product footer at the bottom of the dashboard.
 
 The footer includes:
 
@@ -354,7 +356,7 @@ The footer is intentionally compact and designed as a quiet ending to the dashbo
 
 ## Design Philosophy
 
-OfferFlow is designed as a premium productivity dashboard.
+MyOfferFlow is designed as a premium productivity dashboard.
 
 The visual style focuses on:
 
@@ -401,7 +403,7 @@ A typical user flow looks like this:
 
 ## Application Status Logic
 
-OfferFlow tracks applications using status-based stages:
+MyOfferFlow tracks applications using status-based stages:
 
 | Status | Purpose |
 |---|---|
@@ -475,7 +477,7 @@ The generated preparation content should be displayed in the selected interface 
 
 ## Responsive Design
 
-OfferFlow is designed to work across:
+MyOfferFlow is designed to work across:
 
 - Desktop
 - Laptop
@@ -498,7 +500,7 @@ The interface should avoid horizontal page overflow.
 
 ## Accessibility Considerations
 
-OfferFlow should follow basic accessibility best practices:
+MyOfferFlow should follow basic accessibility best practices:
 
 - Buttons should be real buttons.
 - Interactive elements should have visible focus states.
@@ -516,6 +518,6 @@ All rights reserved.
 
 This project is provided for portfolio and demonstration purposes. The source code, design, structure, and implementation may not be copied, modified, distributed, sublicensed, or used in other projects without explicit written permission from the author.
 
-Users are allowed to access and use the deployed OfferFlow application as an end product through the official website or authorized deployment.
+Users are allowed to access and use the deployed MyOfferFlow application as an end product through the official website or authorized deployment.
 
 You may not reverse engineer, reproduce, resell, redistribute, or create derivative works based on the source code or interface without permission.
