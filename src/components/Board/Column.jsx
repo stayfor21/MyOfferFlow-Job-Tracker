@@ -107,25 +107,25 @@ function EmptyColumnState({ columnId, isDragOver, statusStyle, isFiltered, filte
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
           ? 'border-[var(--drop-drag-border)] bg-[var(--drop-drag-bg)] shadow-[0_0_18px_var(--drop-drag-glow)]'
-          : 'border-zinc-800/60 bg-zinc-950/25 hover:border-[var(--drop-border)] hover:bg-[var(--drop-bg)]'
+          : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:border-[var(--drop-border)] hover:bg-[var(--drop-bg)]'
       ].join(' ')}
     >
       <div className="flex w-full max-w-[240px] flex-col items-center">
         <div
           className={[
-            'mb-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border bg-zinc-900/60',
+            'mb-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border bg-[var(--surface-elevated)]',
             'transition-[border-color,color,background-color] duration-150 ease-out',
             isDragOver
               ? 'border-[var(--drop-drag-border)] text-[var(--drop-text)]'
-              : 'border-zinc-800 text-zinc-500 group-hover/empty:border-[var(--drop-border)] group-hover/empty:text-[var(--drop-text)]'
+              : 'border-[var(--border-subtle)] text-[var(--text-muted)] group-hover/empty:border-[var(--drop-border)] group-hover/empty:text-[var(--drop-text)]'
           ].join(' ')}
         >
           <Icon size={18} />
         </div>
-        <p className="mb-1.5 flex min-h-6 items-center justify-center text-sm font-semibold leading-6 text-zinc-300">
+        <p className="mb-1.5 flex min-h-6 items-center justify-center text-sm font-semibold leading-6 text-[var(--text-soft)]">
           {isDragOver ? t('kanban.dropHere') : title}
         </p>
-        <p className="flex min-h-10 max-w-[220px] items-start justify-center text-xs leading-5 text-zinc-600">
+        <p className="flex min-h-10 max-w-[220px] items-start justify-center text-xs leading-5 text-[var(--text-muted)]">
           {description}
         </p>
       </div>
@@ -191,7 +191,7 @@ function Column({
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
           ? 'border-[var(--column-drag-border)] bg-[var(--column-drag-bg)] shadow-[0_0_0_1px_var(--column-drag-glow)]'
-          : 'border-zinc-900 bg-zinc-950/35 hover:border-zinc-800/80'
+          : 'border-[var(--border-subtle)] bg-[var(--surface)] shadow-sm shadow-black/5 hover:border-[var(--border-strong)]'
       ].join(' ')}
     >
       <div className="mb-5 flex min-h-8 items-center justify-between px-3 pt-2">
@@ -199,7 +199,7 @@ function Column({
           <span className={`inline-flex h-7 items-center rounded-full border px-3 text-xs font-semibold ${column.color}`}>
             {t(column.titleKey)}
           </span>
-          <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full border border-white/[0.06] bg-zinc-900 px-2 text-xs font-medium text-zinc-500">
+          <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2 text-xs font-semibold text-[var(--text-muted)]">
             {jobs.length}
           </span>
         </div>

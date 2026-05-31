@@ -12,8 +12,8 @@ import {
   getGoalDateRange
 } from '../../utils/goals';
 
-const inputClass = 'h-11 w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
-const labelClass = 'text-[11px] font-semibold leading-4 text-zinc-500';
+const inputClass = 'h-11 w-full rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] px-3 text-sm text-[var(--input-text)] outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-[var(--input-placeholder)] focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const labelClass = 'text-[11px] font-semibold leading-4 text-[var(--text-muted)]';
 
 const statusChipClass = {
   completed: 'of-chip-success',
@@ -29,7 +29,7 @@ function GoalCard({ goal, progress, onArchive, onManualProgress }) {
   const statusClass = statusChipClass[progress.status] || statusChipClass.onTrack;
 
   return (
-    <article className="flex min-h-[210px] flex-col rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-sm shadow-black/5">
+    <article className="flex min-h-[176px] flex-col rounded-[22px] border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-sm shadow-black/5">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
@@ -42,20 +42,20 @@ function GoalCard({ goal, progress, onArchive, onManualProgress }) {
             </p>
           )}
         </div>
-        <span className={`of-chip ${statusClass} shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold`}>
+        <span className={`of-chip ${statusClass} h-5 shrink-0 rounded-full px-2 text-[10px] font-semibold leading-none`}>
           {t(`goals.status.${progress.status}`)}
         </span>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-3">
         <div className="flex items-end justify-between gap-3">
-          <p className="text-2xl font-bold text-[var(--text)]">
+          <p className="text-xl font-bold leading-none text-[var(--text)]">
             {progress.progress}<span className="text-sm font-semibold text-[var(--text-muted)]"> / {progress.target}</span>
           </p>
           <p className="text-sm font-semibold text-[var(--primary)]">{progress.percentage}%</p>
         </div>
         <div
-          className="mt-2 h-2.5 overflow-hidden rounded-full bg-[var(--surface-muted)]"
+          className="mt-2 h-2 overflow-hidden rounded-full bg-[var(--surface-muted)]"
           role="progressbar"
           aria-label={t('goals.progressAria', { progress: progress.progress, target: progress.target })}
           aria-valuemin={0}
@@ -69,22 +69,22 @@ function GoalCard({ goal, progress, onArchive, onManualProgress }) {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
-        <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3">
-          <p className="font-medium text-[var(--text-muted)]">{t('goals.remaining')}</p>
-          <p className="mt-1 font-semibold text-[var(--text)]">{progress.remaining}</p>
-        </div>
-        <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3">
-          <p className="font-medium text-[var(--text-muted)]">{t('goals.deadline')}</p>
-          <p className="mt-1 truncate font-semibold text-[var(--text)]">{progress.daysLeft} {t('goals.daysLeft')}</p>
-        </div>
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] font-medium text-[var(--text-muted)]">
+        <span className="inline-flex min-w-0 items-center gap-1 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1">
+          <span>{t('goals.remaining')}:</span>
+          <span className="font-semibold text-[var(--text)]">{progress.remaining}</span>
+        </span>
+        <span className="inline-flex min-w-0 items-center gap-1 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1">
+          <span>{t('goals.deadline')}:</span>
+          <span className="truncate font-semibold text-[var(--text)]">{progress.daysLeft} {t('goals.daysLeft')}</span>
+        </span>
       </div>
 
-      <p className="mt-3 text-[11px] font-medium text-[var(--text-muted)]">
+      <p className="mt-2 text-[11px] font-medium text-[var(--text-faint)]">
         {formatDate(goal.startDate)} - {formatDate(goal.endDate)}
       </p>
 
-      <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-4">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
         {goal.type === 'custom' ? (
           <div className="flex gap-2">
             <Button type="button" variant="secondary" size="compact" onClick={() => onManualProgress(goal.id, -1)}>-1</Button>
@@ -263,10 +263,10 @@ export default function CareerGoals({
   };
 
   return (
-    <section className="mt-6 rounded-[28px] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-2xl shadow-black/10 sm:p-6">
+    <section id="goals" className="mt-6 scroll-mt-24 rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-xl shadow-black/10 sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex min-w-0 items-start gap-3">
-          <div className="of-chip of-chip-violet flex h-10 w-10 shrink-0 justify-center rounded-2xl p-0">
+          <div className="of-chip of-chip-violet flex h-9 w-9 shrink-0 justify-center rounded-2xl p-0">
             <Target size={17} />
           </div>
           <div className="min-w-0">
@@ -279,7 +279,7 @@ export default function CareerGoals({
             )}
           </div>
         </div>
-        <Button type="button" variant="secondary" onClick={() => setIsAdding((current) => !current)} className="shrink-0">
+        <Button type="button" variant="secondary" size="compact" onClick={() => setIsAdding((current) => !current)} className="shrink-0">
           <Plus size={15} />
           {t('goals.add')}
         </Button>
@@ -292,7 +292,7 @@ export default function CareerGoals({
       )}
 
       {activeGoals.length === 0 && !isAdding ? (
-        <div className="mt-5 rounded-3xl border border-dashed border-[var(--border-strong)] bg-[var(--surface-elevated)] p-6 text-center">
+        <div className="mt-5 rounded-3xl border border-dashed border-[var(--border-strong)] bg-[var(--surface-elevated)] p-5 text-center">
           <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--primary-border)] bg-[var(--primary-soft)] text-[var(--primary)]">
             <TrendingUp size={18} />
           </div>
@@ -304,7 +304,7 @@ export default function CareerGoals({
           </Button>
         </div>
       ) : (
-        <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {goalProgress.map(({ goal, progress }) => (
             <GoalCard
               key={goal.id}

@@ -31,14 +31,17 @@ export default function Stats({ jobs }) {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 mb-8">
       {stats.map((stat, i) => (
-        <div key={i} className="rounded-2xl border border-white/[0.08] bg-[#111217]/70 p-5 backdrop-blur-sm">
+        <div
+          key={i}
+          className="rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-sm shadow-black/5 backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--primary-border)] hover:shadow-[0_16px_36px_var(--shadow-color)]"
+        >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-zinc-500 text-sm font-medium">{stat.label}</p>
-              <p className="text-3xl font-bold mt-1 text-zinc-100">{stat.value}</p>
-              <p className="mt-1 text-xs font-medium text-zinc-600">{stat.helper}</p>
+              <p className="text-sm font-semibold text-[var(--text-muted)]">{stat.label}</p>
+              <p className="mt-1 text-3xl font-bold tracking-tight text-[var(--text)]">{stat.value}</p>
+              <p className="mt-1 text-xs font-medium text-[var(--text-faint)]">{stat.helper}</p>
             </div>
-            <div className={`rounded-2xl border border-white/[0.06] bg-zinc-900/70 p-3 ${stat.color}`}>
+            <div className={`rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3 ${stat.color}`}>
               <stat.icon size={22} />
             </div>
           </div>

@@ -25,7 +25,7 @@ export default function SmartFilters({
 
   return (
     <section aria-label={t('filters.aria')} className="mb-6">
-      <div className="modal-scrollbar flex gap-2 overflow-x-auto pb-1">
+      <div className="modal-scrollbar flex gap-2 overflow-x-auto rounded-[22px] border border-[var(--border-subtle)] bg-[var(--surface)] p-2 shadow-sm shadow-black/5">
         {SMART_FILTERS.map((filter) => {
           const Icon = icons[filter.id] || Inbox;
           const isActive = activeFilter === filter.id;
@@ -42,7 +42,7 @@ export default function SmartFilters({
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
                 isActive
                   ? 'border-[#8B5CF6]/35 bg-[#635BFF]/15 text-[var(--text)] shadow-[0_0_16px_rgba(99,91,255,0.10)]'
-                  : 'border-white/[0.10] bg-zinc-950/45 text-zinc-500 hover:border-[#8B5CF6]/25 hover:bg-[#8B5CF6]/[0.08] hover:text-zinc-200'
+                  : 'border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)] hover:text-[var(--text)]'
               ].join(' ')}
             >
               <Icon size={14} />
@@ -50,7 +50,7 @@ export default function SmartFilters({
               <span
                 className={[
                   'inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[10px] font-bold',
-                  isActive ? 'bg-[var(--primary-soft)] text-[var(--text)]' : 'bg-white/[0.06] text-zinc-500'
+                  isActive ? 'bg-[var(--primary-soft)] text-[var(--text)]' : 'bg-[var(--surface-muted)] text-[var(--text-muted)]'
                 ].join(' ')}
               >
                 {counts[filter.id] || 0}
@@ -69,8 +69,8 @@ export default function SmartFilters({
             'transition-[background-color,border-color,color,box-shadow] duration-150 ease-out',
             'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
             hideRejected
-              ? 'border-rose-400/25 bg-rose-500/10 text-rose-100'
-              : 'border-white/[0.10] bg-zinc-950/45 text-zinc-500 hover:border-[#8B5CF6]/25 hover:bg-[#8B5CF6]/[0.08] hover:text-zinc-200'
+              ? 'border-[var(--chip-rose-border)] bg-[var(--chip-rose-bg)] text-[var(--chip-rose-text)]'
+              : 'border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)] hover:text-[var(--text)]'
           ].join(' ')}
         >
           <EyeOff size={14} />

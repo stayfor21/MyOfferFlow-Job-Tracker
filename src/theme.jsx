@@ -2,11 +2,12 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from '
 
 const STORAGE_KEY = 'offerflow-theme';
 const THEMES = ['dark', 'light'];
+const DEFAULT_THEME = 'light';
 
 function getStoredTheme() {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return DEFAULT_THEME;
   const value = window.localStorage.getItem(STORAGE_KEY);
-  return THEMES.includes(value) ? value : 'dark';
+  return THEMES.includes(value) ? value : DEFAULT_THEME;
 }
 
 const ThemeContext = createContext(null);
@@ -22,7 +23,7 @@ export function ThemeProvider({ children }) {
 
   const value = useMemo(() => {
     const setTheme = (nextTheme) => {
-      setThemeState(THEMES.includes(nextTheme) ? nextTheme : 'dark');
+      setThemeState(THEMES.includes(nextTheme) ? nextTheme : DEFAULT_THEME);
     };
 
     const toggleTheme = () => {
@@ -44,4 +45,3 @@ export function useTheme() {
   if (!context) throw new Error('useTheme must be used inside ThemeProvider');
   return context;
 }
-

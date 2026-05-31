@@ -107,11 +107,12 @@ export default function InsightDashboard({
 
   return (
     <motion.section
+      id="insights"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="mb-20 mt-16 border-t border-[var(--border)] pt-10 sm:pt-12"
+      className="mb-20 mt-16 scroll-mt-24 border-t border-[var(--border)] pt-10 sm:pt-12"
     >
       <div className="mb-6 flex min-w-0 items-center gap-3">
         <div className="of-chip of-chip-violet flex h-11 w-11 shrink-0 justify-center rounded-2xl p-0">

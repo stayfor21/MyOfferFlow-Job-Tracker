@@ -71,8 +71,8 @@ function MetaLine({ icon: Icon, children }) {
   if (!children) return null;
 
   return (
-    <div className="flex min-w-0 items-center gap-1.5 text-[11px] font-medium text-zinc-500">
-      {Icon && <Icon size={12} className="shrink-0 text-zinc-500" />}
+    <div className="flex min-w-0 items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)]">
+      {Icon && <Icon size={12} className="shrink-0 text-[var(--text-muted)]" />}
       <span className="truncate">{children}</span>
     </div>
   );
@@ -84,14 +84,14 @@ function CompactRow({ icon: Icon, label, children, aside, title }) {
   return (
     <div
       title={title}
-      className="flex min-h-7 items-center gap-1.5 rounded-xl border border-white/[0.07] bg-white/[0.018] px-2.5 py-1 text-[12px] text-zinc-300"
+      className="flex min-h-7 items-center gap-1.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1 text-[12px] text-[var(--text-soft)]"
     >
-      {Icon && <Icon size={12} className="shrink-0 text-zinc-500" />}
-      <span className="shrink-0 font-medium text-zinc-500">{label}</span>
-      <span className="text-zinc-600">&middot;</span>
+      {Icon && <Icon size={12} className="shrink-0 text-[var(--text-muted)]" />}
+      <span className="shrink-0 font-medium text-[var(--text-muted)]">{label}</span>
+      <span className="text-[var(--text-faint)]">&middot;</span>
       <span className="min-w-0 flex-1 truncate">{children}</span>
       {aside && (
-        <span className="shrink-0 rounded-full border border-white/[0.06] bg-zinc-950/60 px-2 py-0.5 text-[10px] font-semibold text-zinc-500">
+        <span className="shrink-0 rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-2 py-0.5 text-[10px] font-semibold text-[var(--text-muted)]">
           {aside}
         </span>
       )}
@@ -157,9 +157,9 @@ function JobCard({ job, isDragging = false, onClick, onDragStart, onDragEnd }) {
       onDragEnd={handleDragEnd}
       onClick={handleClick}
       className={[
-        'group transform-gpu rounded-2xl border border-white/10 bg-zinc-900/70 p-4 shadow-sm shadow-black/20 will-change-transform',
+        'group transform-gpu rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 shadow-sm shadow-black/5 will-change-transform',
         'transition-[transform,opacity,box-shadow,border-color,background-color] duration-200 ease-out',
-        'hover:-translate-y-0.5 hover:border-[var(--card-accent-border)] hover:bg-zinc-900 hover:shadow-[0_0_24px_var(--card-accent-glow)]',
+        'hover:-translate-y-0.5 hover:border-[var(--card-accent-border)] hover:bg-[var(--surface)] hover:shadow-[0_12px_30px_var(--card-accent-glow)]',
         'focus-visible:border-[var(--card-accent-border)] focus-visible:shadow-[0_0_24px_var(--card-accent-glow)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--card-accent-ring)]',
         'cursor-grab active:cursor-grabbing',
         isDragging
@@ -169,17 +169,17 @@ function JobCard({ job, isDragging = false, onClick, onDragStart, onDragEnd }) {
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="line-clamp-2 font-semibold leading-snug text-zinc-100 transition-colors duration-150 group-hover:text-indigo-100">
+          <h3 className="line-clamp-2 font-semibold leading-snug text-[var(--text)] transition-colors duration-150 group-hover:text-[var(--primary)]">
             {title}
           </h3>
-          <p className="mt-1 flex min-w-0 items-center gap-1.5 text-sm text-zinc-500">
+          <p className="mt-1 flex min-w-0 items-center gap-1.5 text-sm text-[var(--text-muted)]">
             <Building2 size={13} className="shrink-0" />
             <span className="truncate">{company}</span>
           </p>
         </div>
 
         {job.link && (
-          <LinkIcon size={14} className="mt-1 shrink-0 text-zinc-600 transition-colors duration-150 group-hover:text-[#7C73FF]" />
+          <LinkIcon size={14} className="mt-1 shrink-0 text-[var(--text-muted)] transition-colors duration-150 group-hover:text-[#7C73FF]" />
         )}
       </div>
 
@@ -225,13 +225,13 @@ function JobCard({ job, isDragging = false, onClick, onDragStart, onDragEnd }) {
         </div>
       )}
 
-      <div className="mt-3 flex min-h-9 items-center justify-between gap-3 border-t border-white/[0.07] pt-3">
+      <div className="mt-3 flex min-h-9 items-center justify-between gap-3 border-t border-[var(--border-subtle)] pt-3">
         <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
           <GripVertical
             size={13}
             aria-label={t('card.drag')}
             title={t('card.drag')}
-            className="shrink-0 text-zinc-700 transition-colors duration-200 group-hover:text-zinc-500"
+            className="shrink-0 text-[var(--text-faint)] transition-colors duration-200 group-hover:text-[var(--text-muted)]"
           />
           <div className="min-w-0">
             <MetaLine icon={Calendar}>{cardDate}</MetaLine>

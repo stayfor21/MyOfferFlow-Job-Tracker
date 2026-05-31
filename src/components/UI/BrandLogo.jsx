@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from '../../i18n.jsx';
 
-export function LogoMark({ className = '' }) {
+export function LogoMark({ className = '', glyphClassName = '' }) {
   return (
     <div
       className={`relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-[14px] border border-white/10 bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] shadow-[0_0_28px_rgba(99,91,255,0.32)] ${className}`}
@@ -9,7 +9,7 @@ export function LogoMark({ className = '' }) {
     >
       <div className="absolute inset-0 bg-white/10 opacity-20" />
       <div className="absolute left-1.5 right-1.5 top-1 h-3 rounded-full bg-white/20 blur-sm" />
-      <svg viewBox="0 0 44 44" className="relative h-9 w-9 overflow-visible">
+      <svg viewBox="0 0 44 44" className={`relative h-9 w-9 overflow-visible ${glyphClassName}`}>
         <path
           d="M10.5 27 C15 23 18.5 23 23 19.5 C27 16.5 30.5 15 34 11.8"
           fill="none"

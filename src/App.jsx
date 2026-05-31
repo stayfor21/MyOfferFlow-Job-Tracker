@@ -6,6 +6,7 @@ import KanbanBoard from './components/Board/KanbanBoard';
 import Stats from './components/Dashboard/Stats';
 import Button from './components/UI/Button';
 import BrandLogo from './components/UI/BrandLogo';
+import AppFooter from './components/UI/AppFooter';
 import LanguageSwitcher from './components/UI/LanguageSwitcher';
 import ThemeToggle from './components/UI/ThemeToggle';
 import JobModal from './components/Modals/JobModal';
@@ -328,16 +329,18 @@ export default function App() {
           onToggleHideRejected={() => setHideRejected(!hideRejected)}
         />
 
-        <LayoutGroup>
-          <KanbanBoard
-            columns={COLUMNS}
-            jobs={filteredJobs}
-            isFiltered={hasFilteredView}
-            filteredEmptyState={filteredEmptyState}
-            onMoveJob={handleMoveJob}
-            onEditJob={(job) => { setEditingJob(job); setIsModalOpen(true); }}
-          />
-        </LayoutGroup>
+        <section id="board" className="scroll-mt-24">
+          <LayoutGroup>
+            <KanbanBoard
+              columns={COLUMNS}
+              jobs={filteredJobs}
+              isFiltered={hasFilteredView}
+              filteredEmptyState={filteredEmptyState}
+              onMoveJob={handleMoveJob}
+              onEditJob={(job) => { setEditingJob(job); setIsModalOpen(true); }}
+            />
+          </LayoutGroup>
+        </section>
 
         <div id="prep-portal"></div>
 
@@ -351,6 +354,8 @@ export default function App() {
           completedPlannerTaskIds={completedPlannerTaskIds}
         />
       </main>
+
+      <AppFooter onOpenPlanner={() => setIsPlannerOpen(true)} />
 
       {isModalOpen && (
         <JobModal

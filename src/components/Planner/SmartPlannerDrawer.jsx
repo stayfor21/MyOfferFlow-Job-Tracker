@@ -24,9 +24,9 @@ import {
   sortPlannerTasks
 } from '../../utils/planner';
 
-const inputClass = 'h-11 w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
-const textareaClass = 'min-h-[74px] w-full resize-none rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
-const labelClass = 'text-[11px] font-semibold leading-4 text-zinc-500';
+const inputClass = 'h-11 w-full rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] px-3 text-sm text-[var(--input-text)] outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-[var(--input-placeholder)] focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const textareaClass = 'min-h-[74px] w-full resize-none rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] px-3 py-3 text-sm leading-5 text-[var(--input-text)] outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-[var(--input-placeholder)] focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const labelClass = 'text-[11px] font-semibold leading-4 text-[var(--text-muted)]';
 
 const tabs = [
   { id: 'today', labelKey: 'planner.tab.today' },
@@ -208,35 +208,35 @@ function TaskCard({
     : '';
 
   return (
-    <article className="rounded-2xl border border-white/[0.08] bg-zinc-950/45 p-4 transition-[border-color,background-color] duration-150 hover:border-[#8B5CF6]/25 hover:bg-zinc-950/65">
+    <article className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-sm shadow-black/5 transition-[border-color,background-color,box-shadow] duration-150 hover:border-[var(--primary-border)] hover:bg-[var(--surface-elevated)] hover:shadow-[0_10px_28px_var(--shadow-color)]">
       <div className="flex items-start gap-3">
         <div className={`of-chip mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${meta.chip}`}>
           <Icon size={15} />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex min-w-0 items-start justify-between gap-3">
-            <h3 className="min-w-0 text-sm font-semibold leading-5 text-zinc-100">{title}</h3>
+            <h3 className="min-w-0 text-sm font-semibold leading-5 text-[var(--text)]">{title}</h3>
             {task.priority === 'high' && (
               <span className="of-chip of-chip-priority-high shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold">
                 {t('priority.high')}
               </span>
             )}
           </div>
-          {body && <p className="mt-1 text-xs leading-5 text-zinc-500">{body}</p>}
-          <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-zinc-500">
+          {body && <p className="mt-1 text-xs leading-5 text-[var(--text-muted)]">{body}</p>}
+          <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-[var(--text-muted)]">
             {task.date && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-zinc-900/70 px-2.5 py-1">
+              <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1">
                 <CalendarDays size={12} />
                 {formatDate(task.date)}
               </span>
             )}
             {jobContext && (
-              <span className="min-w-0 truncate rounded-full border border-white/[0.08] bg-zinc-900/70 px-2.5 py-1">
+              <span className="min-w-0 truncate rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1">
                 {jobContext}
               </span>
             )}
           </div>
-          {task.notes && <p className="mt-2 line-clamp-2 text-xs leading-5 text-zinc-500">{task.notes}</p>}
+          {task.notes && <p className="mt-2 line-clamp-2 text-xs leading-5 text-[var(--text-muted)]">{task.notes}</p>}
         </div>
       </div>
 
@@ -286,12 +286,12 @@ function EmptyState({ suggested = false }) {
   const { t } = useTranslation();
 
   return (
-    <div className="rounded-3xl border border-dashed border-white/[0.10] bg-zinc-950/30 p-6 text-center">
-      <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-white/[0.08] bg-zinc-900/70 text-zinc-500">
+    <div className="rounded-3xl border border-dashed border-[var(--border-strong)] bg-[var(--surface)] p-5 text-center">
+      <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)]">
         {suggested ? <Lightbulb size={18} /> : <CalendarDays size={18} />}
       </div>
-      <p className="text-sm font-semibold text-zinc-200">{t('planner.emptyTitle')}</p>
-      <p className="mt-1 text-xs leading-5 text-zinc-500">{t('planner.emptyBody')}</p>
+      <p className="text-sm font-semibold text-[var(--text)]">{t('planner.emptyTitle')}</p>
+      <p className="mt-1 text-xs leading-5 text-[var(--text-muted)]">{t('planner.emptyBody')}</p>
     </div>
   );
 }
@@ -537,19 +537,19 @@ export default function SmartPlannerDrawer({
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 36, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative flex h-full w-full max-w-[560px] flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70"
+            className="relative flex h-full w-full max-w-[560px] flex-col border-l border-[var(--border-subtle)] bg-[var(--bg-subtle)] shadow-2xl shadow-black/70"
           >
-            <header className="border-b border-white/[0.08] p-4 sm:p-5">
+            <header className="border-b border-[var(--border-subtle)] p-4 sm:p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <div className="mb-3 inline-flex h-9 items-center gap-2 rounded-2xl border border-[#635BFF]/25 bg-[#635BFF]/10 px-3 text-xs font-semibold text-violet-100">
+                  <div className="of-chip of-chip-violet mb-3 inline-flex h-9 items-center gap-2 rounded-2xl px-3 text-xs font-semibold">
                     <CalendarDays size={15} />
                     {t('planner.badge')}
                   </div>
-                  <h2 id="smart-planner-title" className="text-xl font-bold tracking-tight text-zinc-100">
+                  <h2 id="smart-planner-title" className="text-xl font-bold tracking-tight text-[var(--text)]">
                     {t('planner.title')}
                   </h2>
-                  <p className="mt-1 text-sm leading-5 text-zinc-500">{t('planner.subtitle')}</p>
+                  <p className="mt-1 text-sm leading-5 text-[var(--text-muted)]">{t('planner.subtitle')}</p>
                 </div>
                 <Button type="button" variant="ghost" size="icon" onClick={onClose} aria-label={t('common.close')} className="shrink-0">
                   <X size={20} />
@@ -569,7 +569,7 @@ export default function SmartPlannerDrawer({
                       'h-9 shrink-0 rounded-xl border px-3 text-xs font-semibold transition-[background-color,border-color,color] duration-150',
                       activeTab === tab.id
                         ? 'border-[#635BFF]/35 bg-[#635BFF]/15 text-[var(--text)]'
-                        : 'border-white/[0.08] bg-zinc-950/50 text-zinc-500 hover:border-[#8B5CF6]/25 hover:bg-[#8B5CF6]/[0.08] hover:text-zinc-200'
+                        : 'border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)] hover:text-[var(--text)]'
                     ].join(' ')}
                   >
                     {t(tab.labelKey)}
@@ -590,11 +590,11 @@ export default function SmartPlannerDrawer({
               )}
 
               <div className="mb-4 flex items-center justify-between gap-3">
-                <div className="flex flex-wrap gap-2 text-xs text-zinc-500">
-                  <span className="rounded-full border border-white/[0.08] bg-zinc-950/50 px-2.5 py-1">
+                <div className="flex flex-wrap gap-2 text-xs text-[var(--text-muted)]">
+                  <span className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-2.5 py-1">
                     {t('planner.section.today')}: {todayOverviewCount}
                   </span>
-                  <span className="rounded-full border border-white/[0.08] bg-zinc-950/50 px-2.5 py-1">
+                  <span className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-2.5 py-1">
                     {t('planner.tab.week')}: {weekTasks.length}
                   </span>
                 </div>
@@ -605,7 +605,7 @@ export default function SmartPlannerDrawer({
               </div>
 
               {isAdding && (
-                <form onSubmit={handleSubmit} className="mb-5 rounded-3xl border border-white/[0.08] bg-zinc-950/45 p-4">
+                <form onSubmit={handleSubmit} className="mb-5 rounded-3xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4">
                   <div className="space-y-3">
                     <div className="space-y-2">
                       <label className={labelClass}>{t('planner.form.title')}</label>
@@ -668,35 +668,35 @@ export default function SmartPlannerDrawer({
 
               {activeTab === 'suggested' ? (
                 <section className="space-y-3">
-                  <h3 className="text-sm font-semibold text-zinc-100">{t('planner.section.suggested')}</h3>
+                  <h3 className="text-sm font-semibold text-[var(--text)]">{t('planner.section.suggested')}</h3>
                   {renderTaskList(derived.suggestions, true)}
                 </section>
               ) : activeTab === 'done' ? (
                 <section className="space-y-3">
-                  <h3 className="text-sm font-semibold text-zinc-100">{t('planner.tab.done')}</h3>
+                  <h3 className="text-sm font-semibold text-[var(--text)]">{t('planner.tab.done')}</h3>
                   {renderTaskList(doneTasks)}
                 </section>
               ) : (
                 <div className="space-y-5">
                   {selectedPlannerDate === today && overdueTasks.length > 0 && (
                     <section className="space-y-3">
-                      <h3 className="text-sm font-semibold text-zinc-100">{t('planner.section.overdue')}</h3>
+                      <h3 className="text-sm font-semibold text-[var(--text)]">{t('planner.section.overdue')}</h3>
                       {renderTaskList(overdueTasks)}
                     </section>
                   )}
                   <section className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-sm font-semibold text-zinc-100">{selectedDayLabel}</h3>
+                      <h3 className="text-sm font-semibold text-[var(--text)]">{selectedDayLabel}</h3>
                       <span className="rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1 text-[11px] font-semibold text-[var(--text-muted)]">
                         {getTaskCountLabel(selectedDayTasks.length, t)}
                       </span>
                     </div>
                     {selectedDayTasks.length > 0 ? renderTaskList(selectedDayTasks) : (
-                      <div className="rounded-3xl border border-dashed border-white/[0.10] bg-zinc-950/30 p-6 text-center">
-                        <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-white/[0.08] bg-zinc-900/70 text-zinc-500">
+                      <div className="rounded-3xl border border-dashed border-[var(--border-strong)] bg-[var(--surface)] p-5 text-center">
+                        <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)]">
                           <CalendarDays size={18} />
                         </div>
-                        <p className="text-sm font-semibold text-zinc-200">{t('planner.calendar.emptyDay')}</p>
+                        <p className="text-sm font-semibold text-[var(--text)]">{t('planner.calendar.emptyDay')}</p>
                       </div>
                     )}
                   </section>

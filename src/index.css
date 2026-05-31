@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root,
 :root[data-theme='dark'] {
   --bg: #07080b;
   --bg-subtle: #0b0b0f;
@@ -79,6 +78,7 @@
   --chip-slate-border: rgba(148, 163, 184, 0.26);
 }
 
+:root,
 :root[data-theme='light'] {
   --bg: #f7f7fb;
   --bg-subtle: #f1f2f7;
@@ -226,6 +226,33 @@ body {
   background: var(--bg);
   color: var(--text);
   @apply antialiased;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--scrollbar-thumb), rgba(99, 91, 255, 0.42));
+  border: 2px solid var(--bg);
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--scrollbar-thumb-hover), rgba(99, 91, 255, 0.56));
 }
 
 .color-scheme-dark {
