@@ -498,20 +498,6 @@ The interface should avoid horizontal page overflow.
 
 ---
 
-## Accessibility Considerations
-
-MyOfferFlow should follow basic accessibility best practices:
-
-- Buttons should be real buttons.
-- Interactive elements should have visible focus states.
-- Text should maintain readable contrast in both themes.
-- Disabled states should remain understandable.
-- Icon-only buttons should include accessible labels.
-- Keyboard navigation should work for major controls.
-- Language switching should not break layout or semantics.
-
----
-
 ## License
 
 All rights reserved.
