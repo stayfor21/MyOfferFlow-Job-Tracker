@@ -26,7 +26,7 @@ export default function AppFooter({ onOpenPlanner }) {
             glyphClassName="!h-7 !w-7"
           />
           <div className="min-w-0">
-            <p className="text-sm font-bold tracking-tight text-[var(--text)]">OfferFlow</p>
+            <p className="text-sm font-bold tracking-tight text-[var(--text)]">MyOfferFlow</p>
             <p className="mt-0.5 truncate text-xs font-medium text-[var(--text-muted)]">
               {t('footer.tagline')}
             </p>

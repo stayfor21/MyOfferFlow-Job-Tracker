@@ -37,10 +37,10 @@ export default function BrandLogo() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex items-center gap-3" aria-label="OfferFlow">
+    <div className="flex items-center gap-3" aria-label="MyOfferFlow">
       <LogoMark />
       <div className="hidden sm:block">
-        <p className="text-xl font-bold tracking-tight text-[var(--text)]">OfferFlow</p>
+        <p className="text-xl font-bold tracking-tight text-[var(--text)]">MyOfferFlow</p>
         <p className="-mt-0.5 text-xs font-medium text-[var(--text-muted)]">{t('brand.tagline')}</p>
       </div>
     </div>
