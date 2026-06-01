@@ -300,15 +300,23 @@ export default function App() {
 
             <LanguageSwitcher />
 
-            <Button
-              variant="primary"
-              className="h-11 w-11 shrink-0 rounded-2xl px-0 sm:w-auto sm:px-5"
+            <button
+              type="button"
               aria-label={t('header.addJob')}
+              title={t('header.addJob')}
               onClick={() => { setEditingJob(null); setIsModalOpen(true); }}
+              className={[
+                'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#8B5CF6]/30',
+                'bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] p-0 text-white',
+                'shadow-[0_0_22px_rgba(99,91,255,0.20)] transition-[transform,background-color,box-shadow,border-color,filter] duration-200 ease-out',
+                'hover:border-[#A78BFA]/45 hover:brightness-110 hover:shadow-[0_0_28px_rgba(99,91,255,0.30)]',
+                'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20 active:scale-[0.98]',
+                'sm:w-auto sm:gap-2 sm:px-5'
+              ].join(' ')}
             >
-              <Plus size={18} strokeWidth={2.5} />
+              <Plus aria-hidden="true" size={21} strokeWidth={2.5} className="h-5 w-5 shrink-0" />
               <span className="hidden sm:inline">{t('header.addJob')}</span>
-            </Button>
+            </button>
           </div>
         </div>
       </header>
