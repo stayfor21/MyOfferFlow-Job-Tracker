@@ -112,28 +112,28 @@ function DreamJobToggle({ checked, onChange }) {
         aria-label={t('card.dreamJob')}
         onClick={() => onChange(!checked)}
         className={[
-          'flex h-11 w-full items-center justify-between gap-3 rounded-2xl border px-3 transition-[background-color,border-color,box-shadow] duration-200 ease-out focus:outline-none focus:ring-4 focus:ring-[#635BFF]/15',
+          'flex h-11 w-full items-center justify-between gap-3 rounded-2xl border px-3 text-left transition-[background-color,border-color,box-shadow] duration-200 ease-out focus:outline-none focus:ring-4 focus:ring-[#635BFF]/15',
           checked
-            ? 'border-violet-400/30 bg-violet-500/10 shadow-[0_0_18px_rgba(139,92,246,0.10)]'
-            : 'border-white/[0.08] bg-zinc-950/60 hover:border-white/[0.14]'
+            ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] shadow-[0_0_18px_var(--primary-glow)]'
+            : 'border-[var(--border)] bg-[var(--surface-elevated)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-muted)]'
         ].join(' ')}
       >
         <span className="inline-flex min-w-0 items-center gap-2">
-          <Star size={15} className={checked ? 'text-violet-200' : 'text-zinc-600'} />
-          <span className={checked ? 'text-sm font-semibold text-violet-100' : 'text-sm font-semibold text-zinc-300'}>
+          <Star size={15} className={checked ? 'text-[var(--primary-hover)]' : 'text-[var(--text-muted)]'} />
+          <span className={checked ? 'text-sm font-semibold text-[var(--text)]' : 'text-sm font-semibold text-[var(--text-soft)]'}>
             {t('card.dreamJob')}
           </span>
         </span>
         <span
           className={[
-            'relative h-6 w-11 shrink-0 rounded-full border transition-colors duration-200',
-            checked ? 'border-violet-300/30 bg-[#635BFF]' : 'border-white/[0.08] bg-zinc-800'
+            'of-switch-track relative h-7 w-12 shrink-0 rounded-full border transition-[background-color,border-color,box-shadow] duration-200',
+            checked ? 'of-switch-track-on' : ''
           ].join(' ')}
         >
           <span
             className={[
-              'absolute left-[3px] top-1/2 h-[18px] w-[18px] -translate-y-1/2 rounded-full bg-white shadow-sm transition-transform duration-200 ease-out',
-              checked ? 'translate-x-5' : 'translate-x-0'
+              'of-switch-thumb absolute left-[3px] top-1/2 h-5 w-5 -translate-y-1/2 rounded-full transition-transform duration-200 ease-out',
+              checked ? 'translate-x-[20px]' : 'translate-x-0'
             ].join(' ')}
           />
         </span>
