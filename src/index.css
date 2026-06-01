@@ -554,6 +554,19 @@ body::-webkit-scrollbar-thumb:hover {
   user-select: text;
 }
 
+@media (pointer: coarse) {
+  .of-job-card {
+    touch-action: none;
+  }
+
+  .of-job-card button,
+  .of-job-card a,
+  .of-job-card [role='button'],
+  .of-job-card [data-no-drag='true'] {
+    touch-action: manipulation;
+  }
+}
+
 body.of-card-dragging {
   cursor: grabbing;
   -webkit-user-select: none;

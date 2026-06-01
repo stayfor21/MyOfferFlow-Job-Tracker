@@ -63,6 +63,16 @@ const followUpToneStyles = {
   muted: 'of-chip-slate'
 };
 
+const interactiveSelector = [
+  'button',
+  'a',
+  'input',
+  'textarea',
+  'select',
+  '[role="button"]',
+  '[data-no-drag="true"]'
+].join(',');
+
 function getCardStatusStyle(status) {
   return cardStatusStyles[status] || cardStatusStyles.applied;
 }
@@ -146,7 +156,7 @@ function JobCard({
 
   const handleTouchStart = (event) => {
     if (event.touches.length !== 1) return;
-    if (!event.target.closest('[data-drag-handle="true"]')) {
+    if (event.target.closest(interactiveSelector)) {
       touchDragRef.current = { startX: 0, startY: 0, active: false, cancelled: true };
       return;
     }
@@ -167,16 +177,10 @@ function JobCard({
     const touch = event.touches[0];
     const deltaX = touch.clientX - state.startX;
     const deltaY = touch.clientY - state.startY;
-    const distanceX = Math.abs(deltaX);
-    const distanceY = Math.abs(deltaY);
+    const distance = Math.hypot(deltaX, deltaY);
 
     if (!state.active) {
-      if (distanceY > distanceX + 6) {
-        touchDragRef.current = { ...state, cancelled: true };
-        return;
-      }
-
-      if (distanceX < 7) return;
+      if (distance < 4) return;
       touchDragRef.current = { ...state, active: true };
       recentlyDraggedRef.current = true;
       onDragStart(job.id);
@@ -249,7 +253,7 @@ function JobCard({
         </div>
 
         {job.link && (
-          <LinkIcon draggable={false} size={14} className="mt-1 shrink-0 text-[var(--text-muted)] transition-colors duration-150 group-hover:text-[#7C73FF]" />
+          <LinkIcon data-no-drag="true" draggable={false} size={14} className="mt-1 shrink-0 text-[var(--text-muted)] transition-colors duration-150 group-hover:text-[#7C73FF]" />
         )}
       </div>
 
@@ -314,6 +318,7 @@ function JobCard({
         {status === 'interview' && (
           <Button
             type="button"
+            data-no-drag="true"
             variant="primary"
             size="compact"
             aria-label={`Open interview preparation for ${title}`}
