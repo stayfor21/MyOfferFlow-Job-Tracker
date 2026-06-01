@@ -111,6 +111,7 @@ function JobCard({
   const { t, formatDate } = useTranslation();
   const recentlyDraggedRef = useRef(false);
   const touchDragRef = useRef({ startX: 0, startY: 0, active: false, cancelled: false });
+  const isCoarsePointer = typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)').matches;
   const title = job.title || job.position || job.company || t('job.untitledRole');
   const company = job.company || t('job.unknownCompany');
   const status = job.status || 'applied';
@@ -175,7 +176,7 @@ function JobCard({
         return;
       }
 
-      if (distanceX < 10) return;
+      if (distanceX < 7) return;
       touchDragRef.current = { ...state, active: true };
       recentlyDraggedRef.current = true;
       onDragStart(job.id);
@@ -217,7 +218,7 @@ function JobCard({
         scale: { duration: 0.15, ease: 'easeOut' },
         y: { duration: 0.18, ease: 'easeOut' }
       }}
-      draggable
+      draggable={!isCoarsePointer}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onTouchStart={handleTouchStart}
@@ -226,7 +227,7 @@ function JobCard({
       onTouchCancel={handleTouchEnd}
       onClick={handleClick}
       className={[
-        'group transform-gpu rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 shadow-sm shadow-black/5 will-change-transform',
+        'group transform-gpu [touch-action:pan-x_pan-y] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 shadow-sm shadow-black/5 will-change-transform',
         'transition-[transform,opacity,box-shadow,border-color,background-color] duration-200 ease-out',
         'hover:-translate-y-0.5 hover:border-[var(--card-accent-border)] hover:bg-[var(--surface)] hover:shadow-[0_12px_30px_var(--card-accent-glow)]',
         'focus-visible:border-[var(--card-accent-border)] focus-visible:shadow-[0_0_24px_var(--card-accent-glow)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--card-accent-ring)]',
@@ -300,7 +301,7 @@ function JobCard({
             data-drag-handle="true"
             aria-label={t('card.drag')}
             title={t('card.drag')}
-            className="flex h-8 w-8 shrink-0 touch-none items-center justify-center rounded-xl text-[var(--text-faint)] transition-[background-color,color] duration-200 group-hover:bg-[var(--surface-muted)] group-hover:text-[var(--text-muted)]"
+            className="flex h-10 w-10 shrink-0 touch-none cursor-grab items-center justify-center rounded-xl text-[var(--text-faint)] transition-[background-color,color] duration-200 active:cursor-grabbing group-hover:bg-[var(--surface-muted)] group-hover:text-[var(--text-muted)]"
           >
             <GripVertical size={14} />
           </span>

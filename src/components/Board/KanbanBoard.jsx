@@ -60,7 +60,7 @@ export default function KanbanBoard({ columns, jobs, onMoveJob, onEditJob, isFil
   }, [clearDragState, onMoveJob]);
 
   return (
-    <div className="modal-scrollbar -mx-4 flex touch-pan-x snap-x snap-mandatory items-start gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:gap-5 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
+    <div className="modal-scrollbar -mx-4 flex [touch-action:pan-x_pan-y] snap-x snap-mandatory items-start gap-4 overflow-x-auto px-4 pb-3 [-webkit-overflow-scrolling:touch] sm:-mx-6 sm:gap-5 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
       {columns.map((column) => (
         <Column
           key={column.id}
