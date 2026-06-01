@@ -10,6 +10,8 @@ The goal of MyOfferFlow is simple: help job seekers stay organized, act on time,
 
 ## Overview
 
+<img width="1918" height="911" alt="image" src="https://github.com/user-attachments/assets/3ba563d9-2aa8-4176-85d7-135cb131d88e" />
+
 Searching for a job often becomes chaotic: applications are spread across emails, notes, spreadsheets, job boards, and memory. MyOfferFlow solves this by giving users one structured workspace where every opportunity can be tracked, updated, planned, and analyzed.
 
 Users can add job applications, move them through hiring stages, set priorities, mark dream jobs, schedule follow-ups, prepare for interviews, track career goals, and view insights about their job search progress.
@@ -138,6 +140,8 @@ The filters help users quickly narrow down the board without losing context.
 
 The Smart Planner helps users organize job search tasks by day.
 
+<img width="709" height="730" alt="image" src="https://github.com/user-attachments/assets/ce69a5d0-2f71-49bc-8484-c81943e3ab58" />
+
 It includes:
 
 - Today view
@@ -206,6 +210,8 @@ The preparation flow is designed to help users prepare with more confidence and 
 
 MyOfferFlow includes a dedicated insights section for understanding job search performance.
 
+<img width="1914" height="788" alt="image" src="https://github.com/user-attachments/assets/baba8e21-73c3-4c07-952d-519d25d4125b" />
+
 The dashboard includes:
 
 - Today’s Focus
@@ -231,6 +237,8 @@ The design uses a clear visual hierarchy with cards, progress bars, metrics, and
 ### 8. Career Goals
 
 MyOfferFlow includes a Career Goals section where users can set and track job search targets.
+
+<img width="1918" height="418" alt="image" src="https://github.com/user-attachments/assets/a6092ad5-f831-43cd-b223-f8b45d8b70ab" />
 
 Supported goal types include:
 
