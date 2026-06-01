@@ -531,3 +531,33 @@ body::-webkit-scrollbar-thumb:hover {
   border-color: rgba(15, 23, 42, 0.14) !important;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.22) !important;
 }
+
+.of-job-card,
+.of-job-card *,
+.of-drag-handle,
+.of-drag-handle * {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.of-job-card input,
+.of-job-card textarea,
+.of-job-card [contenteditable='true'] {
+  -webkit-touch-callout: default;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+body.of-card-dragging {
+  cursor: grabbing;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

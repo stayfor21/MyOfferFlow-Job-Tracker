@@ -227,7 +227,7 @@ function JobCard({
       onTouchCancel={handleTouchEnd}
       onClick={handleClick}
       className={[
-        'group transform-gpu [touch-action:pan-x_pan-y] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 shadow-sm shadow-black/5 will-change-transform',
+        'of-job-card group transform-gpu [touch-action:pan-x_pan-y] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 shadow-sm shadow-black/5 will-change-transform',
         'transition-[transform,opacity,box-shadow,border-color,background-color] duration-200 ease-out',
         'hover:-translate-y-0.5 hover:border-[var(--card-accent-border)] hover:bg-[var(--surface)] hover:shadow-[0_12px_30px_var(--card-accent-glow)]',
         'focus-visible:border-[var(--card-accent-border)] focus-visible:shadow-[0_0_24px_var(--card-accent-glow)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--card-accent-ring)]',
@@ -249,7 +249,7 @@ function JobCard({
         </div>
 
         {job.link && (
-          <LinkIcon size={14} className="mt-1 shrink-0 text-[var(--text-muted)] transition-colors duration-150 group-hover:text-[#7C73FF]" />
+          <LinkIcon draggable={false} size={14} className="mt-1 shrink-0 text-[var(--text-muted)] transition-colors duration-150 group-hover:text-[#7C73FF]" />
         )}
       </div>
 
@@ -301,9 +301,10 @@ function JobCard({
             data-drag-handle="true"
             aria-label={t('card.drag')}
             title={t('card.drag')}
-            className="flex h-10 w-10 shrink-0 touch-none cursor-grab items-center justify-center rounded-xl text-[var(--text-faint)] transition-[background-color,color] duration-200 active:cursor-grabbing group-hover:bg-[var(--surface-muted)] group-hover:text-[var(--text-muted)]"
+            onClick={(event) => event.stopPropagation()}
+            className="of-drag-handle flex h-10 w-10 shrink-0 touch-none cursor-grab items-center justify-center rounded-xl text-[var(--text-faint)] transition-[background-color,color] duration-200 active:cursor-grabbing group-hover:bg-[var(--surface-muted)] group-hover:text-[var(--text-muted)]"
           >
-            <GripVertical size={14} />
+            <GripVertical draggable={false} size={14} />
           </span>
           <div className="min-w-0">
             <MetaLine icon={Calendar}>{cardDate}</MetaLine>
