@@ -142,6 +142,8 @@ function Column({
   onEditJob,
   onCardDragStart,
   onCardDragEnd,
+  onTouchDragMove,
+  onTouchDrop,
   onDragOverColumn,
   onDragLeaveColumn,
   isFiltered = false,
@@ -186,8 +188,9 @@ function Column({
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
+      data-column-id={column.id}
       className={[
-        'flex min-h-[600px] flex-col rounded-3xl border p-2',
+        'flex min-h-[520px] w-[86vw] min-w-[300px] max-w-[360px] shrink-0 snap-start flex-col rounded-3xl border p-2 sm:w-[320px] lg:min-h-[600px] lg:w-auto lg:min-w-0 lg:max-w-none',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
           ? 'border-[var(--column-drag-border)] bg-[var(--column-drag-bg)] shadow-[0_0_0_1px_var(--column-drag-glow)]'
@@ -220,6 +223,8 @@ function Column({
               onClick={() => onEditJob(job)}
               onDragStart={onCardDragStart}
               onDragEnd={onCardDragEnd}
+              onTouchDragMove={onTouchDragMove}
+              onTouchDrop={onTouchDrop}
             />
           ))}
         </AnimatePresence>

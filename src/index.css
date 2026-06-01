@@ -255,6 +255,14 @@ body::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--scrollbar-thumb-hover), rgba(99, 91, 255, 0.56));
 }
 
+@media (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
 .color-scheme-dark {
   color-scheme: dark;
 }

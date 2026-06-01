@@ -99,9 +99,18 @@ function CompactRow({ icon: Icon, label, children, aside, title }) {
   );
 }
 
-function JobCard({ job, isDragging = false, onClick, onDragStart, onDragEnd }) {
+function JobCard({
+  job,
+  isDragging = false,
+  onClick,
+  onDragStart,
+  onDragEnd,
+  onTouchDragMove,
+  onTouchDrop
+}) {
   const { t, formatDate } = useTranslation();
   const recentlyDraggedRef = useRef(false);
+  const touchDragRef = useRef({ startX: 0, startY: 0, active: false, cancelled: false });
   const title = job.title || job.position || job.company || t('job.untitledRole');
   const company = job.company || t('job.unknownCompany');
   const status = job.status || 'applied';
@@ -134,6 +143,62 @@ function JobCard({ job, isDragging = false, onClick, onDragStart, onDragEnd }) {
     onClick();
   };
 
+  const handleTouchStart = (event) => {
+    if (event.touches.length !== 1) return;
+    if (!event.target.closest('[data-drag-handle="true"]')) {
+      touchDragRef.current = { startX: 0, startY: 0, active: false, cancelled: true };
+      return;
+    }
+
+    const touch = event.touches[0];
+    touchDragRef.current = {
+      startX: touch.clientX,
+      startY: touch.clientY,
+      active: false,
+      cancelled: false
+    };
+  };
+
+  const handleTouchMove = (event) => {
+    const state = touchDragRef.current;
+    if (state.cancelled || event.touches.length !== 1) return;
+
+    const touch = event.touches[0];
+    const deltaX = touch.clientX - state.startX;
+    const deltaY = touch.clientY - state.startY;
+    const distanceX = Math.abs(deltaX);
+    const distanceY = Math.abs(deltaY);
+
+    if (!state.active) {
+      if (distanceY > distanceX + 6) {
+        touchDragRef.current = { ...state, cancelled: true };
+        return;
+      }
+
+      if (distanceX < 10) return;
+      touchDragRef.current = { ...state, active: true };
+      recentlyDraggedRef.current = true;
+      onDragStart(job.id);
+    }
+
+    event.preventDefault();
+    const targetColumn = document
+      .elementFromPoint(touch.clientX, touch.clientY)
+      ?.closest('[data-column-id]');
+    onTouchDragMove?.(targetColumn?.dataset.columnId);
+  };
+
+  const handleTouchEnd = () => {
+    const state = touchDragRef.current;
+    if (state.active) {
+      onTouchDrop?.(job.id);
+      window.setTimeout(() => {
+        recentlyDraggedRef.current = false;
+      }, 160);
+    }
+    touchDragRef.current = { startX: 0, startY: 0, active: false, cancelled: false };
+  };
+
   return (
     <motion.div
       style={{
@@ -155,6 +220,10 @@ function JobCard({ job, isDragging = false, onClick, onDragStart, onDragEnd }) {
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
       onClick={handleClick}
       className={[
         'group transform-gpu rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 shadow-sm shadow-black/5 will-change-transform',
@@ -227,12 +296,14 @@ function JobCard({ job, isDragging = false, onClick, onDragStart, onDragEnd }) {
 
       <div className="mt-3 flex min-h-9 items-center justify-between gap-3 border-t border-[var(--border-subtle)] pt-3">
         <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
-          <GripVertical
-            size={13}
+          <span
+            data-drag-handle="true"
             aria-label={t('card.drag')}
             title={t('card.drag')}
-            className="shrink-0 text-[var(--text-faint)] transition-colors duration-200 group-hover:text-[var(--text-muted)]"
-          />
+            className="flex h-8 w-8 shrink-0 touch-none items-center justify-center rounded-xl text-[var(--text-faint)] transition-[background-color,color] duration-200 group-hover:bg-[var(--surface-muted)] group-hover:text-[var(--text-muted)]"
+          >
+            <GripVertical size={14} />
+          </span>
           <div className="min-w-0">
             <MetaLine icon={Calendar}>{cardDate}</MetaLine>
           </div>

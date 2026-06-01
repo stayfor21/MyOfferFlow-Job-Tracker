@@ -62,7 +62,7 @@ export default function LanguageSwitcher() {
         aria-haspopup="listbox"
         onClick={() => (isOpen ? setIsOpen(false) : open())}
         className={[
-          'theme-icon-button inline-flex h-11 items-center justify-center gap-2 rounded-2xl border px-3 text-sm font-semibold',
+          'theme-icon-button inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-2xl border px-3 text-sm font-semibold',
           'transition-[background-color,border-color,box-shadow,color] duration-200 ease-out',
           'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
           isOpen ? 'border-[#8B5CF6]/35 shadow-[0_0_18px_rgba(99,91,255,0.14)]' : ''

@@ -17,7 +17,7 @@ export default function ThemeToggle() {
       title={label}
       onClick={toggleTheme}
       className={[
-        'theme-icon-button inline-flex h-11 w-11 items-center justify-center rounded-2xl border',
+        'theme-icon-button inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border',
         'transition-[background-color,border-color,box-shadow,color] duration-200 ease-out',
         'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--primary-glow)]'
       ].join(' ')}
@@ -26,4 +26,3 @@ export default function ThemeToggle() {
     </button>
   );
 }
-

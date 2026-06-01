@@ -245,7 +245,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans selection:bg-[#635BFF]/30">
+    <div className="min-h-screen overflow-x-hidden bg-[var(--bg)] text-[var(--text)] font-sans selection:bg-[#635BFF]/30">
       <PrepBanner
         show={showPrepPrompt}
         onPrepare={handlePrepareNow}
@@ -253,32 +253,32 @@ export default function App() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto grid h-16 max-w-[1600px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)]">
-          <div className="flex min-w-0 justify-start">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 sm:px-6 lg:h-16 lg:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] lg:py-0">
+          <div className="col-start-1 row-start-1 flex min-w-0 justify-start">
             <BrandLogo />
           </div>
 
-          <div className="flex min-w-0 justify-center">
+          <div className="col-span-2 row-start-2 flex min-w-0 justify-center lg:col-span-1 lg:col-start-2 lg:row-start-1">
             <div className="relative w-full">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={16} />
               <input
                 type="text"
                 placeholder={t('header.search')}
-                className="w-full rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] py-2.5 pl-11 pr-4 text-sm text-[var(--input-text)] placeholder:text-[var(--input-placeholder)] transition-all focus:border-[#635BFF]/60 focus:outline-none focus:ring-4 focus:ring-[#635BFF]/20"
+                className="w-full rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] py-2.5 pl-11 pr-4 text-base text-[var(--input-text)] placeholder:text-[var(--input-placeholder)] transition-all focus:border-[#635BFF]/60 focus:outline-none focus:ring-4 focus:ring-[#635BFF]/20 sm:text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3">
+          <div className="col-start-2 row-start-1 flex min-w-0 items-center justify-end gap-2 sm:gap-3 lg:col-start-3">
             <button
               type="button"
               aria-label={t('planner.open')}
               title={t('planner.open')}
               onClick={() => setIsPlannerOpen(true)}
               className={[
-                'theme-icon-button relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border',
+                'theme-icon-button relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border',
                 'transition-[background-color,border-color,box-shadow,color] duration-200 ease-out',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
                 isPlannerOpen ? 'border-[#8B5CF6]/35 text-[var(--text)] shadow-[0_0_18px_rgba(99,91,255,0.14)]' : ''
@@ -302,7 +302,8 @@ export default function App() {
 
             <Button
               variant="primary"
-              className="rounded-2xl px-4 sm:px-5"
+              className="h-11 w-11 shrink-0 rounded-2xl px-0 sm:w-auto sm:px-5"
+              aria-label={t('header.addJob')}
               onClick={() => { setEditingJob(null); setIsModalOpen(true); }}
             >
               <Plus size={18} strokeWidth={2.5} />

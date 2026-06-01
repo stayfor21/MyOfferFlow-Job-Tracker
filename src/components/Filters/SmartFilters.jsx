@@ -25,7 +25,7 @@ export default function SmartFilters({
 
   return (
     <section aria-label={t('filters.aria')} className="mb-6">
-      <div className="modal-scrollbar flex gap-2 overflow-x-auto rounded-[22px] border border-[var(--border-subtle)] bg-[var(--surface)] p-2 shadow-sm shadow-black/5">
+      <div className="modal-scrollbar flex touch-pan-x gap-2 overflow-x-auto rounded-[22px] border border-[var(--border-subtle)] bg-[var(--surface)] p-2 shadow-sm shadow-black/5">
         {SMART_FILTERS.map((filter) => {
           const Icon = icons[filter.id] || Inbox;
           const isActive = activeFilter === filter.id;
@@ -46,7 +46,7 @@ export default function SmartFilters({
               ].join(' ')}
             >
               <Icon size={14} />
-              <span>{t(filter.labelKey)}</span>
+              <span className="max-w-[132px] truncate">{t(filter.labelKey)}</span>
               <span
                 className={[
                   'inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[10px] font-bold',

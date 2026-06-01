@@ -46,8 +46,21 @@ export default function KanbanBoard({ columns, jobs, onMoveJob, onEditJob, isFil
     clearDragState();
   }, [clearDragState, onMoveJob]);
 
+  const handleTouchDragMove = useCallback((columnId) => {
+    if (!columnId) return;
+    handleDragOverColumn(columnId);
+  }, [handleDragOverColumn]);
+
+  const handleTouchDrop = useCallback((jobId) => {
+    const targetColumnId = draggedOverColumnRef.current;
+    if (targetColumnId) {
+      onMoveJob(jobId, targetColumnId);
+    }
+    clearDragState();
+  }, [clearDragState, onMoveJob]);
+
   return (
-    <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-3 lg:grid-cols-5">
+    <div className="modal-scrollbar -mx-4 flex touch-pan-x snap-x snap-mandatory items-start gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:gap-5 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
       {columns.map((column) => (
         <Column
           key={column.id}
@@ -59,6 +72,8 @@ export default function KanbanBoard({ columns, jobs, onMoveJob, onEditJob, isFil
           onEditJob={onEditJob}
           onCardDragStart={handleCardDragStart}
           onCardDragEnd={clearDragState}
+          onTouchDragMove={handleTouchDragMove}
+          onTouchDrop={handleTouchDrop}
           onDragOverColumn={handleDragOverColumn}
           onDragLeaveColumn={handleDragLeaveColumn}
           isFiltered={isFiltered}
