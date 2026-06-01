@@ -498,6 +498,51 @@ The interface should avoid horizontal page overflow.
 
 ---
 
+## Mobile and Tablet Access
+
+MyOfferFlow is currently available as a web application and can be used directly from a browser on desktop, tablet, and mobile devices.
+
+At this stage, MyOfferFlow does not have a native app in the Apple App Store or Google Play Store. Native iOS and Android applications may be considered in the future as the project grows and scales.
+
+For now, users can still add MyOfferFlow to their device home screen and use it in an app-like experience.
+
+### Add MyOfferFlow to the Home Screen
+
+On mobile and tablet devices, users can add MyOfferFlow to the home screen through the browser.
+
+#### On Android / Google Chrome
+
+1. Open MyOfferFlow in Google Chrome.
+2. Tap the three-dot menu in the top-right corner.
+3. Select **Add to Home screen** or **Install app** if available.
+4. Confirm the action.
+
+After that, MyOfferFlow will appear on the home screen and can be opened like a regular app.
+
+#### On iPhone or iPad / Safari
+
+1. Open MyOfferFlow in Safari.
+2. Tap the **Share** button.
+3. Select **Add to Home Screen**.
+4. Confirm the action.
+
+This creates a home screen shortcut for quick access to MyOfferFlow.
+
+### Current Mobile Experience
+
+The mobile and tablet versions are optimized for browser-based usage, including:
+
+- Responsive layouts
+- Touch-friendly controls
+- Mobile and tablet Kanban interaction
+- Smart Planner access
+- Light and dark themes
+- English, German, and Russian interface support
+
+Native mobile apps are not available yet, but they are a possible future direction for the project.
+
+---
+
 ## License
 
 All rights reserved.
