@@ -253,13 +253,13 @@ export default function App() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 sm:px-6 lg:h-16 lg:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] lg:py-0">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 sm:px-6 xl:h-16 xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] xl:py-0">
           <div className="col-start-1 row-start-1 flex min-w-0 justify-start">
             <BrandLogo />
           </div>
 
-          <div className="col-span-2 row-start-2 flex min-w-0 justify-center lg:col-span-1 lg:col-start-2 lg:row-start-1">
-            <div className="relative w-full">
+          <div className="col-span-2 row-start-2 flex min-w-0 justify-center xl:col-span-1 xl:col-start-2 xl:row-start-1">
+            <div className="relative w-full md:max-w-[760px] xl:max-w-none">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={16} />
               <input
                 type="text"
@@ -271,7 +271,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="col-start-2 row-start-1 flex min-w-0 items-center justify-end gap-2 sm:gap-3 lg:col-start-3">
+          <div className="col-start-2 row-start-1 flex min-w-max shrink-0 items-center justify-end gap-2 sm:gap-2.5 xl:col-start-3 xl:gap-3">
             <button
               type="button"
               aria-label={t('planner.open')}
@@ -311,11 +311,11 @@ export default function App() {
                 'shadow-[0_0_22px_rgba(99,91,255,0.20)] transition-[transform,background-color,box-shadow,border-color,filter] duration-200 ease-out',
                 'hover:border-[#A78BFA]/45 hover:brightness-110 hover:shadow-[0_0_28px_rgba(99,91,255,0.30)]',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20 active:scale-[0.98]',
-                'sm:w-auto sm:gap-2 sm:px-5'
+                'xl:w-auto xl:gap-2 xl:px-5'
               ].join(' ')}
             >
               <Plus aria-hidden="true" size={21} strokeWidth={2.5} className="h-5 w-5 shrink-0" />
-              <span className="hidden sm:inline">{t('header.addJob')}</span>
+              <span className="hidden xl:inline">{t('header.addJob')}</span>
             </button>
           </div>
         </div>
