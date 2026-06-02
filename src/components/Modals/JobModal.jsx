@@ -4,7 +4,6 @@ import {
   ArchiveRestore,
   Bell,
   Building2,
-  CalendarDays,
   CheckCircle2,
   ExternalLink,
   Flag,
@@ -34,7 +33,6 @@ import {
 } from '../../utils/jobMetadata';
 
 const inputClass = 'block h-11 w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
-const dateInputClass = 'job-drawer-date-input block h-11 w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 pr-11 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
 const textareaClass = 'block min-h-[76px] w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
 const labelClass = 'text-[11px] font-semibold leading-4 text-zinc-500';
 const statusChipStyles = {
@@ -89,25 +87,6 @@ function Section({ title, icon: Icon, children }) {
       </div>
       {children}
     </section>
-  );
-}
-
-function DateInput({ value, onChange, required = false }) {
-  return (
-    <div className="job-drawer-date-shell relative w-full min-w-0 max-w-full box-border">
-      <input
-        className={`${dateInputClass} color-scheme-dark`}
-        type="date"
-        required={required}
-        value={value}
-        onChange={onChange}
-      />
-      <CalendarDays
-        aria-hidden="true"
-        size={16}
-        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500"
-      />
-    </div>
   );
 }
 
@@ -376,7 +355,9 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                 />
               </Field>
               <Field label={t('modal.dateApplied')}>
-                <DateInput
+                <input
+                  className={`${inputClass} color-scheme-dark`}
+                  type="date"
                   value={formData.appliedDate}
                   onChange={(e) => setField('appliedDate', e.target.value)}
                 />
@@ -440,7 +421,9 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                 />
               </Field>
               <Field label={t('modal.dueDate')}>
-                <DateInput
+                <input
+                  className={`${inputClass} color-scheme-dark`}
+                  type="date"
                   value={formData.nextActionDueDate || ''}
                   onChange={(e) => setField('nextActionDueDate', e.target.value)}
                 />
@@ -477,7 +460,9 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
 
               <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,1fr)_auto]">
                 <Field label={t('modal.followUpDate')}>
-                  <DateInput
+                  <input
+                    className={`${inputClass} color-scheme-dark`}
+                    type="date"
                     value={formData.followUpDate || ''}
                     onChange={(e) => handleFollowUpDate(e.target.value)}
                   />
