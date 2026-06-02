@@ -253,13 +253,13 @@ export default function App() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 sm:px-5 md:h-16 md:grid-cols-[auto_minmax(220px,380px)_auto] md:gap-x-4 md:gap-y-0 md:py-0 lg:grid-cols-[auto_minmax(260px,500px)_auto] xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] xl:px-6">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 sm:px-5 md:h-16 md:grid-cols-[max-content_minmax(220px,320px)_max-content] md:gap-x-3 md:gap-y-0 md:py-0 lg:grid-cols-[max-content_minmax(260px,460px)_max-content] lg:gap-x-4 xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] xl:px-6">
           <div className="col-start-1 row-start-1 flex min-w-0 justify-start">
             <BrandLogo />
           </div>
 
           <div className="col-span-2 row-start-2 flex min-w-0 justify-center md:col-span-1 md:col-start-2 md:row-start-1 md:w-full md:justify-self-center xl:col-span-1 xl:col-start-2">
-            <div className="relative w-full md:max-w-[380px] lg:max-w-[500px] xl:max-w-none">
+            <div className="relative w-full md:max-w-[320px] lg:max-w-[460px] xl:max-w-none">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={16} />
               <input
                 type="text"

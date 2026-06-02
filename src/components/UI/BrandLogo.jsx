@@ -39,8 +39,8 @@ export default function BrandLogo() {
   return (
     <div className="flex min-w-0 items-center gap-3 md:gap-2.5 xl:gap-3" aria-label="MyOfferFlow">
       <LogoMark className="md:h-10 md:w-10 md:rounded-[13px] xl:h-11 xl:w-11 xl:rounded-[14px]" glyphClassName="md:h-8 md:w-8 xl:h-9 xl:w-9" />
-      <div className="hidden min-w-0 max-w-[132px] sm:block xl:max-w-none">
-        <p className="truncate whitespace-nowrap text-xl font-bold tracking-tight text-[var(--text)] md:text-base xl:text-xl">MyOfferFlow</p>
+      <div className="hidden min-w-[118px] sm:block xl:min-w-0 xl:max-w-none">
+        <p className="whitespace-nowrap text-xl font-bold tracking-tight text-[var(--text)] md:text-base xl:text-xl">MyOfferFlow</p>
         <p className="-mt-0.5 hidden text-xs font-medium text-[var(--text-muted)] xl:block">{t('brand.tagline')}</p>
       </div>
     </div>

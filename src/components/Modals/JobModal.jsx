@@ -32,8 +32,8 @@ import {
   todayString
 } from '../../utils/jobMetadata';
 
-const inputClass = 'h-11 w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
-const textareaClass = 'min-h-[76px] w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const inputClass = 'h-11 w-full min-w-0 max-w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const textareaClass = 'min-h-[76px] w-full min-w-0 max-w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
 const labelClass = 'text-[11px] font-semibold leading-4 text-zinc-500';
 const statusChipStyles = {
   applied: 'of-chip-status-applied',
@@ -71,7 +71,7 @@ function buildInitialForm(job) {
 
 function Field({ label, children }) {
   return (
-    <div className="space-y-2">
+    <div className="min-w-0 max-w-full space-y-2">
       <label className={labelClass}>{label}</label>
       {children}
     </div>
@@ -80,7 +80,7 @@ function Field({ label, children }) {
 
 function Section({ title, icon: Icon, children }) {
   return (
-    <section className="rounded-2xl border border-white/[0.08] bg-zinc-950/30 p-4">
+    <section className="min-w-0 max-w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-zinc-950/30 p-4">
       <div className="mb-4 flex items-center gap-2">
         <Icon size={16} className="text-[#8B5CF6]" />
         <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
@@ -277,7 +277,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
 
       <form
         onSubmit={handleSubmit}
-        className="relative flex h-full w-full max-w-[540px] flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70"
+        className="relative flex h-full w-full max-w-[100vw] flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:max-w-[640px] xl:max-w-[560px]"
       >
         <header className="border-b border-white/[0.08] p-4 sm:p-5">
           <div className="flex items-start justify-between gap-4">
@@ -321,7 +321,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           </div>
         </header>
 
-        <div className="modal-scrollbar flex-1 space-y-4 overflow-y-auto p-4 pb-7 sm:p-5 sm:pb-8">
+        <div className="modal-scrollbar flex-1 space-y-4 overflow-y-auto p-4 pb-[calc(1.75rem+env(safe-area-inset-bottom))] sm:p-5 sm:pb-[calc(2rem+env(safe-area-inset-bottom))]">
           {isArchived && (
             <div className="rounded-2xl border p-4 text-sm of-chip-archived">
               {t('archive.notice')}
@@ -329,7 +329,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           )}
 
           <Section title={t('modal.overview')} icon={Building2}>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <Field label={t('modal.company')}>
                 <input
                   className={inputClass}
@@ -383,7 +383,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
               />
             </div>
 
-            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
               <InfoRow label={t('modal.status')} value={t(`status.${formData.status}`)} />
               <InfoRow label={t('modal.source')} value={formData.link ? t('modal.jobLinkSaved') : t('common.notSet')} />
               {roleDetail && <InfoRow label={t('modal.roleDetail')} value={roleDetail} />}
@@ -393,7 +393,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           </Section>
 
           <Section title={t('modal.priority')} icon={Flag}>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Field label={t('modal.priority')}>
                 <CustomSelect
                   value={formData.priority || 'medium'}
@@ -458,7 +458,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                 </div>
               )}
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
                 <Field label={t('modal.followUpDate')}>
                   <input
                     className={`${inputClass} color-scheme-dark`}
@@ -467,7 +467,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                     onChange={(e) => handleFollowUpDate(e.target.value)}
                   />
                 </Field>
-                <div className="flex items-end gap-2">
+                <div className="flex min-w-0 flex-wrap items-end gap-2">
                   {followUpConfig.quickActions.map((action) => (
                     <Button
                       key={action.label}
@@ -475,7 +475,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                       variant="secondary"
                       size="compact"
                       onClick={() => handleFollowUpQuickAction(action)}
-                      className="flex-1"
+                      className="min-w-[96px] flex-1"
                     >
                       {quickActionLabel(action.label)}
                     </Button>
