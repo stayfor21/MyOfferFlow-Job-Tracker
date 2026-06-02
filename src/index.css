@@ -294,6 +294,23 @@ body::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 0 18px var(--primary-glow);
 }
 
+.job-drawer-panel,
+.job-drawer-panel * {
+  box-sizing: border-box;
+}
+
+.job-drawer-panel input,
+.job-drawer-panel textarea,
+.job-drawer-panel button,
+.job-drawer-panel [role='button'] {
+  max-width: 100%;
+}
+
+.job-drawer-panel input[type='date'] {
+  min-width: 0;
+  width: 100%;
+}
+
 :root[data-theme='light'] button:disabled,
 :root[data-theme='light'] [aria-disabled='true'] {
   opacity: 0.72 !important;
