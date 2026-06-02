@@ -468,34 +468,6 @@ const technicalPatterns = [
 ];
 
 const MIN_CONTEXT_LENGTH = 30;
-const allowedContextPattern = /^[A-Za-z0-9\s.,;:!?'"()[\]{}\/\\&+\-@#%$*_`|<>~=]+$/;
-const contextKeywords = [
-  'api',
-  'backend',
-  'code',
-  'company',
-  'developer',
-  'development',
-  'engineer',
-  'engineering',
-  'frontend',
-  'interview',
-  'job',
-  'node',
-  'position',
-  'react',
-  'recruiter',
-  'rest',
-  'role',
-  'screen',
-  'software',
-  'sql',
-  'system',
-  'team',
-  'teamwork',
-  'technical',
-  'typescript'
-];
 
 function scoreKeywords(text, keywords) {
   return keywords.reduce((score, keyword) => {
@@ -510,39 +482,45 @@ function detectCategory(text = '') {
   const frontendScore = scoreKeywords(lower, [
     'frontend', 'front-end', 'front end', 'react', 'next.js', 'nextjs', 'vue', 'angular',
     'javascript', 'typescript', 'html', 'css', 'tailwind', 'responsive', 'ui components',
-    'web app', 'browser', 'accessibility', 'state management'
+    'web app', 'browser', 'accessibility', 'state management', 'webanwendung', 'web app',
+    'komponenten', 'state management', 'barrierefreiheit', 'frontend-entwickler',
+    'фронтенд', 'frontend-разработчик', 'веб', 'интерфейс', 'компоненты', 'состояние',
+    'доступность', 'адаптивный ui'
   ]);
   const backendScore = scoreKeywords(lower, [
     'backend', 'back-end', 'back end', 'node.js', 'nodejs', 'express', 'nestjs', 'django',
     'flask', 'fastapi', 'api', 'rest', 'graphql', 'database', 'sql', 'nosql', 'postgresql',
-    'mongodb', 'redis', 'microservices', 'authentication', 'server', 'cloud', 'docker'
+    'mongodb', 'redis', 'microservices', 'authentication', 'server', 'cloud', 'docker',
+    'datenbank', 'authentifizierung', 'autorisierung', 'skalierung', 'serverarchitektur',
+    'бэкенд', 'backend-разработчик', 'сервер', 'база данных', 'базы данных',
+    'аутентификация', 'авторизация', 'масштабирование', 'микросервисы'
   ]);
   const designScore = scoreKeywords(lower, [
     'ux', 'ui', 'ux/ui', 'product design', 'interface design', 'user flows', 'wireframes',
     'prototypes', 'figma', 'usability', 'design system', 'user research', 'interaction design',
-    'visual design', 'mobile design', 'web design', 'accessibility design'
+    'visual design', 'mobile design', 'web design', 'accessibility design', 'designprozess',
+    'nutzerbedürfnisse', 'prototyping', 'portfolio', 'дизайн', 'дизайнер', 'ux/ui-дизайнер',
+    'пользовательские сценарии', 'прототип', 'прототипирование', 'дизайн-система',
+    'визуальная иерархия'
   ]);
 
   if (designScore >= 2 && designScore >= frontendScore && designScore >= backendScore) return 'UX/UI Designer';
   if (frontendScore >= 2 && frontendScore >= backendScore) return 'Frontend Developer';
   if (backendScore >= 2) return 'Backend Developer';
 
-  if (lower.match(/engineer|developer|dev|code|software|fullstack|full-stack|python|java|tech|architecture|testing/)) return 'Software Engineering';
-  if (lower.match(/product|manager|business|owner|analyst|strategy|roadmap/)) return 'Product / Business';
-  if (lower.match(/marketing|seo|content|growth|social|ads|campaign/)) return 'Marketing';
-  if (lower.match(/bank|finance|invest|trading|tax|accountant|valuation/)) return 'Finance / Banking';
-  if (lower.match(/design|creative|art|product designer/)) return 'Design';
+  if (lower.match(/engineer|developer|dev|code|software|fullstack|full-stack|python|java|tech|architecture|testing|entwickler|softwareentwicklung|разработчик|инженер|код|архитектура|тестирование/)) return 'Software Engineering';
+  if (lower.match(/product|manager|business|owner|analyst|strategy|roadmap|produkt|geschäft|produktmanager|продукт|бизнес|аналитик|стратегия|роадмап/)) return 'Product / Business';
+  if (lower.match(/marketing|seo|content|growth|social|ads|campaign|kampagne|маркетинг|контент|реклама|кампания/)) return 'Marketing';
+  if (lower.match(/bank|finance|invest|trading|tax|accountant|valuation|finanz|банк|финанс|инвест|налог|оценк/)) return 'Finance / Banking';
+  if (lower.match(/design|creative|art|product designer|gestaltung|дизайн|креатив/)) return 'Design';
   return 'Other';
 }
 
 function validateContext(value = '') {
   const trimmed = value.trim();
-  const words = trimmed.toLowerCase().match(/[a-z]+(?:\.[a-z]+)?/g) || [];
-  const alphaNumeric = trimmed.replace(/[^A-Za-z0-9]/g, '');
+  const words = trimmed.toLowerCase().match(/[\p{L}][\p{L}\p{M}\p{N}.'’-]*/gu) || [];
+  const alphaNumeric = trimmed.replace(/[^\p{L}\p{N}]/gu, '');
   const uniqueWords = new Set(words);
-  const hasContextKeyword = contextKeywords.some((keyword) => (
-    new RegExp(`\\b${keyword}\\b`, 'i').test(trimmed)
-  ));
   const mostRepeatedWordCount = words.reduce((maxCount, word) => {
     const count = words.filter((item) => item === word).length;
     return Math.max(maxCount, count);
@@ -564,15 +542,7 @@ function validateContext(value = '') {
     };
   }
 
-  if (!allowedContextPattern.test(trimmed)) {
-    return {
-      isValid: false,
-      reason: 'non_english',
-      messageKey: 'prep.validationEnglish'
-    };
-  }
-
-  if (!/[A-Za-z]/.test(trimmed) || /^[\d\s.,;:!?'"()[\]{}\/\\&+\-@#%$*_`|<>~=]+$/.test(trimmed)) {
+  if (!/\p{L}/u.test(trimmed) || /^[\p{N}\s.,;:!?'"()[\]{}\/\\&+\-@#%$*_`|<>~=]+$/u.test(trimmed)) {
     return {
       isValid: false,
       reason: 'numbers_symbols_only',
@@ -580,7 +550,7 @@ function validateContext(value = '') {
     };
   }
 
-  if (alphaNumeric.length >= 10 && /^([A-Za-z0-9])\1+$/.test(alphaNumeric)) {
+  if (alphaNumeric.length >= 10 && /^([\p{L}\p{N}])\1+$/u.test(alphaNumeric)) {
     return {
       isValid: false,
       reason: 'spam',
@@ -604,7 +574,7 @@ function validateContext(value = '') {
     };
   }
 
-  if (words.length < 4 || !hasContextKeyword) {
+  if (words.length < 3) {
     return {
       isValid: false,
       reason: 'gibberish',
