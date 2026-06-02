@@ -32,8 +32,8 @@ import {
   todayString
 } from '../../utils/jobMetadata';
 
-const inputClass = 'h-11 w-full min-w-0 max-w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
-const textareaClass = 'min-h-[76px] w-full min-w-0 max-w-full rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const inputClass = 'block h-11 w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const textareaClass = 'block min-h-[76px] w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
 const labelClass = 'text-[11px] font-semibold leading-4 text-zinc-500';
 const statusChipStyles = {
   applied: 'of-chip-status-applied',
@@ -71,7 +71,7 @@ function buildInitialForm(job) {
 
 function Field({ label, children }) {
   return (
-    <div className="min-w-0 max-w-full space-y-2">
+    <div className="w-full min-w-0 max-w-full box-border space-y-2">
       <label className={labelClass}>{label}</label>
       {children}
     </div>
@@ -80,7 +80,7 @@ function Field({ label, children }) {
 
 function Section({ title, icon: Icon, children }) {
   return (
-    <section className="min-w-0 max-w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-zinc-950/30 p-4">
+    <section className="w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.08] bg-zinc-950/30 p-4">
       <div className="mb-4 flex items-center gap-2">
         <Icon size={16} className="text-[#8B5CF6]" />
         <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
