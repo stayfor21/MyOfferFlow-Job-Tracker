@@ -277,7 +277,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
 
       <form
         onSubmit={handleSubmit}
-        className="relative flex h-full w-full max-w-[100vw] flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:max-w-[640px] xl:max-w-[560px]"
+        className="relative flex h-full w-full max-w-[100vw] flex-col overflow-x-hidden border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:w-[min(680px,100vw)] lg:w-[min(720px,72vw)] xl:w-[640px] 2xl:w-[680px]"
       >
         <header className="border-b border-white/[0.08] p-4 sm:p-5">
           <div className="flex items-start justify-between gap-4">
@@ -329,7 +329,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           )}
 
           <Section title={t('modal.overview')} icon={Building2}>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
               <Field label={t('modal.company')}>
                 <input
                   className={inputClass}
@@ -383,7 +383,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
               />
             </div>
 
-            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
               <InfoRow label={t('modal.status')} value={t(`status.${formData.status}`)} />
               <InfoRow label={t('modal.source')} value={formData.link ? t('modal.jobLinkSaved') : t('common.notSet')} />
               {roleDetail && <InfoRow label={t('modal.roleDetail')} value={roleDetail} />}
@@ -393,7 +393,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           </Section>
 
           <Section title={t('modal.priority')} icon={Flag}>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               <Field label={t('modal.priority')}>
                 <CustomSelect
                   value={formData.priority || 'medium'}
@@ -428,7 +428,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                   onChange={(e) => setField('nextActionDueDate', e.target.value)}
                 />
               </Field>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex min-w-0 flex-wrap gap-2">
                 {actionSuggestions.map((action) => (
                   <Button
                     key={action}
@@ -436,7 +436,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                     variant="secondary"
                     size="compact"
                     onClick={() => setField('nextAction', action)}
-                    className="rounded-full"
+                    className="min-w-0 max-w-full rounded-full whitespace-normal text-left leading-tight"
                   >
                     {getNextActionDisplay(action, t)}
                   </Button>
@@ -458,7 +458,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                 </div>
               )}
 
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
+              <div className="grid grid-cols-1 gap-3 lg:grid-cols-[minmax(0,1fr)_auto]">
                 <Field label={t('modal.followUpDate')}>
                   <input
                     className={`${inputClass} color-scheme-dark`}
@@ -467,7 +467,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                     onChange={(e) => handleFollowUpDate(e.target.value)}
                   />
                 </Field>
-                <div className="flex min-w-0 flex-wrap items-end gap-2">
+                <div className="grid min-w-0 grid-cols-2 gap-2 lg:flex lg:flex-wrap lg:items-end">
                   {followUpConfig.quickActions.map((action) => (
                     <Button
                       key={action.label}
@@ -475,7 +475,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                       variant="secondary"
                       size="compact"
                       onClick={() => handleFollowUpQuickAction(action)}
-                      className="min-w-[96px] flex-1"
+                      className="min-w-0 max-w-full whitespace-normal px-2.5 leading-tight lg:min-w-[96px] lg:flex-1"
                     >
                       {quickActionLabel(action.label)}
                     </Button>

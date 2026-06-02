@@ -37,10 +37,10 @@ export default function BrandLogo() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex min-w-0 items-center gap-3 md:gap-2.5 xl:gap-3" aria-label="MyOfferFlow">
-      <LogoMark className="md:h-10 md:w-10 md:rounded-[13px] xl:h-11 xl:w-11 xl:rounded-[14px]" glyphClassName="md:h-8 md:w-8 xl:h-9 xl:w-9" />
-      <div className="hidden min-w-[118px] sm:block xl:min-w-0 xl:max-w-none">
-        <p className="whitespace-nowrap text-xl font-bold tracking-tight text-[var(--text)] md:text-base xl:text-xl">MyOfferFlow</p>
+    <div className="flex min-w-max shrink-0 items-center gap-2.5 xl:gap-3" aria-label="MyOfferFlow">
+      <LogoMark className="h-10 w-10 rounded-[13px] xl:h-11 xl:w-11 xl:rounded-[14px]" glyphClassName="h-8 w-8 xl:h-9 xl:w-9" />
+      <div className="brand-wordmark min-w-max xl:max-w-none">
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-tight text-[var(--text)] md:text-[17px] lg:text-lg xl:text-xl">MyOfferFlow</p>
         <p className="-mt-0.5 hidden text-xs font-medium text-[var(--text-muted)] xl:block">{t('brand.tagline')}</p>
       </div>
     </div>

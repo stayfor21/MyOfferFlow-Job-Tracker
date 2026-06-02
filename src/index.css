@@ -228,6 +228,16 @@ body {
   @apply antialiased;
 }
 
+.brand-wordmark {
+  display: block;
+}
+
+@media (max-width: 379px) {
+  .brand-wordmark {
+    display: none;
+  }
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);

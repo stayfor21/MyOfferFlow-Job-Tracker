@@ -253,8 +253,8 @@ export default function App() {
       />
 
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 px-4 py-3 sm:px-5 md:h-16 md:grid-cols-[max-content_minmax(220px,320px)_max-content] md:gap-x-3 md:gap-y-0 md:py-0 lg:grid-cols-[max-content_minmax(260px,460px)_max-content] lg:gap-x-4 xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] xl:px-6">
-          <div className="col-start-1 row-start-1 flex min-w-0 justify-start">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-[max-content_minmax(0,1fr)] items-center gap-x-2 gap-y-3 px-3 py-3 sm:gap-x-3 sm:px-5 md:h-16 md:grid-cols-[max-content_minmax(180px,320px)_max-content] md:justify-between md:gap-y-0 md:py-0 lg:grid-cols-[max-content_minmax(280px,520px)_max-content] lg:gap-x-4 xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] xl:justify-stretch xl:px-6">
+          <div className="col-start-1 row-start-1 flex min-w-max shrink-0 justify-start">
             <BrandLogo />
           </div>
 
@@ -271,14 +271,14 @@ export default function App() {
             </div>
           </div>
 
-          <div className="col-start-2 row-start-1 flex min-w-max shrink-0 items-center justify-end gap-2 sm:gap-2.5 md:col-start-3 xl:gap-3">
+          <div className="col-start-2 row-start-1 flex min-w-max shrink-0 items-center justify-end gap-1.5 sm:gap-2.5 md:col-start-3 xl:gap-3">
             <button
               type="button"
               aria-label={t('planner.open')}
               title={t('planner.open')}
               onClick={() => setIsPlannerOpen(true)}
               className={[
-                'theme-icon-button relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border',
+                'theme-icon-button relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border md:h-11 md:w-11',
                 'transition-[background-color,border-color,box-shadow,color] duration-200 ease-out',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
                 isPlannerOpen ? 'border-[#8B5CF6]/35 text-[var(--text)] shadow-[0_0_18px_rgba(99,91,255,0.14)]' : ''
@@ -306,7 +306,7 @@ export default function App() {
               title={t('header.addJob')}
               onClick={() => { setEditingJob(null); setIsModalOpen(true); }}
               className={[
-                'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#8B5CF6]/30',
+                'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[#8B5CF6]/30 md:h-11 md:w-11',
                 'bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] p-0 text-white',
                 'shadow-[0_0_22px_rgba(99,91,255,0.20)] transition-[transform,background-color,box-shadow,border-color,filter] duration-200 ease-out',
                 'hover:border-[#A78BFA]/45 hover:brightness-110 hover:shadow-[0_0_28px_rgba(99,91,255,0.30)]',
