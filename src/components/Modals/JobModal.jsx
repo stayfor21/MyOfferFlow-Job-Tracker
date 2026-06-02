@@ -458,7 +458,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                 </div>
               )}
 
-              <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,1fr)_auto]">
+              <div className="space-y-3">
                 <Field label={t('modal.followUpDate')}>
                   <input
                     className={`${inputClass} color-scheme-dark`}
@@ -467,7 +467,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                     onChange={(e) => handleFollowUpDate(e.target.value)}
                   />
                 </Field>
-                <div className="grid min-w-0 grid-cols-2 gap-2 xl:flex xl:flex-wrap xl:items-end">
+                <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:flex-wrap">
                   {followUpConfig.quickActions.map((action) => (
                     <Button
                       key={action.label}
@@ -475,7 +475,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                       variant="secondary"
                       size="compact"
                       onClick={() => handleFollowUpQuickAction(action)}
-                      className="min-w-0 max-w-full whitespace-normal px-2.5 leading-tight xl:min-w-[96px] xl:flex-1"
+                      className="min-w-0 max-w-full whitespace-normal px-2.5 leading-tight"
                     >
                       {quickActionLabel(action.label)}
                     </Button>
