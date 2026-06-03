@@ -33,7 +33,7 @@ export default function AppFooter({ onOpenPlanner }) {
           </div>
         </div>
 
-        <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold text-[var(--text-soft)] lg:justify-center">
+        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-semibold text-[var(--text-soft)] lg:justify-center">
           {footerLinks.map((link) => (
             <button
               key={link.id}
@@ -51,6 +51,15 @@ export default function AppFooter({ onOpenPlanner }) {
           >
             {t('footer.links.planner')}
           </button>
+          <a
+            href="https://github.com/stayfor21/MyOfferFlow-Job-Tracker"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t('footer.githubAria')}
+            className="inline-flex items-center gap-1 rounded-lg transition-colors duration-150 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20"
+          >
+            <span>{t('footer.links.github')}</span>
+          </a>
         </nav>
 
         <div className="min-w-0 text-left text-xs font-medium text-[var(--text-muted)] lg:text-right">
