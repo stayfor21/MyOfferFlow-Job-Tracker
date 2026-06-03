@@ -19,8 +19,8 @@ export default function AppFooter({ onOpenPlanner }) {
 
   return (
     <footer className="border-t border-[var(--border)] bg-transparent">
-      <div className="mx-auto grid max-w-[1600px] gap-5 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-6">
-        <div className="flex min-w-0 items-center gap-3">
+      <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-5 px-4 py-8 text-center sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-6 sm:gap-y-[18px] sm:px-6 sm:text-left lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-6">
+        <div className="order-1 flex min-w-0 items-center justify-center gap-3 sm:justify-self-start lg:justify-self-start">
           <LogoMark
             className="!h-8 !w-8 !rounded-xl shadow-[0_0_18px_rgba(99,91,255,0.22)]"
             glyphClassName="!h-7 !w-7"
@@ -33,13 +33,13 @@ export default function AppFooter({ onOpenPlanner }) {
           </div>
         </div>
 
-        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-semibold text-[var(--text-soft)] lg:justify-center">
+        <nav className="order-2 flex w-full flex-wrap items-center justify-center gap-x-[18px] gap-y-2 text-sm font-semibold leading-6 text-[var(--text-soft)] sm:order-3 sm:col-span-2 sm:gap-x-6 lg:order-2 lg:col-span-1 lg:justify-self-center">
           {footerLinks.map((link) => (
             <button
               key={link.id}
               type="button"
               onClick={() => scrollToSection(link.id)}
-              className="rounded-lg transition-colors duration-150 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20"
+              className="rounded-lg transition-colors duration-150 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20"
             >
               {t(link.labelKey)}
             </button>
@@ -47,7 +47,7 @@ export default function AppFooter({ onOpenPlanner }) {
           <button
             type="button"
             onClick={onOpenPlanner}
-            className="rounded-lg transition-colors duration-150 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20"
+            className="rounded-lg transition-colors duration-150 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20"
           >
             {t('footer.links.planner')}
           </button>
@@ -56,13 +56,13 @@ export default function AppFooter({ onOpenPlanner }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t('footer.githubAria')}
-            className="inline-flex items-center gap-1 rounded-lg transition-colors duration-150 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20"
+            className="rounded-lg transition-colors duration-150 ease-out hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20"
           >
-            <span>{t('footer.links.github')}</span>
+            {t('footer.links.github')}
           </a>
         </nav>
 
-        <div className="min-w-0 text-left text-xs font-medium text-[var(--text-muted)] lg:text-right">
+        <div className="order-3 min-w-0 text-center text-xs font-medium text-[var(--text-muted)] sm:order-2 sm:justify-self-end sm:text-right lg:order-3 lg:justify-self-end">
           <p className="truncate">{t('footer.status')}</p>
           <p className="mt-1 text-[11px] text-[var(--text-faint)]">v1.0</p>
         </div>
