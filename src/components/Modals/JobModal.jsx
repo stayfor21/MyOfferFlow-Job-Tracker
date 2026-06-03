@@ -45,19 +45,21 @@ const statusChipStyles = {
 };
 
 function buildInitialForm(job) {
+  const today = todayString();
+
   return {
     company: job?.company || '',
     position: job?.position || '',
     location: job?.location || '',
     link: job?.link || '',
     status: job?.status || 'applied',
-    appliedDate: job?.appliedDate || new Date().toISOString().split('T')[0],
+    appliedDate: job?.appliedDate || today,
     notes: job?.notes || '',
     priority: job?.priority || 'medium',
     isDreamJob: Boolean(job?.isDreamJob),
     nextAction: job?.nextAction || '',
-    nextActionDueDate: job?.nextActionDueDate || '',
-    followUpDate: job?.followUpDate || '',
+    nextActionDueDate: job?.nextActionDueDate || today,
+    followUpDate: job?.followUpDate || today,
     followUpDone: Boolean(job?.followUpDone),
     followUpNote: job?.followUpNote || '',
     lastFollowUpAt: job?.lastFollowUpAt || '',
@@ -278,7 +280,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
 
       <form
         onSubmit={handleSubmit}
-        className="job-drawer-panel relative flex h-full w-full max-w-[100vw] flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:w-[min(680px,100vw)] lg:w-[min(720px,72vw)] xl:w-[640px] 2xl:w-[680px]"
+        className="job-drawer-panel relative flex h-full w-full max-w-full flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:w-[min(680px,100%)] lg:w-[min(720px,72vw)] xl:w-[640px] 2xl:w-[680px]"
       >
         <header className="border-b border-white/[0.08] p-4 sm:p-5">
           <div className="flex items-start justify-between gap-4">
