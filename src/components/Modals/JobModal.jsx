@@ -324,7 +324,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           </div>
         </header>
 
-        <div className="modal-scrollbar flex-1 space-y-4 overflow-y-auto p-4 pb-[calc(1.75rem+env(safe-area-inset-bottom))] sm:p-5 sm:pb-[calc(2rem+env(safe-area-inset-bottom))]">
+        <div className="modal-scrollbar w-full min-w-0 max-w-full flex-1 space-y-4 overflow-x-hidden overflow-y-auto p-4 pb-[calc(1.75rem+env(safe-area-inset-bottom))] sm:p-5 sm:pb-[calc(2rem+env(safe-area-inset-bottom))]">
           {isArchived && (
             <div className="rounded-2xl border p-4 text-sm of-chip-archived">
               {t('archive.notice')}
@@ -332,7 +332,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           )}
 
           <Section title={t('modal.overview')} icon={Building2}>
-            <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
+            <div className="grid min-w-0 grid-cols-1 gap-3">
               <Field label={t('modal.company')}>
                 <input
                   className={inputClass}
@@ -386,7 +386,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
               />
             </div>
 
-            <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-2">
+            <div className="mt-3 grid min-w-0 grid-cols-1 gap-3">
               <InfoRow label={t('modal.status')} value={t(`status.${formData.status}`)} />
               <InfoRow label={t('modal.source')} value={formData.link ? t('modal.jobLinkSaved') : t('common.notSet')} />
               {roleDetail && <InfoRow label={t('modal.roleDetail')} value={roleDetail} />}
@@ -396,7 +396,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
           </Section>
 
           <Section title={t('modal.priority')} icon={Flag}>
-            <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <div className="grid min-w-0 grid-cols-1 gap-4">
               <Field label={t('modal.priority')}>
                 <CustomSelect
                   value={formData.priority || 'medium'}
