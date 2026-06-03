@@ -320,22 +320,49 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .job-drawer-panel input[type='date'] {
+  display: flex;
+  align-items: center;
+  height: 2.75rem;
   min-width: 0;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  padding-block: 0;
+  line-height: 1.25rem;
 }
 
 .job-drawer-panel input[type='date']::-webkit-datetime-edit,
-.job-drawer-panel input[type='date']::-webkit-datetime-edit-fields-wrapper,
+.job-drawer-panel input[type='date']::-webkit-date-and-time-value {
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0;
+  line-height: 1.25rem;
+  text-align: left;
+}
+
+.job-drawer-panel input[type='date']::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .job-drawer-panel input[type='date']::-webkit-datetime-edit-text,
 .job-drawer-panel input[type='date']::-webkit-datetime-edit-month-field,
 .job-drawer-panel input[type='date']::-webkit-datetime-edit-day-field,
-.job-drawer-panel input[type='date']::-webkit-datetime-edit-year-field,
-.job-drawer-panel input[type='date']::-webkit-date-and-time-value {
+.job-drawer-panel input[type='date']::-webkit-datetime-edit-year-field {
+  align-self: center;
   min-width: 0;
-  max-width: 100%;
-  text-align: left;
+  line-height: 1.25rem;
+}
+
+.job-drawer-panel input[type='date']::-webkit-calendar-picker-indicator {
+  align-self: center;
+  margin: 0;
 }
 
 :root[data-theme='light'] button:disabled,

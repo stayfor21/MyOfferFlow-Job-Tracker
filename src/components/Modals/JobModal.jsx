@@ -33,6 +33,7 @@ import {
 } from '../../utils/jobMetadata';
 
 const inputClass = 'block h-11 w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
+const dateInputClass = `${inputClass} job-drawer-date-field color-scheme-dark`;
 const textareaClass = 'block min-h-[76px] w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
 const labelClass = 'text-[11px] font-semibold leading-4 text-zinc-500';
 const statusChipStyles = {
@@ -277,7 +278,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
 
       <form
         onSubmit={handleSubmit}
-        className="job-drawer-panel relative flex h-full w-full max-w-[100vw] flex-col overflow-x-hidden border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:w-[min(680px,100vw)] lg:w-[min(720px,72vw)] xl:w-[640px] 2xl:w-[680px]"
+        className="job-drawer-panel relative flex h-full w-full max-w-[100vw] flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:w-[min(680px,100vw)] lg:w-[min(720px,72vw)] xl:w-[640px] 2xl:w-[680px]"
       >
         <header className="border-b border-white/[0.08] p-4 sm:p-5">
           <div className="flex items-start justify-between gap-4">
@@ -356,7 +357,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
               </Field>
               <Field label={t('modal.dateApplied')}>
                 <input
-                  className={`${inputClass} color-scheme-dark`}
+                  className={dateInputClass}
                   type="date"
                   value={formData.appliedDate}
                   onChange={(e) => setField('appliedDate', e.target.value)}
@@ -422,7 +423,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
               </Field>
               <Field label={t('modal.dueDate')}>
                 <input
-                  className={`${inputClass} color-scheme-dark`}
+                  className={dateInputClass}
                   type="date"
                   value={formData.nextActionDueDate || ''}
                   onChange={(e) => setField('nextActionDueDate', e.target.value)}
@@ -461,7 +462,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
               <div className="space-y-3">
                 <Field label={t('modal.followUpDate')}>
                   <input
-                    className={`${inputClass} color-scheme-dark`}
+                    className={dateInputClass}
                     type="date"
                     value={formData.followUpDate || ''}
                     onChange={(e) => handleFollowUpDate(e.target.value)}
