@@ -84,7 +84,7 @@ function getStatusStyle(columnId) {
   return statusDropStyles[columnId] || statusDropStyles.applied;
 }
 
-function EmptyColumnState({ columnId, isDragOver, statusStyle, isFiltered, filteredEmptyState }) {
+function KanbanEmptyState({ columnId, isDragOver, statusStyle, isFiltered, filteredEmptyState }) {
   const { t } = useTranslation();
   const state = emptyStates[columnId] || emptyStates.applied;
   const Icon = state.icon;
@@ -103,29 +103,29 @@ function EmptyColumnState({ columnId, isDragOver, statusStyle, isFiltered, filte
         '--drop-text': statusStyle.text
       }}
       className={[
-        'group/empty flex h-[170px] w-full min-w-0 max-w-full items-center justify-center rounded-2xl border border-dashed px-[18px] py-6 text-center',
+        'group/empty box-border min-h-[196px] w-full min-w-0 max-w-full rounded-2xl border border-dashed px-[18px] py-5 text-center',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
           ? 'border-[var(--drop-drag-border)] bg-[var(--drop-drag-bg)] shadow-[0_0_18px_var(--drop-drag-glow)]'
           : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:border-[var(--drop-border)] hover:bg-[var(--drop-bg)]'
       ].join(' ')}
     >
-      <div className="grid h-full w-full min-w-0 max-w-full grid-rows-[44px_36px_minmax(42px,1fr)] justify-items-center gap-3">
+      <div className="grid w-full min-w-0 max-w-full grid-rows-[48px_38px_minmax(52px,auto)] justify-items-center gap-2.5">
         <div
           className={[
-            'flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border bg-[var(--surface-elevated)]',
+            'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border bg-[var(--surface-elevated)]',
             'transition-[border-color,color,background-color] duration-150 ease-out',
             isDragOver
               ? 'border-[var(--drop-drag-border)] text-[var(--drop-text)]'
               : 'border-[var(--border-subtle)] text-[var(--text-muted)] group-hover/empty:border-[var(--drop-border)] group-hover/empty:text-[var(--drop-text)]'
           ].join(' ')}
         >
-          <Icon size={18} />
+          <Icon size={20} />
         </div>
-        <p className="flex min-h-9 max-w-full items-center justify-center text-wrap break-words text-center text-sm font-semibold leading-[1.35] text-[var(--text-soft)]">
+        <p className="flex h-full max-w-[190px] items-center justify-center text-wrap break-words text-center text-sm font-semibold leading-[1.35] text-[var(--text-soft)]">
           {isDragOver ? t('kanban.dropHere') : title}
         </p>
-        <p className="mx-auto flex min-h-[42px] max-w-[180px] items-start justify-center text-wrap break-words text-center text-xs leading-[1.45] text-[var(--text-muted)]">
+        <p className="mx-auto flex min-h-[52px] max-w-[190px] items-start justify-center text-wrap break-words text-center text-xs leading-[1.45] text-[var(--text-muted)]">
           {description}
         </p>
       </div>
@@ -190,7 +190,7 @@ function Column({
       onDrop={handleDrop}
       data-column-id={column.id}
       className={[
-        'flex min-h-[520px] w-[86vw] min-w-[300px] max-w-[360px] shrink-0 snap-start flex-col rounded-3xl border p-2 sm:w-[320px] lg:min-h-[600px] lg:w-auto lg:min-w-0 lg:max-w-none',
+        'flex min-h-[520px] w-[86vw] min-w-[300px] max-w-[360px] shrink-0 snap-start flex-col rounded-3xl border p-2 sm:w-[320px] xl:min-h-[600px] xl:w-auto xl:min-w-0 xl:max-w-none',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
           ? 'border-[var(--column-drag-border)] bg-[var(--column-drag-bg)] shadow-[0_0_0_1px_var(--column-drag-glow)]'
@@ -229,7 +229,7 @@ function Column({
           ))}
         </AnimatePresence>
         {jobs.length === 0 && (
-          <EmptyColumnState
+          <KanbanEmptyState
             columnId={column.id}
             isDragOver={isDragOver}
             statusStyle={statusStyle}
