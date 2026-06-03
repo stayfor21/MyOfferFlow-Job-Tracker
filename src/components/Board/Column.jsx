@@ -110,7 +110,7 @@ function EmptyColumnState({ columnId, isDragOver, statusStyle, isFiltered, filte
           : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:border-[var(--drop-border)] hover:bg-[var(--drop-bg)]'
       ].join(' ')}
     >
-      <div className="flex w-full max-w-[240px] flex-col items-center">
+      <div className="flex w-full min-w-0 max-w-full flex-col items-center">
         <div
           className={[
             'mb-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border bg-[var(--surface-elevated)]',
@@ -122,10 +122,10 @@ function EmptyColumnState({ columnId, isDragOver, statusStyle, isFiltered, filte
         >
           <Icon size={18} />
         </div>
-        <p className="mb-1.5 flex min-h-6 items-center justify-center text-sm font-semibold leading-6 text-[var(--text-soft)]">
+        <p className="mb-1.5 flex min-h-6 max-w-full items-center justify-center text-wrap break-words text-center text-sm font-semibold leading-[1.35] text-[var(--text-soft)]">
           {isDragOver ? t('kanban.dropHere') : title}
         </p>
-        <p className="flex min-h-10 max-w-[220px] items-start justify-center text-xs leading-5 text-[var(--text-muted)]">
+        <p className="mx-auto flex min-h-10 max-w-[180px] items-start justify-center text-wrap break-words text-center text-xs leading-[1.45] text-[var(--text-muted)]">
           {description}
         </p>
       </div>
@@ -197,9 +197,9 @@ function Column({
           : 'border-[var(--border-subtle)] bg-[var(--surface)] shadow-sm shadow-black/5 hover:border-[var(--border-strong)]'
       ].join(' ')}
     >
-      <div className="mb-5 flex min-h-8 items-center justify-between px-3 pt-2">
-        <div className="flex items-center gap-2">
-          <span className={`inline-flex h-7 items-center rounded-full border px-3 text-xs font-semibold ${column.color}`}>
+      <div className="mb-5 flex min-h-8 min-w-0 items-center justify-between gap-2 px-3 pt-2">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className={`inline-flex h-7 min-w-0 items-center rounded-full border px-3 text-xs font-semibold ${column.color}`}>
             {t(column.titleKey)}
           </span>
           <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2 text-xs font-semibold text-[var(--text-muted)]">
