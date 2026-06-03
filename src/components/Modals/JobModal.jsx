@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Archive,
   ArchiveRestore,
   Bell,
   Building2,
+  CalendarDays,
   CheckCircle2,
   ExternalLink,
   Flag,
@@ -33,7 +34,6 @@ import {
 } from '../../utils/jobMetadata';
 
 const inputClass = 'block h-11 w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 text-sm text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
-const dateInputClass = `${inputClass} job-drawer-date-field color-scheme-dark`;
 const textareaClass = 'block min-h-[76px] w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.10] bg-zinc-950/60 px-3 py-3 text-sm leading-5 text-zinc-100 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-zinc-600 focus:border-[#635BFF]/60 focus:ring-4 focus:ring-[#635BFF]/15';
 const labelClass = 'text-[11px] font-semibold leading-4 text-zinc-500';
 const statusChipStyles = {
@@ -90,6 +90,47 @@ function Section({ title, icon: Icon, children }) {
       </div>
       {children}
     </section>
+  );
+}
+
+function AppDateField({ value, onChange, ariaLabel, formatDate }) {
+  const inputRef = useRef(null);
+  const displayValue = value ? formatDate(value) : '';
+
+  const openPicker = () => {
+    const input = inputRef.current;
+    if (!input) return;
+
+    if (typeof input.showPicker === 'function') {
+      input.showPicker();
+      return;
+    }
+
+    input.focus();
+    input.click();
+  };
+
+  return (
+    <div className="app-date-control">
+      <button
+        type="button"
+        className="app-date-field"
+        aria-label={ariaLabel}
+        onClick={openPicker}
+      >
+        <span className="app-date-value">{displayValue}</span>
+        <CalendarDays aria-hidden="true" size={16} className="app-date-icon" />
+      </button>
+      <input
+        ref={inputRef}
+        className="app-date-native"
+        type="date"
+        value={value}
+        onChange={onChange}
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+    </div>
   );
 }
 
@@ -358,11 +399,11 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                 />
               </Field>
               <Field label={t('modal.dateApplied')}>
-                <input
-                  className={dateInputClass}
-                  type="date"
+                <AppDateField
                   value={formData.appliedDate}
                   onChange={(e) => setField('appliedDate', e.target.value)}
+                  ariaLabel={t('modal.dateApplied')}
+                  formatDate={formatDate}
                 />
               </Field>
             </div>
@@ -424,11 +465,11 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                 />
               </Field>
               <Field label={t('modal.dueDate')}>
-                <input
-                  className={dateInputClass}
-                  type="date"
+                <AppDateField
                   value={formData.nextActionDueDate || ''}
                   onChange={(e) => setField('nextActionDueDate', e.target.value)}
+                  ariaLabel={t('modal.dueDate')}
+                  formatDate={formatDate}
                 />
               </Field>
               <div className="flex min-w-0 flex-wrap gap-2">
@@ -463,11 +504,11 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
 
               <div className="space-y-3">
                 <Field label={t('modal.followUpDate')}>
-                  <input
-                    className={dateInputClass}
-                    type="date"
+                  <AppDateField
                     value={formData.followUpDate || ''}
                     onChange={(e) => handleFollowUpDate(e.target.value)}
+                    ariaLabel={t('modal.followUpDate')}
+                    formatDate={formatDate}
                   />
                 </Field>
                 <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:flex-wrap">
