@@ -103,17 +103,17 @@ function EmptyColumnState({ columnId, isDragOver, statusStyle, isFiltered, filte
         '--drop-text': statusStyle.text
       }}
       className={[
-        'group/empty flex h-[156px] items-center justify-center rounded-2xl border border-dashed px-5 py-5 text-center',
+        'group/empty flex h-[170px] w-full min-w-0 max-w-full items-center justify-center rounded-2xl border border-dashed px-[18px] py-6 text-center',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
           ? 'border-[var(--drop-drag-border)] bg-[var(--drop-drag-bg)] shadow-[0_0_18px_var(--drop-drag-glow)]'
           : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:border-[var(--drop-border)] hover:bg-[var(--drop-bg)]'
       ].join(' ')}
     >
-      <div className="flex w-full min-w-0 max-w-full flex-col items-center">
+      <div className="grid h-full w-full min-w-0 max-w-full grid-rows-[44px_36px_minmax(42px,1fr)] justify-items-center gap-3">
         <div
           className={[
-            'mb-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border bg-[var(--surface-elevated)]',
+            'flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border bg-[var(--surface-elevated)]',
             'transition-[border-color,color,background-color] duration-150 ease-out',
             isDragOver
               ? 'border-[var(--drop-drag-border)] text-[var(--drop-text)]'
@@ -122,10 +122,10 @@ function EmptyColumnState({ columnId, isDragOver, statusStyle, isFiltered, filte
         >
           <Icon size={18} />
         </div>
-        <p className="mb-1.5 flex min-h-6 max-w-full items-center justify-center text-wrap break-words text-center text-sm font-semibold leading-[1.35] text-[var(--text-soft)]">
+        <p className="flex min-h-9 max-w-full items-center justify-center text-wrap break-words text-center text-sm font-semibold leading-[1.35] text-[var(--text-soft)]">
           {isDragOver ? t('kanban.dropHere') : title}
         </p>
-        <p className="mx-auto flex min-h-10 max-w-[180px] items-start justify-center text-wrap break-words text-center text-xs leading-[1.45] text-[var(--text-muted)]">
+        <p className="mx-auto flex min-h-[42px] max-w-[180px] items-start justify-center text-wrap break-words text-center text-xs leading-[1.45] text-[var(--text-muted)]">
           {description}
         </p>
       </div>
