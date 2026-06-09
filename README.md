@@ -18,8 +18,6 @@ Users can add job applications, move them through hiring stages, set priorities,
 
 MyOfferFlow is built as a polished SaaS-style dashboard with support for light and dark themes, multilingual UI, smart planner features, and a responsive interface.
 
-Link: https://myofferflow.pages.dev
-
 ---
 
 ## Key Features
