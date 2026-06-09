@@ -83,7 +83,7 @@ function Field({ label, children }) {
 
 function Section({ title, icon: Icon, children }) {
   return (
-    <section className="w-full min-w-0 max-w-full box-border rounded-2xl border border-white/[0.08] bg-zinc-950/30 p-4">
+    <section className="of-premium-card w-full min-w-0 max-w-full box-border rounded-2xl p-4">
       <div className="mb-4 flex items-center gap-2">
         <Icon size={16} className="text-[#8B5CF6]" />
         <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
@@ -158,7 +158,7 @@ function DreamJobToggle({ checked, onChange }) {
         className={[
           'flex h-11 w-full items-center justify-between gap-3 rounded-2xl border px-3 text-left transition-[background-color,border-color,box-shadow] duration-200 ease-out focus:outline-none focus:ring-4 focus:ring-[#635BFF]/15',
           checked
-            ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] shadow-[0_0_18px_var(--primary-glow)]'
+            ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] shadow-[0_8px_20px_var(--primary-glow)]'
             : 'border-[var(--border)] bg-[var(--surface-elevated)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-muted)]'
         ].join(' ')}
       >
@@ -304,6 +304,10 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
   };
 
   const getTimelineDescription = (event) => {
+    if (event.type === 'created') return t('kanban.emptyApplied');
+    if (event.type === 'status_changed' && event.metadata?.to && !event.metadata?.from) {
+      return t('timeline.currentStatusDescription', { status: t(`status.${event.metadata.to}`) });
+    }
     if (event.type === 'status_changed' && event.metadata?.from && event.metadata?.to) {
       return `${t(`status.${event.metadata.from}`)} -> ${t(`status.${event.metadata.to}`)}`;
     }
@@ -314,14 +318,14 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
     <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm">
       <button
         type="button"
-        aria-label="Close application details"
+        aria-label={t('modal.closeDetails')}
         className="absolute inset-0 cursor-default"
         onClick={onClose}
       />
 
       <form
         onSubmit={handleSubmit}
-        className="job-drawer-panel relative flex h-full w-full max-w-full flex-col border-l border-white/[0.08] bg-[#0b0b0f] shadow-2xl shadow-black/70 md:w-[min(680px,100%)] lg:w-[min(720px,72vw)] xl:w-[640px] 2xl:w-[680px]"
+        className="job-drawer-panel relative flex h-full w-full max-w-full flex-col border-l border-[var(--border-subtle)] bg-[var(--bg-subtle)] shadow-[var(--shadow-drawer)] md:w-[min(680px,100%)] lg:w-[min(720px,72vw)] xl:w-[640px] 2xl:w-[680px]"
       >
         <header className="border-b border-white/[0.08] p-4 sm:p-5">
           <div className="flex items-start justify-between gap-4">
@@ -443,7 +447,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
                   value={formData.priority || 'medium'}
                   options={priorityOptions}
                   onChange={(nextPriority) => setField('priority', nextPriority)}
-                  ariaLabel="Priority"
+                  ariaLabel={t('modal.priority')}
                 />
               </Field>
 
@@ -581,7 +585,7 @@ export default function JobModal({ job, onClose, onSave, onDelete, onArchive }) 
               <div className="absolute bottom-2 left-[7px] top-2 w-px bg-white/[0.08]" />
               {timeline.map((event) => (
                 <div key={event.id} className="relative flex gap-3">
-                  <span className="mt-1.5 h-3.5 w-3.5 shrink-0 rounded-full border border-[#635BFF]/35 bg-[#635BFF]/25 shadow-[0_0_12px_rgba(99,91,255,0.18)]" />
+                  <span className="mt-1.5 h-3.5 w-3.5 shrink-0 rounded-full border border-[#635BFF]/30 bg-[#635BFF]/20 shadow-[0_6px_14px_rgba(99,91,255,0.10)]" />
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-zinc-200">{getTimelineLabel(event)}</p>
                     <p className="mt-0.5 text-[11px] text-zinc-600">

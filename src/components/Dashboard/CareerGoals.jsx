@@ -23,13 +23,42 @@ const statusChipClass = {
   missed: 'of-chip-danger'
 };
 
+function getUkrainianDayWord(count) {
+  const value = Math.abs(Number(count) || 0);
+  const lastTwo = value % 100;
+  const last = value % 10;
+
+  if (lastTwo >= 11 && lastTwo <= 14) return 'днів';
+  if (last === 1) return 'день';
+  if (last >= 2 && last <= 4) return 'дні';
+  return 'днів';
+}
+
+function formatGoalDaysLeft(daysLeft, language) {
+  const count = Math.max(0, Number(daysLeft) || 0);
+
+  if (language === 'uk') {
+    return `${count} ${getUkrainianDayWord(count)}`;
+  }
+
+  if (language === 'de') {
+    return `noch ${count} ${count === 1 ? 'Tag' : 'Tage'}`;
+  }
+
+  if (language === 'ru') {
+    return `${count} дн. осталось`;
+  }
+
+  return `${count} ${count === 1 ? 'day' : 'days'} left`;
+}
+
 function GoalCard({ goal, progress, onArchive, onManualProgress }) {
-  const { t, formatDate } = useTranslation();
+  const { t, formatDate, language } = useTranslation();
   const title = buildGoalTitle(goal, t);
   const statusClass = statusChipClass[progress.status] || statusChipClass.onTrack;
 
   return (
-    <article className="flex min-h-[176px] flex-col rounded-[22px] border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-sm shadow-black/5">
+    <article className="of-premium-card of-lift flex min-h-[176px] flex-col rounded-[22px] p-4">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
@@ -49,7 +78,7 @@ function GoalCard({ goal, progress, onArchive, onManualProgress }) {
 
       <div className="mt-3">
         <div className="flex items-end justify-between gap-3">
-          <p className="text-xl font-bold leading-none text-[var(--text)]">
+          <p className="of-number text-xl font-bold leading-none text-[var(--text)]">
             {progress.progress}<span className="text-sm font-semibold text-[var(--text-muted)]"> / {progress.target}</span>
           </p>
           <p className="text-sm font-semibold text-[var(--primary)]">{progress.percentage}%</p>
@@ -63,7 +92,7 @@ function GoalCard({ goal, progress, onArchive, onManualProgress }) {
           aria-valuenow={Math.min(progress.progress, progress.target)}
         >
           <div
-            className={`h-full rounded-full ${progress.status === 'completed' ? 'bg-emerald-500' : 'bg-[#635BFF]'}`}
+            className={`h-full rounded-full transition-[width] duration-700 ease-out ${progress.status === 'completed' ? 'bg-emerald-500' : 'bg-[#635BFF]'}`}
             style={{ width: `${progress.percentage}%` }}
           />
         </div>
@@ -76,7 +105,7 @@ function GoalCard({ goal, progress, onArchive, onManualProgress }) {
         </span>
         <span className="inline-flex min-w-0 items-center gap-1 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1">
           <span>{t('goals.deadline')}:</span>
-          <span className="truncate font-semibold text-[var(--text)]">{progress.daysLeft} {t('goals.daysLeft')}</span>
+          <span className="truncate font-semibold text-[var(--text)]">{formatGoalDaysLeft(progress.daysLeft, language)}</span>
         </span>
       </div>
 
@@ -147,7 +176,7 @@ function GoalForm({ onCancel, onCreate }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-3xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4">
+    <form onSubmit={handleSubmit} className="of-premium-card rounded-3xl p-4">
       <div className="grid gap-3 md:grid-cols-2">
         <div className="space-y-2">
           <label className={labelClass}>{t('goals.form.type')}</label>
@@ -263,7 +292,7 @@ export default function CareerGoals({
   };
 
   return (
-    <section id="goals" className="mt-6 scroll-mt-24 rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-xl shadow-black/10 sm:p-5">
+    <section id="goals" className="of-section-shell mt-6 scroll-mt-24 rounded-[24px] p-4 sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex min-w-0 items-start gap-3">
           <div className="of-chip of-chip-violet flex h-9 w-9 shrink-0 justify-center rounded-2xl p-0">
@@ -292,7 +321,7 @@ export default function CareerGoals({
       )}
 
       {activeGoals.length === 0 && !isAdding ? (
-        <div className="mt-5 rounded-3xl border border-dashed border-[var(--border-strong)] bg-[var(--surface-elevated)] p-5 text-center">
+        <div className="of-premium-card mt-5 rounded-3xl p-5 text-center">
           <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--primary-border)] bg-[var(--primary-soft)] text-[var(--primary)]">
             <TrendingUp size={18} />
           </div>

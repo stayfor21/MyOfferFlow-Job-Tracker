@@ -34,49 +34,49 @@ const emptyStates = {
 
 const statusDropStyles = {
   applied: {
-    text: '#60A5FA',
-    border: 'rgba(96,165,250,0.45)',
-    dragBorder: 'rgba(96,165,250,0.68)',
-    bg: 'rgba(96,165,250,0.08)',
-    dragBg: 'rgba(96,165,250,0.12)',
-    glow: 'rgba(96,165,250,0.22)',
-    dragGlow: 'rgba(96,165,250,0.30)'
+    text: '#93C5FD',
+    border: 'rgba(96,165,250,0.32)',
+    dragBorder: 'rgba(96,165,250,0.46)',
+    bg: 'rgba(96,165,250,0.055)',
+    dragBg: 'rgba(96,165,250,0.08)',
+    glow: 'rgba(96,165,250,0.08)',
+    dragGlow: 'rgba(96,165,250,0.12)'
   },
   screening: {
-    text: '#C084FC',
-    border: 'rgba(192,132,252,0.45)',
-    dragBorder: 'rgba(192,132,252,0.68)',
-    bg: 'rgba(192,132,252,0.08)',
-    dragBg: 'rgba(192,132,252,0.12)',
-    glow: 'rgba(192,132,252,0.22)',
-    dragGlow: 'rgba(192,132,252,0.30)'
+    text: '#C4B5FD',
+    border: 'rgba(192,132,252,0.32)',
+    dragBorder: 'rgba(192,132,252,0.46)',
+    bg: 'rgba(192,132,252,0.055)',
+    dragBg: 'rgba(192,132,252,0.08)',
+    glow: 'rgba(192,132,252,0.08)',
+    dragGlow: 'rgba(192,132,252,0.12)'
   },
   interview: {
-    text: '#FBBF24',
-    border: 'rgba(251,191,36,0.45)',
-    dragBorder: 'rgba(251,191,36,0.68)',
-    bg: 'rgba(251,191,36,0.08)',
-    dragBg: 'rgba(251,191,36,0.12)',
-    glow: 'rgba(251,191,36,0.22)',
-    dragGlow: 'rgba(251,191,36,0.30)'
+    text: '#F1C76F',
+    border: 'rgba(251,191,36,0.34)',
+    dragBorder: 'rgba(251,191,36,0.48)',
+    bg: 'rgba(251,191,36,0.055)',
+    dragBg: 'rgba(251,191,36,0.08)',
+    glow: 'rgba(251,191,36,0.08)',
+    dragGlow: 'rgba(251,191,36,0.12)'
   },
   offer: {
-    text: '#34D399',
-    border: 'rgba(52,211,153,0.45)',
-    dragBorder: 'rgba(52,211,153,0.68)',
-    bg: 'rgba(52,211,153,0.08)',
-    dragBg: 'rgba(52,211,153,0.12)',
-    glow: 'rgba(52,211,153,0.22)',
-    dragGlow: 'rgba(52,211,153,0.30)'
+    text: '#8FDCBD',
+    border: 'rgba(52,211,153,0.32)',
+    dragBorder: 'rgba(52,211,153,0.46)',
+    bg: 'rgba(52,211,153,0.055)',
+    dragBg: 'rgba(52,211,153,0.08)',
+    glow: 'rgba(52,211,153,0.08)',
+    dragGlow: 'rgba(52,211,153,0.12)'
   },
   rejected: {
-    text: '#FB7185',
-    border: 'rgba(251,113,133,0.45)',
-    dragBorder: 'rgba(251,113,133,0.68)',
-    bg: 'rgba(251,113,133,0.08)',
-    dragBg: 'rgba(251,113,133,0.12)',
-    glow: 'rgba(251,113,133,0.22)',
-    dragGlow: 'rgba(251,113,133,0.30)'
+    text: '#F2A6B2',
+    border: 'rgba(251,113,133,0.32)',
+    dragBorder: 'rgba(251,113,133,0.46)',
+    bg: 'rgba(251,113,133,0.055)',
+    dragBg: 'rgba(251,113,133,0.08)',
+    glow: 'rgba(251,113,133,0.08)',
+    dragGlow: 'rgba(251,113,133,0.12)'
   }
 };
 
@@ -106,7 +106,7 @@ function KanbanEmptyState({ columnId, isDragOver, statusStyle, isFiltered, filte
         'group/empty box-border min-h-[196px] w-full min-w-0 max-w-full rounded-2xl border border-dashed px-[18px] py-5 text-center',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
-          ? 'border-[var(--drop-drag-border)] bg-[var(--drop-drag-bg)] shadow-[0_0_18px_var(--drop-drag-glow)]'
+          ? 'border-[var(--drop-drag-border)] bg-[var(--drop-drag-bg)] shadow-[0_10px_24px_var(--drop-drag-glow)]'
           : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:border-[var(--drop-border)] hover:bg-[var(--drop-bg)]'
       ].join(' ')}
     >
@@ -171,7 +171,7 @@ function Column({
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const jobId = e.dataTransfer.getData('jobId');
+    const jobId = e.dataTransfer.getData('jobId') || e.dataTransfer.getData('text/plain');
     if (jobId) onMoveJob(jobId, column.id);
     onCardDragEnd();
   };
@@ -190,11 +190,11 @@ function Column({
       onDrop={handleDrop}
       data-column-id={column.id}
       className={[
-        'flex min-h-[520px] w-[86vw] min-w-[300px] max-w-[360px] shrink-0 snap-start flex-col rounded-3xl border p-2 sm:w-[320px] xl:min-h-[600px] xl:w-auto xl:min-w-0 xl:max-w-none',
+        'of-premium-card flex min-h-[520px] w-[86vw] min-w-[300px] max-w-[360px] shrink-0 snap-start flex-col rounded-3xl p-2 sm:w-[320px] xl:min-h-[600px] xl:w-auto xl:min-w-0 xl:max-w-none',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
           ? 'border-[var(--column-drag-border)] bg-[var(--column-drag-bg)] shadow-[0_0_0_1px_var(--column-drag-glow)]'
-          : 'border-[var(--border-subtle)] bg-[var(--surface)] shadow-sm shadow-black/5 hover:border-[var(--border-strong)]'
+          : 'hover:border-[var(--border-strong)]'
       ].join(' ')}
     >
       <div className="mb-5 flex min-h-8 min-w-0 items-center justify-between gap-2 px-3 pt-2">
@@ -208,7 +208,7 @@ function Column({
         </div>
         {isDragOver && (
           <span className="rounded-full border border-[var(--column-drag-border)] bg-[var(--column-drag-bg)] px-2.5 py-1 text-[11px] font-semibold text-[var(--column-text)]">
-            Drop here
+            {t('kanban.dropHere')}
           </span>
         )}
       </div>

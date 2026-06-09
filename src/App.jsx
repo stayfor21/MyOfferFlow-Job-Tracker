@@ -28,11 +28,11 @@ import { getSmartFilterCounts, getVisibleJobs } from './utils/filters';
 import { useTranslation } from './i18n.jsx';
 
 const COLUMNS = [
-  { id: 'applied', titleKey: 'status.applied', color: 'bg-blue-500/10 text-blue-300 border-blue-500/20' },
-  { id: 'screening', titleKey: 'status.screening', color: 'bg-purple-500/10 text-purple-300 border-purple-500/20' },
-  { id: 'interview', titleKey: 'status.interview', color: 'bg-amber-500/10 text-amber-300 border-amber-500/20' },
-  { id: 'offer', titleKey: 'status.offer', color: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20' },
-  { id: 'rejected', titleKey: 'status.rejected', color: 'bg-rose-500/10 text-rose-300 border-rose-500/20' },
+  { id: 'applied', titleKey: 'status.applied', color: 'of-chip-status-applied' },
+  { id: 'screening', titleKey: 'status.screening', color: 'of-chip-status-screening' },
+  { id: 'interview', titleKey: 'status.interview', color: 'of-chip-status-interview' },
+  { id: 'offer', titleKey: 'status.offer', color: 'of-chip-status-offer' },
+  { id: 'rejected', titleKey: 'status.rejected', color: 'of-chip-status-rejected' },
 ];
 
 export default function App() {
@@ -252,8 +252,8 @@ export default function App() {
         onLater={handlePrepLater}
       />
 
-      <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-[max-content_minmax(0,1fr)] items-center gap-x-2 gap-y-3 px-3 py-3 sm:gap-x-3 sm:px-5 md:h-16 md:grid-cols-[max-content_minmax(180px,320px)_max-content] md:justify-between md:gap-y-0 md:py-0 lg:grid-cols-[max-content_minmax(280px,520px)_max-content] lg:gap-x-4 xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] xl:justify-stretch xl:px-6">
+      <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header-bg)] shadow-[0_12px_34px_rgba(15,23,42,0.06)] backdrop-blur-2xl">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-[max-content_minmax(0,1fr)] items-center gap-x-2 gap-y-3 px-3 py-3 sm:gap-x-3 sm:px-5 md:h-[72px] md:grid-cols-[max-content_minmax(180px,320px)_max-content] md:justify-between md:gap-y-0 md:py-0 lg:grid-cols-[max-content_minmax(280px,520px)_max-content] lg:gap-x-4 xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)_minmax(0,1fr)] xl:justify-stretch xl:px-6">
           <div className="col-start-1 row-start-1 flex min-w-max shrink-0 justify-start">
             <BrandLogo />
           </div>
@@ -264,7 +264,7 @@ export default function App() {
               <input
                 type="text"
                 placeholder={t('header.search')}
-                className="w-full rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] py-2.5 pl-11 pr-4 text-base text-[var(--input-text)] placeholder:text-[var(--input-placeholder)] transition-all focus:border-[#635BFF]/60 focus:outline-none focus:ring-4 focus:ring-[#635BFF]/20 sm:text-sm"
+                className="h-11 w-full rounded-2xl border border-[var(--input-border)] bg-[var(--input-bg)] py-2.5 pl-11 pr-4 text-base text-[var(--input-text)] shadow-sm shadow-black/5 placeholder:text-[var(--input-placeholder)] transition-all duration-200 focus:border-[#635BFF]/60 focus:outline-none focus:ring-4 focus:ring-[#635BFF]/20 sm:text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -281,7 +281,7 @@ export default function App() {
                 'theme-icon-button relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border md:h-11 md:w-11',
                 'transition-[background-color,border-color,box-shadow,color] duration-200 ease-out',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
-                isPlannerOpen ? 'border-[#8B5CF6]/35 text-[var(--text)] shadow-[0_0_18px_rgba(99,91,255,0.14)]' : ''
+                isPlannerOpen ? 'border-[#8B5CF6]/35 text-[var(--text)] shadow-[0_8px_20px_rgba(99,91,255,0.10)]' : ''
               ].join(' ')}
             >
               <CalendarDays size={17} />
@@ -308,8 +308,8 @@ export default function App() {
               className={[
                 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[#8B5CF6]/30 md:h-11 md:w-11',
                 'bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] p-0 text-white',
-                'shadow-[0_0_22px_rgba(99,91,255,0.20)] transition-[transform,background-color,box-shadow,border-color,filter] duration-200 ease-out',
-                'hover:border-[#A78BFA]/45 hover:brightness-110 hover:shadow-[0_0_28px_rgba(99,91,255,0.30)]',
+                'shadow-[0_10px_24px_rgba(99,91,255,0.16)] transition-[transform,background-color,box-shadow,border-color,filter] duration-200 ease-out',
+                'hover:border-[#A78BFA]/45 hover:brightness-105 hover:shadow-[0_12px_28px_rgba(99,91,255,0.20)]',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20 active:scale-[0.98]',
                 'xl:w-auto xl:gap-2 xl:px-5'
               ].join(' ')}
@@ -321,7 +321,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <main className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 sm:py-10">
         <div className="mb-8">
           <p className="text-sm font-medium text-[#8B8FA3]">
             {t('main.tagline')}

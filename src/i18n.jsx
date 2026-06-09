@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
+import { ukTranslations } from './i18n.uk.js';
 
 const STORAGE_KEY = 'offerflow-language';
-const SUPPORTED_LANGUAGES = ['en', 'de', 'ru'];
+const SUPPORTED_LANGUAGES = ['en', 'de', 'ru', 'uk'];
 
 export const translations = {
   en: {
@@ -9,6 +10,7 @@ export const translations = {
     'lang.english': 'English',
     'lang.german': 'Deutsch',
     'lang.russian': 'Русский',
+    'lang.ukrainian': 'Українська',
     'brand.tagline': 'Pipeline to offer',
     'header.search': 'Search by company, role, or status...',
     'header.addJob': 'Add Job',
@@ -96,6 +98,7 @@ export const translations = {
     'card.next': 'Next',
     'card.prep': 'Prep',
     'card.drag': 'Drag to move',
+    'card.openPrepAria': 'Open interview preparation for {{title}}',
     'follow.appliedDue': 'Follow-up due',
     'follow.appliedFuture': 'Follow-up',
     'follow.screeningDue': 'Recruiter reply due',
@@ -176,6 +179,7 @@ export const translations = {
     'follow.helper.rejected': 'Optionally ask for feedback or keep this as history.',
     'timeline.applicationAdded': 'Application added',
     'timeline.currentStatus': 'Current status: {{status}}',
+    'timeline.currentStatusDescription': 'This application is currently in {{status}}.',
     'prep.bannerTitle': 'Interview Prep',
     'prep.bannerBody': 'AI-powered prep for every interview.',
     'prep.ignore': 'IGNORE',
@@ -194,6 +198,8 @@ export const translations = {
     'prep.interviewType': 'Interview Type',
     'prep.focusAreas': 'Focus Areas',
     'prep.estimatedTime': 'Estimated Prep Time',
+    'prep.focusAreasFallback': 'Role-specific questions, communication, problem solving',
+    'prep.time30': '30 min',
     'prep.generate': 'Generate Interview Prep Plan',
     'prep.generating': 'Generating prep plan...',
     'prep.ready': 'Your prep plan is ready.',
@@ -371,6 +377,7 @@ export const translations = {
     'lang.english': 'English',
     'lang.german': 'Deutsch',
     'lang.russian': 'Русский',
+    'lang.ukrainian': 'Українська',
     'brand.tagline': 'Pipeline bis zum Angebot',
     'header.search': 'Nach Unternehmen, Rolle oder Status suchen...',
     'header.addJob': 'Stelle hinzufügen',
@@ -458,6 +465,7 @@ export const translations = {
     'card.next': 'Nächster Schritt',
     'card.prep': 'Vorbereitung',
     'card.drag': 'Ziehen zum Verschieben',
+    'card.openPrepAria': 'Interviewvorbereitung für {{title}} öffnen',
     'follow.appliedDue': 'Follow-up fällig',
     'follow.appliedFuture': 'Follow-up',
     'follow.screeningDue': 'Recruiter-Antwort fällig',
@@ -538,6 +546,7 @@ export const translations = {
     'follow.helper.rejected': 'Optional Feedback anfragen oder als Verlauf behalten.',
     'timeline.applicationAdded': 'Bewerbung hinzugefügt',
     'timeline.currentStatus': 'Aktueller Status: {{status}}',
+    'timeline.currentStatusDescription': 'Diese Bewerbung ist aktuell in {{status}}.',
     'prep.bannerTitle': 'Interviewvorbereitung',
     'prep.bannerBody': 'KI-gestützte Vorbereitung für jedes Interview.',
     'prep.ignore': 'IGNORIEREN',
@@ -556,6 +565,8 @@ export const translations = {
     'prep.interviewType': 'Interviewtyp',
     'prep.focusAreas': 'Schwerpunkte',
     'prep.estimatedTime': 'Geschätzte Vorbereitungszeit',
+    'prep.focusAreasFallback': 'Rollenspezifische Fragen, Kommunikation, Problemlösung',
+    'prep.time30': '30 Min.',
     'prep.generate': 'Interview-Vorbereitungsplan erstellen',
     'prep.generating': 'Vorbereitungsplan wird erstellt...',
     'prep.ready': 'Dein Vorbereitungsplan ist bereit.',
@@ -733,6 +744,7 @@ export const translations = {
     'lang.english': 'English',
     'lang.german': 'Deutsch',
     'lang.russian': 'Русский',
+    'lang.ukrainian': 'Українська',
     'brand.tagline': 'Путь к офферу',
     'header.search': 'Поиск по компании, роли или статусу...',
     'header.addJob': 'Добавить вакансию',
@@ -820,6 +832,7 @@ export const translations = {
     'card.next': 'Следующий шаг',
     'card.prep': 'Подготовка',
     'card.drag': 'Перетащить',
+    'card.openPrepAria': 'Открыть подготовку к интервью для {{title}}',
     'follow.appliedDue': 'Нужно написать follow-up',
     'follow.appliedFuture': 'Follow-up',
     'follow.screeningDue': 'Нужно ответить рекрутеру',
@@ -900,6 +913,7 @@ export const translations = {
     'follow.helper.rejected': 'Можно попросить feedback или оставить как историю.',
     'timeline.applicationAdded': 'Заявка добавлена',
     'timeline.currentStatus': 'Текущий статус: {{status}}',
+    'timeline.currentStatusDescription': 'Эта заявка сейчас на этапе «{{status}}».',
     'prep.bannerTitle': 'Подготовка к интервью',
     'prep.bannerBody': 'AI-подготовка к каждому интервью.',
     'prep.ignore': 'ПРОПУСТИТЬ',
@@ -918,6 +932,8 @@ export const translations = {
     'prep.interviewType': 'Тип интервью',
     'prep.focusAreas': 'Фокусные темы',
     'prep.estimatedTime': 'Примерное время подготовки',
+    'prep.focusAreasFallback': 'Вопросы по роли, коммуникация, решение задач',
+    'prep.time30': '30 мин',
     'prep.generate': 'Сгенерировать план подготовки',
     'prep.generating': 'Генерируем план...',
     'prep.ready': 'План подготовки готов.',
@@ -1089,13 +1105,27 @@ export const translations = {
     'category.Finance / Banking': 'Финансы / Банкинг',
     'category.Design': 'Дизайн',
     'category.Other': 'Другое'
-  }
+  },
+  uk: ukTranslations
 };
 
 function interpolate(template, params = {}) {
   return Object.entries(params).reduce((value, [key, replacement]) => (
     value.replaceAll(`{{${key}}}`, String(replacement))
   ), template);
+}
+
+const UNRESOLVED_PLACEHOLDER_PATTERN = /{{[^}]+}}|%[a-zA-Z]+%|\{(?:count|days|value|total|remaining|deadline)\}/;
+
+function warnUnresolvedPlaceholder(language, key, value) {
+  if (
+    typeof import.meta !== 'undefined' &&
+    import.meta.env?.DEV &&
+    typeof value === 'string' &&
+    UNRESOLVED_PLACEHOLDER_PATTERN.test(value)
+  ) {
+    console.warn(`Unresolved translation placeholder for locale "${language}": ${key} -> ${value}`);
+  }
 }
 
 function getStoredLanguage() {
@@ -1118,13 +1148,38 @@ export function LanguageProvider({ children }) {
   const value = useMemo(() => {
     const t = (key, params) => {
       const template = translations[language]?.[key] ?? translations.en[key] ?? key;
-      return interpolate(template, params);
+      if (
+        translations[language]?.[key] === undefined &&
+        typeof import.meta !== 'undefined' &&
+        import.meta.env?.DEV
+      ) {
+        console.warn(`Missing translation for locale "${language}": ${key}`);
+      }
+      const nextValue = interpolate(template, params);
+      warnUnresolvedPlaceholder(language, key, nextValue);
+      return nextValue;
     };
 
     const formatDate = (value, options = { month: 'short', day: 'numeric' }) => {
       if (!value) return '';
       const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00` : value);
       if (Number.isNaN(date.getTime())) return value;
+      if (language === 'uk') {
+        const datePart = date.toLocaleDateString('uk-UA', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+        if (options?.hour || options?.minute || options?.second) {
+          const timePart = date.toLocaleTimeString('uk-UA', {
+            hour: options.hour,
+            minute: options.minute,
+            second: options.second
+          });
+          return `${datePart}, ${timePart}`;
+        }
+        return datePart;
+      }
       const locale = language === 'de' ? 'de-DE' : language === 'ru' ? 'ru-RU' : 'en-US';
       return date.toLocaleDateString(locale, options);
     };
@@ -1148,5 +1203,14 @@ export function useTranslation() {
 export function getTranslation(language, key, params) {
   const safeLanguage = SUPPORTED_LANGUAGES.includes(language) ? language : 'en';
   const template = translations[safeLanguage]?.[key] ?? translations.en[key] ?? key;
-  return interpolate(template, params);
+  if (
+    translations[safeLanguage]?.[key] === undefined &&
+    typeof import.meta !== 'undefined' &&
+    import.meta.env?.DEV
+  ) {
+    console.warn(`Missing translation for locale "${safeLanguage}": ${key}`);
+  }
+  const nextValue = interpolate(template, params);
+  warnUnresolvedPlaceholder(safeLanguage, key, nextValue);
+  return nextValue;
 }

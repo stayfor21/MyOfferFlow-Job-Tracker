@@ -19,12 +19,6 @@ import CustomSelect from './src/components/UI/CustomSelect';
 import Button from './src/components/UI/Button';
 import { useTranslation } from './src/i18n.jsx';
 
-const FALLBACK_INSIGHTS = {
-  interviewType: 'Technical / Behavioral',
-  focusAreas: 'Role-specific questions, communication, problem solving',
-  prepTime: '30 min'
-};
-
 const CATEGORY_INTERVIEW_TYPES = {
   'Frontend Developer': 'prep.type.frontend',
   'Backend Developer': 'prep.type.backend',
@@ -155,9 +149,63 @@ const FOCUS_AREA_RU = {
   'Transferable impact': 'Переносимый опыт'
 };
 
+const FOCUS_AREA_UK = {
+  'Component architecture': 'Архітектура компонентів',
+  'State management': 'Керування станом',
+  'Performance optimization': 'Оптимізація продуктивності',
+  Accessibility: 'Доступність',
+  'API integration': 'Інтеграція API',
+  'Responsive UI': 'Адаптивний UI',
+  Testing: 'Тестування',
+  'Code review communication': 'Комунікація на code review',
+  'API design': 'Дизайн API',
+  'Database modeling': 'Моделювання бази даних',
+  'Authentication and authorization': 'Аутентифікація та авторизація',
+  'Performance and scalability': 'Продуктивність і масштабованість',
+  'System design basics': 'Основи системного дизайну',
+  'Error handling': 'Обробка помилок',
+  Security: 'Безпека',
+  'Testing and observability': 'Тестування та спостережуваність',
+  'Design process': 'Дизайн-процес',
+  'User flows': 'Користувацькі сценарії',
+  'Design systems': 'Дизайн-системи',
+  'Portfolio storytelling': 'Розповідь про портфоліо',
+  'Wireframing and prototyping': 'Вайрфрейми та прототипування',
+  'Usability decisions': 'Рішення щодо зручності',
+  'Visual hierarchy': 'Візуальна ієрархія',
+  'Collaboration with developers': 'Співпраця з розробниками',
+  'Problem solving': 'Розв’язання задач',
+  'Technical fundamentals': 'Технічні основи',
+  'Architecture tradeoffs': 'Архітектурні компроміси',
+  'Code quality': 'Якість коду',
+  Collaboration: 'Співпраця',
+  Prioritization: 'Пріоритизація',
+  'Stakeholder communication': 'Комунікація зі стейкхолдерами',
+  'Product metrics': 'Продуктові метрики',
+  'Roadmap tradeoffs': 'Компроміси roadmap',
+  'Launch planning': 'Планування запуску',
+  'Campaign strategy': 'Стратегія кампаній',
+  'Audience insights': 'Інсайти аудиторії',
+  'Growth experiments': 'Growth-експерименти',
+  'Content performance': 'Ефективність контенту',
+  'Channel tradeoffs': 'Компроміси каналів',
+  'Risk assessment': 'Оцінка ризиків',
+  'Financial statements': 'Фінансова звітність',
+  'Market awareness': 'Розуміння ринку',
+  'Accuracy under pressure': 'Точність під тиском',
+  'Ethics and compliance': 'Етика та комплаєнс',
+  'User research': 'User research',
+  'Cross-functional feedback': 'Кросфункціональний фідбек',
+  'Role fit': 'Відповідність ролі',
+  Communication: 'Комунікація',
+  'Company motivation': 'Мотивація щодо компанії',
+  'Transferable impact': 'Переносний досвід'
+};
+
 function localizeFocusAreas(areas, language) {
   if (language === 'de') return areas.map((area) => FOCUS_AREA_DE[area] || area);
   if (language === 'ru') return areas.map((area) => FOCUS_AREA_RU[area] || area);
+  if (language === 'uk') return areas.map((area) => FOCUS_AREA_UK[area] || area);
   return areas;
 }
 
@@ -233,9 +281,46 @@ const PREP_TEXT_RU = {
   'Prepare questions about design process, team collaboration, and product goals': 'Подготовь вопросы о дизайн-процессе, команде и продуктовых целях'
 };
 
+const PREP_TEXT_UK = {
+  'Use STAR for behavioral answers.': 'Використовуй STAR для поведінкових відповідей.',
+  'Explain tradeoffs, not only definitions.': 'Пояснюй компроміси, а не лише визначення.',
+  'Prepare one project story with measurable impact.': 'Підготуй одну історію про проєкт із вимірюваним результатом.',
+  'Keep answers structured: context -> action -> result.': 'Тримай структуру: контекст -> дія -> результат.',
+  'Explain decisions in terms of user experience, maintainability, and performance.': 'Пояснюй рішення через користувацький досвід, підтримуваність і продуктивність.',
+  'Mention accessibility, responsive behavior, and edge states.': 'Згадай доступність, адаптивність та edge states.',
+  'Use concrete examples from real UI work.': 'Використовуй конкретні приклади з реальної UI-роботи.',
+  'Talk about tradeoffs between speed and quality.': 'Говори про компроміси між швидкістю та якістю.',
+  'Structure answers around reliability, data consistency, security, and scalability.': 'Будуй відповіді навколо надійності, узгодженості даних, безпеки та масштабованості.',
+  'Explain tradeoffs clearly.': 'Чітко пояснюй компроміси.',
+  'Use diagrams or step-by-step reasoning if appropriate.': 'За потреби міркуй покроково.',
+  'Mention observability, testing, and failure cases.': 'Згадай спостережуваність, тестування та сценарії відмов.',
+  'Explain the problem before the visual solution.': 'Спочатку пояснюй проблему, потім візуальне рішення.',
+  'Connect design choices to user goals and business goals.': 'Пов’язуй дизайн-рішення з цілями користувачів і бізнесу.',
+  'Mention constraints, iterations, and feedback.': 'Згадай обмеження, ітерації та фідбек.',
+  'Use portfolio examples instead of abstract answers.': 'Використовуй приклади з портфоліо замість абстрактних відповідей.',
+  'Discuss accessibility, hierarchy, and developer handoff.': 'Обговорюй доступність, ієрархію та handoff розробникам.',
+  'Review company and role context': 'Повтори контекст компанії та ролі',
+  'Practice behavioral stories': 'Відпрацюй поведінкові історії',
+  'Review technical fundamentals': 'Повтори технічні основи',
+  'Prepare questions for the interviewer': 'Підготуй питання для інтерв’юера',
+  'Review role and product context': 'Повтори контекст ролі та продукту',
+  'Review React, TypeScript, state management, and API integration': 'Повтори React, TypeScript, керування станом та інтеграцію API',
+  'Prepare one UI project story with measurable impact': 'Підготуй історію про UI-проєкт із вимірюваним результатом',
+  'Prepare questions about design systems, team workflow, and frontend architecture': 'Підготуй питання про дизайн-системи, workflow команди та frontend-архітектуру',
+  'Review role and business context': 'Повтори контекст ролі та бізнесу',
+  'Review API design, databases, authentication, and error handling': 'Повтори дизайн API, бази даних, auth та обробку помилок',
+  'Practice one system design example': 'Відпрацюй один приклад системного дизайну',
+  'Prepare questions about architecture, infrastructure, and team practices': 'Підготуй питання про архітектуру, інфраструктуру та командні практики',
+  'Review company product and target users': 'Повтори продукт компанії та цільових користувачів',
+  'Prepare one portfolio case study': 'Підготуй один case study з портфоліо',
+  'Practice explaining design decisions and tradeoffs': 'Відпрацюй пояснення дизайн-рішень і компромісів',
+  'Prepare questions about design process, team collaboration, and product goals': 'Підготуй питання про дизайн-процес, співпрацю в команді та продуктові цілі'
+};
+
 function localizePrepText(value, language) {
   if (language === 'de') return PREP_TEXT_DE[value] || value;
   if (language === 'ru') return PREP_TEXT_RU[value] || value;
+  if (language === 'uk') return PREP_TEXT_UK[value] || value;
   return value;
 }
 
@@ -423,9 +508,102 @@ const QUESTION_RU = {
   'How do you stay updated with industry trends?': 'Как ты следишь за трендами индустрии?'
 };
 
+const QUESTION_UK = {
+  'Tell me about a time you improved the user experience of a web application.': 'Розкажи про випадок, коли ти покращив користувацький досвід вебзастосунку.',
+  'Describe a situation where you disagreed with a designer or backend engineer.': 'Опиши ситуацію, коли ти не погоджувався з дизайнером або backend-інженером.',
+  'Tell me about a time you had to balance speed, quality, and technical debt.': 'Розкажи, як ти балансував швидкість, якість і технічний борг.',
+  'How do you handle feedback during code reviews?': 'Як ти працюєш із фідбеком під час code review?',
+  'How do you structure reusable React components?': 'Як ти структуруєш перевикористовувані React-компоненти?',
+  'How do you manage state in a complex frontend application?': 'Як ти керуєш станом у складному frontend-застосунку?',
+  'What are common causes of poor frontend performance and how do you fix them?': 'Які причини найчастіше погіршують frontend-продуктивність і як ти їх виправляєш?',
+  'How do you approach accessibility in web interfaces?': 'Як ти підходиш до доступності вебінтерфейсів?',
+  'Explain the difference between client-side rendering, server-side rendering, and static generation.': 'Поясни різницю між client-side rendering, server-side rendering і static generation.',
+  'How do you handle API loading, error, and empty states in the UI?': 'Як ти обробляєш стани завантаження, помилки та порожні стани в UI?',
+  'How do you test frontend components?': 'Як ти тестуєш frontend-компоненти?',
+  'What are the benefits and tradeoffs of TypeScript in frontend development?': 'Які переваги та компроміси дає TypeScript у frontend-розробці?',
+  'How would you build a responsive dashboard from a Figma design?': 'Як би ти зібрав адаптивний dashboard за Figma-дизайном?',
+  'How do you ensure consistency across a design system?': 'Як ти забезпечуєш консистентність у дизайн-системі?',
+  'How would you debug a layout that breaks on mobile?': 'Як би ти дебажив layout, який ламається на мобільному екрані?',
+  'How do you collaborate with backend developers when API requirements change?': 'Як ти співпрацюєш із backend-розробниками, коли змінюються вимоги до API?',
+  'Tell me about a time you designed or improved a backend system.': 'Розкажи про випадок, коли ти проєктував або покращував backend-систему.',
+  'Describe a situation where you had to debug a production issue.': 'Опиши ситуацію, коли тобі довелося дебажити production-проблему.',
+  'Tell me about a time you had to make a tradeoff between speed, reliability, and scalability.': 'Розкажи про компроміс між швидкістю, надійністю та масштабованістю.',
+  'How do you communicate technical risks to non-technical teammates?': 'Як ти пояснюєш технічні ризики нетехнічним колегам?',
+  'How do you design a REST API?': 'Як ти проєктуєш REST API?',
+  'What is the difference between SQL and NoSQL databases?': 'Чим відрізняються SQL і NoSQL бази даних?',
+  'How do you approach database schema design?': 'Як ти підходиш до проєктування схеми бази даних?',
+  'How do you handle authentication and authorization?': 'Як ти реалізуєш аутентифікацію та авторизацію?',
+  'What strategies do you use for error handling and logging?': 'Які стратегії ти використовуєш для обробки помилок і логування?',
+  'How would you improve the performance of a slow API endpoint?': 'Як би ти прискорив повільний API endpoint?',
+  'What is caching and when would you use it?': 'Що таке caching і коли його варто використовувати?',
+  'How do you test backend services?': 'Як ти тестуєш backend-сервіси?',
+  'What are common security concerns in backend development?': 'Які основні ризики безпеки є в backend-розробці?',
+  'Explain horizontal scaling and when it becomes necessary.': 'Поясни горизонтальне масштабування і коли воно потрібне.',
+  'How would you design an API for a job application tracking system?': 'Як би ти спроєктував API для трекера заявок?',
+  'How would you model users, jobs, statuses, and reminders in a database?': 'Як би ти змоделював користувачів, вакансії, статуси та нагадування в базі даних?',
+  'How would you prevent duplicate applications or invalid status transitions?': 'Як би ти запобіг дублям заявок або некоректним переходам статусів?',
+  'How would you monitor failures in a backend service?': 'Як би ти моніторив збої backend-сервісу?',
+  'Tell me about a design project you are proud of.': 'Розкажи про дизайн-проєкт, яким ти пишаєшся.',
+  'Describe a time you received difficult feedback on your design.': 'Опиши випадок, коли ти отримав складний фідбек щодо дизайну.',
+  'Tell me about a time you had to defend a design decision.': 'Розкажи про ситуацію, коли тобі довелося захищати дизайн-рішення.',
+  'How do you collaborate with developers and product managers?': 'Як ти співпрацюєш із розробниками та product managers?',
+  'Tell me about a time you improved a product based on user feedback.': 'Розкажи, як ти покращив продукт на основі user feedback.',
+  'Walk me through your design process from problem to final UI.': 'Проведи мене через свій дизайн-процес від проблеми до фінального UI.',
+  'How do you create user flows and wireframes?': 'Як ти створюєш user flows і wireframes?',
+  'How do you use Figma in your design workflow?': 'Як ти використовуєш Figma у робочому процесі?',
+  'How do you decide visual hierarchy on a page?': 'Як ти ухвалюєш рішення щодо візуальної ієрархії на сторінці?',
+  'What makes a dashboard easy to understand?': 'Що робить dashboard зрозумілим?',
+  'How do you approach responsive design?': 'Як ти підходиш до адаптивного дизайну?',
+  'How do you work with design systems?': 'Як ти працюєш із дизайн-системами?',
+  'How do you validate whether a design is effective?': 'Як ти перевіряєш, чи дизайн ефективний?',
+  'How do you balance business goals and user needs?': 'Як ти балансуєш бізнес-цілі та потреби користувачів?',
+  'How do you prepare a design handoff for developers?': 'Як ти готуєш design handoff для розробників?',
+  'Walk me through one case study in your portfolio.': 'Проведи мене через один case study у твоєму портфоліо.',
+  'What problem were you solving in this project?': 'Яку проблему ти вирішував у цьому проєкті?',
+  'What constraints did you work with?': 'З якими обмеженнями ти працював?',
+  'What changed after your design?': 'Що змінилося після твого дизайну?',
+  'What would you improve if you had more time?': 'Що б ти покращив, якби мав більше часу?',
+  'How would you redesign a confusing job application tracker dashboard?': 'Як би ти покращив заплутаний dashboard трекера заявок?',
+  'How would you improve empty states in a SaaS product?': 'Як би ти покращив empty states у SaaS-продукті?',
+  'How would you design a mobile version of a Kanban board?': 'Як би ти спроєктував мобільну версію Kanban-дошки?',
+  'How would you make an interview preparation flow feel more premium?': 'Як би ти зробив flow підготовки до інтерв’ю більш premium?',
+  'Tell me about a time you had to deal with a significant technical debt.': 'Розкажи про випадок, коли тобі довелося працювати зі значним технічним боргом.',
+  'How do you handle disagreements with a peer during code reviews?': 'Як ти вирішуєш розбіжності з колегою під час code review?',
+  'Describe a complex project you led from start to finish.': 'Опиши складний проєкт, який ти вів від початку до кінця.',
+  'Tell me about a time you failed to meet a deadline.': 'Розкажи про випадок, коли ти не вклався в дедлайн.',
+  'Explain the difference between SQL and NoSQL databases.': 'Поясни різницю між SQL і NoSQL базами даних.',
+  'What are the SOLID principles in object-oriented design?': 'Що таке принципи SOLID в об’єктно-орієнтованому дизайні?',
+  'How do you optimize front-end performance in a React application?': 'Як ти оптимізуєш frontend-продуктивність у React-застосунку?',
+  'Explain how a microservices architecture handles data consistency.': 'Поясни, як мікросервісна архітектура працює з узгодженістю даних.',
+  'What is your approach to automated testing and CI/CD?': 'Який у тебе підхід до автоматизованого тестування та CI/CD?',
+  'Tell me about a product decision you made based on data.': 'Розкажи про продуктове рішення, яке ти ухвалив на основі даних.',
+  'How do you prioritize features when resources are limited?': 'Як ти пріоритизуєш фічі, коли ресурси обмежені?',
+  'Describe a time you had to manage a difficult stakeholder.': 'Опиши ситуацію зі складним стейкхолдером.',
+  "How do you handle a product launch that didn't go as planned?": 'Як ти дієш, якщо запуск продукту пішов не за планом?',
+  'How do you define success for a new feature?': 'Як ти визначаєш успіх нової фічі?',
+  'Walk me through your process for creating a product roadmap.': 'Розкажи про процес створення product roadmap.',
+  "What's your favorite product and how would you improve it?": 'Який твій улюблений продукт і як би ти його покращив?',
+  'How do you balance user needs with business goals?': 'Як ти балансуєш потреби користувачів із бізнес-цілями?',
+  'Describe a time you had to work under extreme pressure to meet a regulatory deadline.': 'Опиши ситуацію, коли ти працював під сильним тиском через регуляторний дедлайн.',
+  'How do you ensure accuracy in your financial reporting?': 'Як ти забезпечуєш точність фінансової звітності?',
+  'Tell me about a time you identified an ethical concern at work.': 'Розкажи про випадок, коли ти помітив етичний ризик на роботі.',
+  "Explain the impact of rising interest rates on a company's valuation.": 'Поясни вплив зростання відсоткових ставок на оцінку компанії.',
+  'How do you calculate the Weighted Average Cost of Capital (WACC)?': 'Як розраховується Weighted Average Cost of Capital (WACC)?',
+  'Walk me through the three financial statements and how they link.': 'Проведи мене через три фінансові звіти та їхній зв’язок.',
+  'What is your experience with financial modeling and risk assessment?': 'Який у тебе досвід у фінансовому моделюванні та оцінці ризиків?',
+  'Tell me about yourself and your background.': 'Розкажи про себе та свій досвід.',
+  'Why are you interested in this company and role?': 'Чому тебе цікавить ця компанія та роль?',
+  'What are your greatest strengths and weaknesses?': 'Які твої головні сильні та слабкі сторони?',
+  'Where do you see yourself in five years?': 'Де ти бачиш себе через п’ять років?',
+  'What is your unique value proposition for this role?': 'У чому твоя унікальна цінність для цієї ролі?',
+  "Describe a challenging project you've worked on recently.": 'Опиши складний проєкт, над яким ти нещодавно працював.',
+  'How do you stay updated with industry trends?': 'Як ти стежиш за трендами індустрії?'
+};
+
 function localizeQuestion(value, language) {
   if (language === 'de') return QUESTION_DE[value] || value;
   if (language === 'ru') return QUESTION_RU[value] || value;
+  if (language === 'uk') return QUESTION_UK[value] || value;
   return value;
 }
 
@@ -589,13 +767,13 @@ function validateContext(value = '') {
   };
 }
 
-function buildInitialContext(job) {
+function buildInitialContext(job, t = (key) => key) {
   if (!job) return '';
 
   const parts = [
     job.position || job.title,
-    job.company ? `at ${job.company}` : '',
-    job.location ? `Location: ${job.location}` : '',
+    job.company ? `${t('modal.company')}: ${job.company}` : '',
+    job.location ? `${t('modal.location')}: ${job.location}` : '',
     job.notes
   ].filter(Boolean);
 
@@ -851,8 +1029,8 @@ function PrepSetup({
             </div>
 
             <InsightRow label={t('prep.interviewType')} value={interviewType} />
-            <InsightRow label={t('prep.focusAreas')} value={displayFocusAreas.slice(0, 4).join(', ') || FALLBACK_INSIGHTS.focusAreas} />
-            <InsightRow label={t('prep.estimatedTime')} value={FALLBACK_INSIGHTS.prepTime} />
+            <InsightRow label={t('prep.focusAreas')} value={displayFocusAreas.slice(0, 4).join(', ') || t('prep.focusAreasFallback')} />
+            <InsightRow label={t('prep.estimatedTime')} value={t('prep.time30')} />
           </div>
         </section>
       </aside>
@@ -904,7 +1082,13 @@ function PrepPlan({ category, currentPrep, onBack, onClose }) {
   const questionSections = getQuestionSections(category, questionGroups).filter((section) => section.questions.length > 0);
   const focusAreas = CATEGORY_FOCUS_AREAS[category] || CATEGORY_FOCUS_AREAS.Other;
   const displayFocusAreas = localizeFocusAreas(focusAreas, language);
-  const priorityItems = language === 'ru'
+  const priorityItems = language === 'uk'
+    ? [
+      `Повтори ${displayFocusAreas[0] || 'основи ролі'}`,
+      'Підготуй історію про проєкт із вимірюваним результатом',
+      'Відпрацюй приклади чіткої комунікації'
+    ]
+    : language === 'ru'
     ? [
       `Повтори ${displayFocusAreas[0] || 'основы роли'}`,
       'Подготовь проектную историю с результатом',
@@ -950,7 +1134,7 @@ function PrepPlan({ category, currentPrep, onBack, onClose }) {
             <PrepChip tone="indigo"><Target size={13} /> {t('prep.focusAreas')}</PrepChip>
             <PrepChip tone="amber"><MessageSquareText size={13} /> {t('prep.practiceQuestions')}</PrepChip>
             <PrepChip><ClipboardCheck size={13} /> {t('prep.answerStrategy')}</PrepChip>
-            <PrepChip tone="emerald"><Clock3 size={13} /> 30 min</PrepChip>
+            <PrepChip tone="emerald"><Clock3 size={13} /> {t('prep.time30')}</PrepChip>
           </div>
         </div>
       </section>
@@ -976,7 +1160,7 @@ function PrepPlan({ category, currentPrep, onBack, onClose }) {
             {section.questions.map((question) => (
               <QuestionCard
                 key={question}
-                badge={t(section.titleKey || section.title).replace(' Questions', '').replace('Fragen', '').replace('Вопросы', '').replace('вопросы', '').trim()}
+                badge={t(section.titleKey || section.title).replace(' Questions', '').replace('Fragen', '').replace('Вопросы', '').replace('вопросы', '').replace('Питання', '').replace('питання', '').trim()}
                 question={localizeQuestion(question, language)}
                 meta={section.tone === 'behavioral' ? t('prep.tests') : t('prep.review')}
                 tone={section.tone}
@@ -1056,7 +1240,7 @@ export default function InterviewPrepModal({ isOpen, onClose, initialData }) {
   useEffect(() => {
     if (!isOpen) return;
 
-    const nextContext = buildInitialContext(initialData);
+    const nextContext = buildInitialContext(initialData, t);
     setJobText(nextContext);
     setCategory(detectCategory(nextContext));
     setStep('input');
@@ -1065,7 +1249,7 @@ export default function InterviewPrepModal({ isOpen, onClose, initialData }) {
     setHasBlurredContext(false);
     setHasAttemptedGenerate(false);
     setHasManualCategory(false);
-  }, [isOpen, initialData]);
+  }, [isOpen, initialData, t]);
 
   useEffect(() => {
     if (!isOpen) return undefined;

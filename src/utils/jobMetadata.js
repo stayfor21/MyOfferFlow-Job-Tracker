@@ -335,7 +335,8 @@ export function ensureTimeline(job) {
       type: 'status_changed',
       label: `Current status: ${status}`,
       description: `This application is currently in ${status}.`,
-      createdAt: job?.updatedAt || createdAt
+      createdAt: job?.updatedAt || createdAt,
+      metadata: { to: job?.status || 'applied' }
     });
   }
 

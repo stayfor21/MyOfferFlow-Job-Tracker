@@ -25,7 +25,7 @@ export default function SmartFilters({
 
   return (
     <section aria-label={t('filters.aria')} className="mb-6">
-      <div className="modal-scrollbar flex touch-pan-x gap-2 overflow-x-auto rounded-[22px] border border-[var(--border-subtle)] bg-[var(--surface)] p-2 shadow-sm shadow-black/5">
+      <div className="modal-scrollbar of-command-surface flex touch-pan-x gap-2 overflow-x-auto rounded-[22px] p-2">
         {SMART_FILTERS.map((filter) => {
           const Icon = icons[filter.id] || Inbox;
           const isActive = activeFilter === filter.id;
@@ -41,7 +41,7 @@ export default function SmartFilters({
                 'transition-[background-color,border-color,color,box-shadow] duration-150 ease-out',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
                 isActive
-                  ? 'border-[#8B5CF6]/35 bg-[#635BFF]/15 text-[var(--text)] shadow-[0_0_16px_rgba(99,91,255,0.10)]'
+                  ? 'border-[#8B5CF6]/35 bg-[#635BFF]/15 text-[var(--text)] shadow-[0_8px_22px_rgba(99,91,255,0.14)]'
                   : 'border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)] hover:text-[var(--text)]'
               ].join(' ')}
             >

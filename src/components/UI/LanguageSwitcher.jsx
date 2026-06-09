@@ -6,7 +6,8 @@ import { useTranslation } from '../../i18n.jsx';
 const options = [
   { value: 'en', short: 'EN', labelKey: 'lang.english' },
   { value: 'de', short: 'DE', labelKey: 'lang.german' },
-  { value: 'ru', short: 'RU', labelKey: 'lang.russian' }
+  { value: 'ru', short: 'RU', labelKey: 'lang.russian' },
+  { value: 'uk', short: 'UA', labelKey: 'lang.ukrainian' }
 ];
 
 export default function LanguageSwitcher() {
@@ -65,7 +66,7 @@ export default function LanguageSwitcher() {
           'theme-icon-button inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-2xl border px-2.5 text-sm font-semibold md:h-11 md:gap-2 md:px-3',
           'transition-[background-color,border-color,box-shadow,color] duration-200 ease-out',
           'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
-          isOpen ? 'border-[#8B5CF6]/35 shadow-[0_0_18px_rgba(99,91,255,0.14)]' : ''
+          isOpen ? 'border-[#8B5CF6]/35 shadow-[0_8px_20px_rgba(99,91,255,0.10)]' : ''
         ].join(' ')}
       >
         <Languages size={15} className="hidden text-current opacity-70 md:block" />

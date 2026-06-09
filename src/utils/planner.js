@@ -1,20 +1,20 @@
 import { getNextActionDisplay, getNextActionLabelKey } from './jobMetadata';
 
 const TITLE_KEY_ALIASES = {
-  'planner.task.prepareInterview': ['Prepare for interview', 'Auf Interview vorbereiten', 'Подготовиться к интервью'],
-  'planner.task.sendThankYou': ['Send thank-you note', 'Dankesnachricht senden', 'Отправить благодарность'],
-  'planner.task.followUpRecruiter': ['Follow up with recruiter', 'Beim Recruiter nachfassen', 'Написать рекрутеру'],
-  'planner.task.recruiterReply': ['Recruiter reply', 'Recruiter-Antwort', 'Ответ рекрутеру'],
-  'planner.task.respondOffer': ['Respond to offer', 'Auf Angebot antworten', 'Ответить на оффер'],
-  'planner.task.askFeedback': ['Ask for feedback', 'Um Feedback bitten', 'Попросить обратную связь'],
-  'action.sendAvailability': ['Send availability', 'Verfügbarkeit senden', 'Отправить доступное время'],
-  'action.prepareInterview': ['Prepare for interview', 'Auf Interview vorbereiten', 'Подготовиться к интервью'],
-  'action.followUpRecruiter': ['Follow up with recruiter', 'Beim Recruiter nachfassen', 'Написать рекрутеру'],
-  'action.waitResponse': ['Wait for response', 'Auf Antwort warten', 'Ждать ответа'],
-  'action.sendThankYou': ['Send thank-you email', 'Dankesnachricht senden', 'Отправить благодарственное письмо'],
-  'action.reviewOffer': ['Review offer', 'Angebot prüfen', 'Изучить оффер'],
-  'action.respondOffer': ['Respond to offer', 'Auf Angebot antworten', 'Ответить на оффер'],
-  'action.askFeedback': ['Ask for feedback', 'Um Feedback bitten', 'Попросить обратную связь']
+  'planner.task.prepareInterview': ['Prepare for interview', 'Auf Interview vorbereiten', 'Подготовиться к интервью', 'Підготуватися до інтерв’ю'],
+  'planner.task.sendThankYou': ['Send thank-you note', 'Dankesnachricht senden', 'Отправить благодарность', 'Надіслати подяку'],
+  'planner.task.followUpRecruiter': ['Follow up with recruiter', 'Beim Recruiter nachfassen', 'Написать рекрутеру', 'Написати рекрутеру'],
+  'planner.task.recruiterReply': ['Recruiter reply', 'Recruiter-Antwort', 'Ответ рекрутеру', 'Відповідь рекрутеру'],
+  'planner.task.respondOffer': ['Respond to offer', 'Auf Angebot antworten', 'Ответить на оффер', 'Відповісти на офер'],
+  'planner.task.askFeedback': ['Ask for feedback', 'Um Feedback bitten', 'Попросить обратную связь', 'Попросити фідбек'],
+  'action.sendAvailability': ['Send availability', 'Verfügbarkeit senden', 'Отправить доступное время', 'Надіслати доступний час'],
+  'action.prepareInterview': ['Prepare for interview', 'Auf Interview vorbereiten', 'Подготовиться к интервью', 'Підготуватися до інтерв’ю'],
+  'action.followUpRecruiter': ['Follow up with recruiter', 'Beim Recruiter nachfassen', 'Написать рекрутеру', 'Написати рекрутеру'],
+  'action.waitResponse': ['Wait for response', 'Auf Antwort warten', 'Ждать ответа', 'Чекати відповіді'],
+  'action.sendThankYou': ['Send thank-you email', 'Dankesnachricht senden', 'Отправить благодарственное письмо', 'Надіслати лист подяки'],
+  'action.reviewOffer': ['Review offer', 'Angebot prüfen', 'Изучить оффер', 'Переглянути офер'],
+  'action.respondOffer': ['Respond to offer', 'Auf Angebot antworten', 'Ответить на оффер', 'Відповісти на офер'],
+  'action.askFeedback': ['Ask for feedback', 'Um Feedback bitten', 'Попросить обратную связь', 'Попросити фідбек']
 };
 
 export function getTodayString(date = new Date()) {

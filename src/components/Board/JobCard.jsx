@@ -1,4 +1,4 @@
-import React, { memo, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Bell, Building2, Calendar, Flag, GripVertical, Link as LinkIcon, ListChecks, Sparkles, Star } from 'lucide-react';
 import Button from '../UI/Button';
@@ -21,34 +21,34 @@ const statusStyles = {
 
 const cardStatusStyles = {
   applied: {
-    border: 'rgba(96,165,250,0.55)',
-    glow: 'rgba(96,165,250,0.20)',
-    dragGlow: 'rgba(96,165,250,0.26)',
-    ring: 'rgba(96,165,250,0.35)'
+    border: 'rgba(96,165,250,0.38)',
+    glow: 'rgba(96,165,250,0.08)',
+    dragGlow: 'rgba(96,165,250,0.12)',
+    ring: 'rgba(96,165,250,0.26)'
   },
   screening: {
-    border: 'rgba(192,132,252,0.55)',
-    glow: 'rgba(192,132,252,0.20)',
-    dragGlow: 'rgba(192,132,252,0.26)',
-    ring: 'rgba(192,132,252,0.35)'
+    border: 'rgba(192,132,252,0.38)',
+    glow: 'rgba(192,132,252,0.08)',
+    dragGlow: 'rgba(192,132,252,0.12)',
+    ring: 'rgba(192,132,252,0.26)'
   },
   interview: {
-    border: 'rgba(251,191,36,0.55)',
-    glow: 'rgba(251,191,36,0.20)',
-    dragGlow: 'rgba(251,191,36,0.26)',
-    ring: 'rgba(251,191,36,0.35)'
+    border: 'rgba(251,191,36,0.4)',
+    glow: 'rgba(251,191,36,0.08)',
+    dragGlow: 'rgba(251,191,36,0.12)',
+    ring: 'rgba(251,191,36,0.28)'
   },
   offer: {
-    border: 'rgba(52,211,153,0.55)',
-    glow: 'rgba(52,211,153,0.20)',
-    dragGlow: 'rgba(52,211,153,0.26)',
-    ring: 'rgba(52,211,153,0.35)'
+    border: 'rgba(52,211,153,0.38)',
+    glow: 'rgba(52,211,153,0.08)',
+    dragGlow: 'rgba(52,211,153,0.12)',
+    ring: 'rgba(52,211,153,0.26)'
   },
   rejected: {
-    border: 'rgba(251,113,133,0.55)',
-    glow: 'rgba(251,113,133,0.20)',
-    dragGlow: 'rgba(251,113,133,0.26)',
-    ring: 'rgba(251,113,133,0.35)'
+    border: 'rgba(251,113,133,0.38)',
+    glow: 'rgba(251,113,133,0.08)',
+    dragGlow: 'rgba(251,113,133,0.12)',
+    ring: 'rgba(251,113,133,0.26)'
   }
 };
 
@@ -121,7 +121,7 @@ function JobCard({
   const { t, formatDate } = useTranslation();
   const recentlyDraggedRef = useRef(false);
   const touchDragRef = useRef({ startX: 0, startY: 0, active: false, cancelled: false });
-  const isCoarsePointer = typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)').matches;
+  const pointerDragRef = useRef({ pointerId: null, startX: 0, startY: 0, active: false, cancelled: false });
   const title = job.title || job.position || job.company || t('job.untitledRole');
   const company = job.company || t('job.unknownCompany');
   const status = job.status || 'applied';
@@ -136,8 +136,14 @@ function JobCard({
   const cardDate = formatDate(job.appliedDate || job.createdAt);
 
   const handleDragStart = (e) => {
+    if (e.target.closest(interactiveSelector)) {
+      e.preventDefault();
+      return;
+    }
+
     recentlyDraggedRef.current = true;
     e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', job.id);
     e.dataTransfer.setData('jobId', job.id);
     onDragStart(job.id);
   };
@@ -204,6 +210,70 @@ function JobCard({
     touchDragRef.current = { startX: 0, startY: 0, active: false, cancelled: false };
   };
 
+  const handlePointerDown = (event) => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    if (event.target.closest(interactiveSelector)) {
+      pointerDragRef.current = { pointerId: null, startX: 0, startY: 0, active: false, cancelled: true };
+      return;
+    }
+
+    pointerDragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      active: false,
+      cancelled: false
+    };
+  };
+
+  useEffect(() => {
+    const handlePointerMove = (event) => {
+      const state = pointerDragRef.current;
+      if (state.cancelled || state.pointerId !== event.pointerId) return;
+
+      const deltaX = event.clientX - state.startX;
+      const deltaY = event.clientY - state.startY;
+      const distance = Math.hypot(deltaX, deltaY);
+
+      if (!state.active) {
+        if (distance < 4) return;
+        pointerDragRef.current = { ...state, active: true };
+        recentlyDraggedRef.current = true;
+        onDragStart(job.id);
+      }
+
+      event.preventDefault();
+      const targetColumn = document
+        .elementFromPoint(event.clientX, event.clientY)
+        ?.closest('[data-column-id]');
+      onTouchDragMove?.(targetColumn?.dataset.columnId);
+    };
+
+    const handlePointerUp = (event) => {
+      const state = pointerDragRef.current;
+      if (state.pointerId !== event.pointerId) return;
+
+      if (state.active) {
+        onTouchDrop?.(job.id);
+        window.setTimeout(() => {
+          recentlyDraggedRef.current = false;
+        }, 160);
+      }
+
+      pointerDragRef.current = { pointerId: null, startX: 0, startY: 0, active: false, cancelled: false };
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: false });
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
+    };
+  }, [job.id, onDragStart, onTouchDragMove, onTouchDrop]);
+
   return (
     <motion.div
       style={{
@@ -214,7 +284,7 @@ function JobCard({
       }}
       layout="position"
       initial={{ opacity: 0.9, scale: 0.98, y: 4 }}
-      animate={{ opacity: isDragging ? 0.9 : 1, scale: isDragging ? 1.03 : 1, y: 0 }}
+      animate={{ opacity: isDragging ? 0.92 : 1, scale: isDragging ? 1.015 : 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.12, ease: 'easeOut' } }}
       transition={{
         layout: { duration: 0.18, ease: 'easeOut' },
@@ -222,22 +292,23 @@ function JobCard({
         scale: { duration: 0.15, ease: 'easeOut' },
         y: { duration: 0.18, ease: 'easeOut' }
       }}
-      draggable={!isCoarsePointer}
+      draggable={false}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onPointerDown={handlePointerDown}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
       onClick={handleClick}
       className={[
-        'of-job-card group transform-gpu [touch-action:pan-x_pan-y] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4 shadow-sm shadow-black/5 will-change-transform',
+        'of-job-card of-premium-card group select-none transform-gpu [touch-action:pan-x_pan-y] rounded-2xl p-4 will-change-transform',
         'transition-[transform,opacity,box-shadow,border-color,background-color] duration-200 ease-out',
-        'hover:-translate-y-0.5 hover:border-[var(--card-accent-border)] hover:bg-[var(--surface)] hover:shadow-[0_12px_30px_var(--card-accent-glow)]',
-        'focus-visible:border-[var(--card-accent-border)] focus-visible:shadow-[0_0_24px_var(--card-accent-glow)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--card-accent-ring)]',
+        'hover:-translate-y-px hover:border-[var(--card-accent-border)] hover:bg-[var(--surface)] hover:shadow-[0_10px_24px_var(--card-accent-glow)]',
+        'focus-visible:border-[var(--card-accent-border)] focus-visible:shadow-[0_0_16px_var(--card-accent-glow)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--card-accent-ring)]',
         'cursor-grab active:cursor-grabbing',
         isDragging
-          ? 'cursor-grabbing border-[var(--card-accent-border)] opacity-90 shadow-[0_0_28px_var(--card-accent-drag-glow)] ring-1 ring-[var(--card-accent-ring)]'
+          ? 'cursor-grabbing border-[var(--card-accent-border)] opacity-90 shadow-[0_10px_26px_var(--card-accent-drag-glow)] ring-1 ring-[var(--card-accent-ring)]'
           : ''
       ].join(' ')}
     >
@@ -321,12 +392,12 @@ function JobCard({
             data-no-drag="true"
             variant="primary"
             size="compact"
-            aria-label={`Open interview preparation for ${title}`}
+            aria-label={t('card.openPrepAria', { title })}
             onClick={(e) => {
               e.stopPropagation();
               window.dispatchEvent(new CustomEvent('open-prep-tool', { detail: job }));
             }}
-            className="h-8 min-w-[116px] shrink-0 gap-1.5 whitespace-nowrap px-3 text-[11px] leading-none shadow-[0_0_14px_rgba(99,91,255,0.14)]"
+            className="h-8 min-w-[116px] shrink-0 gap-1.5 whitespace-nowrap px-3 text-[11px] leading-none shadow-[0_8px_18px_rgba(99,91,255,0.10)]"
           >
             <Sparkles size={12} />
             <span className="text-center">{t('card.prep')}</span>

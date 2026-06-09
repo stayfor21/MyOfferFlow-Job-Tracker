@@ -8,9 +8,9 @@ import { useTranslation } from '../../i18n.jsx';
 
 function MetricCard({ label, value, helper, color }) {
   return (
-    <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-4">
+    <div className="of-premium-card rounded-2xl p-4">
       <p className="text-xs font-medium text-[var(--text-muted)]">{label}</p>
-      <p className={`mt-2 text-2xl font-bold ${color}`}>{value}</p>
+      <p className={`of-number mt-2 text-2xl font-bold ${color}`}>{value}</p>
       {helper && <p className="mt-1 text-[11px] font-medium text-[var(--text-faint)]">{helper}</p>}
     </div>
   );
@@ -52,7 +52,7 @@ export default function InsightDashboard({
     if (activeInterview) {
       return {
         title: t('dashboard.prepareInterview'),
-        body: [activeInterview.position || activeInterview.title || 'Interview', activeInterview.company].filter(Boolean).join(' · '),
+        body: [activeInterview.position || activeInterview.title || t('status.interview'), activeInterview.company].filter(Boolean).join(' · '),
         action: t('dashboard.openPrep'),
         onAction: () => window.dispatchEvent(new CustomEvent('open-prep-tool', { detail: activeInterview }))
       };
@@ -126,7 +126,7 @@ export default function InsightDashboard({
 
       <div className="grid items-stretch gap-6 xl:grid-cols-[minmax(320px,0.72fr)_minmax(560px,1.28fr)]">
         <div className="grid min-w-0 gap-5 xl:grid-rows-[auto_minmax(0,1fr)]">
-          <div className="min-w-0 rounded-3xl border border-[var(--primary-border)] bg-[var(--primary-soft)] p-4 text-left shadow-sm shadow-black/5 sm:p-[18px]">
+          <div className="of-premium-card rounded-3xl p-4 text-left sm:p-[18px]">
             <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
               <div className="of-chip of-chip-violet flex h-9 w-9 shrink-0 justify-center rounded-xl p-0">
                 <Lightbulb size={15} />
@@ -148,7 +148,7 @@ export default function InsightDashboard({
             </div>
           </div>
 
-          <div className="flex min-h-0 flex-col rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-2xl shadow-black/15 sm:p-6">
+          <div className="of-premium-card flex min-h-0 flex-col rounded-[24px] p-5 sm:p-6">
             <div className="mb-5 text-center">
               <h3 className="text-base font-semibold text-[var(--text)]">{t('dashboard.efficiency')}</h3>
               <p className="mt-1 text-sm text-[var(--text-muted)]">{t('dashboard.efficiencyHelp')}</p>
@@ -177,11 +177,11 @@ export default function InsightDashboard({
                   whileInView={{ strokeDashoffset: 503 - (503 * efficiency) / 100 }}
                   transition={{ duration: 1.5, ease: 'easeInOut', delay: 0.2 }}
                   strokeLinecap="round"
-                  className="text-[#635BFF] drop-shadow-[0_0_16px_rgba(99,91,255,0.25)]"
+                  className="text-[#635BFF] drop-shadow-[0_8px_14px_rgba(99,91,255,0.12)]"
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-4xl font-bold text-[var(--text)]">{efficiency}%</span>
+                <span className="of-number text-4xl font-bold text-[var(--text)]">{efficiency}%</span>
                 <span className="mt-1 text-xs font-medium text-[var(--text-muted)]">{t('dashboard.efficiencyRate')}</span>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function InsightDashboard({
           </div>
         </div>
 
-        <div className="flex min-h-0 flex-col rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-2xl shadow-black/15 sm:p-6">
+        <div className="of-premium-card flex min-h-0 flex-col rounded-[24px] p-5 sm:p-6">
           <div className="mb-6 flex items-center justify-between gap-4">
             <div>
               <h3 className="text-base font-semibold text-[var(--text)]">{t('dashboard.pipeline')}</h3>
@@ -217,7 +217,7 @@ export default function InsightDashboard({
                     whileInView={{ width: `${(item.count / maxCount) * 100}%` }}
                     transition={{ duration: 1, delay: idx * 0.1 }}
                     style={{ backgroundColor: item.color }}
-                    className="h-full rounded-full shadow-[0_0_18px_rgba(255,255,255,0.08)]"
+                    className="h-full rounded-full shadow-[0_6px_14px_rgba(255,255,255,0.05)]"
                   />
                 </div>
               </div>

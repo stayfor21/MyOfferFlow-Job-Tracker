@@ -38,7 +38,8 @@ const tabs = [
 const plannerLocales = {
   en: 'en-US',
   de: 'de-DE',
-  ru: 'ru-RU'
+  ru: 'ru-RU',
+  uk: 'uk-UA'
 };
 
 const typeMeta = {
@@ -78,6 +79,15 @@ function formatSelectedDayLabel(dateKey, language, t) {
 
   const date = new Date(`${dateKey}T00:00:00`);
   if (Number.isNaN(date.getTime())) return dateKey;
+  if (language === 'uk') {
+    const weekday = date.toLocaleDateString('uk-UA', { weekday: 'long' });
+    const datePart = date.toLocaleDateString('uk-UA', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    return `${weekday}, ${datePart}`;
+  }
   return date.toLocaleDateString(getPlannerLocale(language), {
     weekday: 'long',
     month: 'short',
@@ -133,7 +143,7 @@ function CalendarStrip({
               className={[
                 'h-[68px] w-[68px] shrink-0 rounded-2xl border p-2 text-left transition-[background-color,border-color,box-shadow,color] duration-150 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
                 isSelected
-                  ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] text-[var(--text)] shadow-[0_0_18px_var(--primary-glow)]'
+                  ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] text-[var(--text)] shadow-[0_8px_20px_var(--primary-glow)]'
                   : 'border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)]',
                 isToday && !isSelected ? 'ring-1 ring-[var(--primary-border)]' : ''
               ].join(' ')}
@@ -208,7 +218,7 @@ function TaskCard({
     : '';
 
   return (
-    <article className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4 shadow-sm shadow-black/5 transition-[border-color,background-color,box-shadow] duration-150 hover:border-[var(--primary-border)] hover:bg-[var(--surface-elevated)] hover:shadow-[0_10px_28px_var(--shadow-color)]">
+    <article className="of-premium-card of-lift rounded-2xl p-4">
       <div className="flex items-start gap-3">
         <div className={`of-chip mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${meta.chip}`}>
           <Icon size={15} />
@@ -537,7 +547,7 @@ export default function SmartPlannerDrawer({
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 36, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="relative flex h-full w-full max-w-[560px] flex-col border-l border-[var(--border-subtle)] bg-[var(--bg-subtle)] shadow-2xl shadow-black/70"
+            className="relative flex h-full w-full max-w-[560px] flex-col border-l border-[var(--border-subtle)] bg-[var(--bg-subtle)] shadow-[var(--shadow-drawer)]"
           >
             <header className="border-b border-[var(--border-subtle)] p-4 sm:p-5">
               <div className="flex items-start justify-between gap-4">
@@ -566,9 +576,9 @@ export default function SmartPlannerDrawer({
                       if (tab.id === 'today') setSelectedPlannerDate(today);
                     }}
                     className={[
-                      'h-9 shrink-0 rounded-xl border px-3 text-xs font-semibold transition-[background-color,border-color,color] duration-150',
+                      'h-9 shrink-0 rounded-xl border px-3 text-xs font-semibold transition-[background-color,border-color,color,box-shadow] duration-150',
                       activeTab === tab.id
-                        ? 'border-[#635BFF]/35 bg-[#635BFF]/15 text-[var(--text)]'
+                        ? 'border-[#635BFF]/35 bg-[#635BFF]/15 text-[var(--text)] shadow-[0_8px_22px_rgba(99,91,255,0.12)]'
                         : 'border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)] hover:text-[var(--text)]'
                     ].join(' ')}
                   >

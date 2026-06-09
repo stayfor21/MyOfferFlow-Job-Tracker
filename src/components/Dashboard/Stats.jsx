@@ -29,19 +29,19 @@ export default function Stats({ jobs }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 mb-8">
+    <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
       {stats.map((stat, i) => (
         <div
           key={i}
-          className="rounded-[24px] border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-sm shadow-black/5 backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--primary-border)] hover:shadow-[0_16px_36px_var(--shadow-color)]"
+          className="of-premium-card of-lift rounded-[24px] p-5"
         >
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-[var(--text-muted)]">{stat.label}</p>
-              <p className="mt-1 text-3xl font-bold tracking-tight text-[var(--text)]">{stat.value}</p>
+              <p className="of-number mt-1 text-3xl font-bold tracking-tight text-[var(--text)]">{stat.value}</p>
               <p className="mt-1 text-xs font-medium text-[var(--text-faint)]">{stat.helper}</p>
             </div>
-            <div className={`rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3 ${stat.color}`}>
+            <div className={`rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3 shadow-sm shadow-black/5 ${stat.color}`}>
               <stat.icon size={22} />
             </div>
           </div>

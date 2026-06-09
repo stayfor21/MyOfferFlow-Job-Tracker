@@ -110,7 +110,7 @@ Edit mode includes actions such as:
 - Archive application
 - Delete application
 
-The footer is adaptive and designed to avoid overflow in English, German, and Russian.
+The footer is adaptive and designed to avoid overflow in English, German, Russian, and Ukrainian.
 
 ---
 
@@ -545,7 +545,7 @@ The mobile and tablet versions are optimized for browser-based usage, including:
 - Mobile and tablet Kanban interaction
 - Smart Planner access
 - Light and dark themes
-- English, German, and Russian interface support
+- English, German, Russian, and Ukrainian interface support
 
 Native mobile apps are not available yet, but they are a possible future direction for the project.
 

@@ -4,7 +4,7 @@ import { useTranslation } from '../../i18n.jsx';
 export function LogoMark({ className = '', glyphClassName = '' }) {
   return (
     <div
-      className={`relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-[14px] border border-white/10 bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] shadow-[0_0_28px_rgba(99,91,255,0.32)] ${className}`}
+      className={`relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-[14px] border border-white/10 bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] shadow-[0_10px_24px_rgba(99,91,255,0.18)] ${className}`}
       aria-hidden="true"
     >
       <div className="absolute inset-0 bg-white/10 opacity-20" />
