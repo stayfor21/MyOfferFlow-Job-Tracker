@@ -1,551 +1,336 @@
-# MyOfferFlow - Job Application Tracker
+# MyOfferFlow
 
-MyOfferFlow is a modern job application tracking dashboard designed to help users manage their hiring pipeline from the first application to the final offer.
+<p align="center">
+  <img src="./public/readme/cover.png" alt="MyOfferFlow product preview" width="100%" />
+</p>
 
-It combines a visual Kanban board, smart planning tools, interview preparation, career goals, analytics, reminders, and multilingual support into one focused productivity workspace.
+<p align="center">
+  <strong>A focused job application tracker for managing the full journey from application to offer.</strong>
+</p>
 
-The goal of MyOfferFlow is simple: help job seekers stay organized, act on time, prepare better, and move through the hiring process with more clarity.
+<p align="center">
+  MyOfferFlow helps job seekers organize applications, interviews, follow-ups, goals, preparation tasks, and offers in one clean productivity workspace.
+</p>
+
+<p align="center">
+  <a href="https://myofferflow.pages.dev"><strong>Live Demo</strong></a>
+  ·
+  <a href="#features">Features</a>
+  ·
+  <a href="#technical-overview">Technical Overview</a>
+  ·
+  <a href="#roadmap">Roadmap</a>
+  ·
+  <a href="#license">License</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/Vite-Build-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/TailwindCSS-UI-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/i18n-EN%20DE%20RU%20UA-7C5CFF?style=for-the-badge" alt="i18n" />
+</p>
 
 ---
 
 ## Overview
 
-<img width="1918" height="911" alt="image" src="https://github.com/user-attachments/assets/3ba563d9-2aa8-4176-85d7-135cb131d88e" />
+MyOfferFlow is a modern job application tracking dashboard designed to help job seekers manage their hiring pipeline with more structure, clarity, and consistency.
 
-Searching for a job often becomes chaotic: applications are spread across emails, notes, spreadsheets, job boards, and memory. MyOfferFlow solves this by giving users one structured workspace where every opportunity can be tracked, updated, planned, and analyzed.
+Job searching often becomes scattered across spreadsheets, emails, notes, job boards, calendars, and memory. MyOfferFlow brings the core workflow into one focused interface: tracking applications, planning follow-ups, preparing for interviews, setting goals, and reviewing progress.
 
-Users can add job applications, move them through hiring stages, set priorities, mark dream jobs, schedule follow-ups, prepare for interviews, track career goals, and view insights about their job search progress.
-
-MyOfferFlow is built as a polished SaaS-style dashboard with support for light and dark themes, multilingual UI, smart planner features, and a responsive interface.
+The project is built as a polished SaaS-style frontend product with responsive layouts, multilingual UI, light and dark themes, browser-based persistence, and an app-like experience on mobile and tablet devices.
 
 ---
 
-## Key Features
+## Features
 
-### 1. Kanban Job Pipeline
+### Kanban Job Pipeline
 
-MyOfferFlow uses a visual Kanban board to track applications by status.
+MyOfferFlow uses a visual Kanban board to track applications across the main hiring stages:
 
-Default pipeline stages:
+* Applied
+* Screening
+* Interview
+* Offer
+* Rejected
 
-- Applied
-- Screening
-- Interview
-- Offer
-- Rejected
+Job cards can be moved between columns to update their current status. Each stage uses stable internal identifiers, while visible labels are localized through the interface language.
 
-Users can drag and drop job cards between columns to update their current status.
+### Application Management
 
-Each column includes:
+Users can create and edit detailed job application records.
 
-- Status label
-- Application count
-- Empty state
-- Drop area
-- Status-aware hover and drag states
+Each application can include:
 
-The Kanban board gives users a clear overview of where every opportunity currently stands.
+* Company
+* Role
+* Location
+* Job link
+* Source
+* Status
+* Priority
+* Dream Job preference
+* Application date
+* Next action
+* Due date
+* Follow-up reminder
+* Notes
 
----
+The application drawer is designed to work across desktop, tablet, and mobile screens.
 
-### 2. Job Application Cards
+### Smart Filters
 
-Each application is displayed as a compact but informative card.
+The board includes quick filters for focusing on specific parts of the job search pipeline:
 
-A job card can show:
+* All
+* Dream Jobs
+* High Priority
+* Due Today
+* Interviews
+* Offers
+* Rejected
+* Archived
+* Hide Rejected
 
-- Role title
-- Company name
-- Current status
-- Priority level
-- Dream Job tag
-- Application date
-- Next action
-- Follow-up reminder
-- Interview preparation shortcut
-- Job link indicator
+Filter counts are derived from the current application state.
 
-The card design is optimized to remain readable even when multiple tags and reminders are active.
+### Interview Preparation
 
-Cards are designed to be:
+MyOfferFlow includes an interview preparation flow for creating structured preparation plans based on role, company, interview type, and job context.
 
-- Compact
-- Scannable
-- Status-aware
-- Drag-friendly
-- Responsive
-- Theme-aware
+The preparation system is designed to support:
 
----
+* Technical questions
+* Behavioral questions
+* Answer strategy
+* Focus areas
+* Preparation notes
+* Interview-specific planning
 
-### 3. Add and Edit Application Drawer
+A future version may expand this into a dedicated AI interview preparation agent.
 
-Users can create or edit applications through a detailed side drawer.
+### Smart Planner
 
-The drawer includes sections for:
-
-- Overview
-- Company
-- Role
-- Location
-- Date applied
-- Job link
-- Status
-- Source
-- Priority
-- Dream Job preference
-- Next action
-- Due date
-- Follow-up reminder
-- Follow-up notes
-
-The drawer supports both add mode and edit mode.
-
-Edit mode includes actions such as:
-
-- Save changes
-- Close
-- Archive application
-- Delete application
-
-The footer is adaptive and designed to avoid overflow in English, German, Russian, and Ukrainian.
-
----
-
-### 4. Smart Filters
-
-MyOfferFlow includes a smart filter bar that allows users to quickly focus on specific groups of applications.
-
-Available filters include:
-
-- All
-- Dream Jobs
-- High Priority
-- Due Today
-- Interviews
-- Offers
-- Rejected
-- Archived
-- Hide Rejected
-
-Each filter displays a count and uses theme-aware styling.
-
-The filters help users quickly narrow down the board without losing context.
-
----
-
-### 5. Smart Planner
-
-The Smart Planner helps users organize job search tasks by day.
-
-<img width="709" height="730" alt="image" src="https://github.com/user-attachments/assets/ce69a5d0-2f71-49bc-8484-c81943e3ab58" />
-
-It includes:
-
-- Today view
-- Week view
-- Suggestions
-- Completed tasks
-- Calendar strip
-- Manual task creation
-- Auto-generated tasks from applications
-- Task completion tracking
-
-The calendar strip shows upcoming days and task counts, allowing users to quickly select a date and view relevant tasks.
+The Smart Planner helps users organize job search actions by day and week.
 
 Planner tasks can include:
 
-- Prepare for interview
-- Send follow-up
-- Send thank-you note
-- Respond to recruiter
-- Review offer
-- Manual custom tasks
+* Interview preparation
+* Follow-ups
+* Thank-you notes
+* Recruiter responses
+* Offer review tasks
+* Manual custom tasks
 
-The planner is connected to application data, so it can suggest or display tasks based on the current state of the hiring pipeline.
+Tasks can be connected to application data, so the planner reflects the current state of the hiring pipeline.
 
----
+### Insight Dashboard
 
-### 6. Interview Preparation
+The Insight Dashboard provides a high-level overview of job search progress.
 
-MyOfferFlow includes an interview preparation flow that helps users create structured preparation plans for specific applications.
+It includes:
 
-The preparation system can use:
+* Today’s focus
+* Pipeline distribution
+* Application efficiency
+* Success ratio
+* Active trials
+* Rejection rate
+* Total reach
 
-- Job description
-- Role context
-- Company information
-- Application category
-- Interview type
-- Focus areas
+These metrics help users understand where their applications are concentrated and how their current job search strategy is progressing.
 
-Supported interview preparation categories include:
+### Career Goals
 
-- Software Engineering
-- Frontend Developer
-- Backend Developer
-- UX/UI Designer
-- Product / Business
-- Marketing
-- Finance / Banking
-- Design
-- Other
-
-The preparation plan can include:
-
-- Technical questions
-- Behavioral questions
-- Answer strategy
-- 30-minute preparation routine
-- Focus areas
-- Suggested talking points
-
-The preparation flow is designed to help users prepare with more confidence and structure.
-
----
-
-### 7. Insight Dashboard
-
-MyOfferFlow includes a dedicated insights section for understanding job search performance.
-
-<img width="1914" height="788" alt="image" src="https://github.com/user-attachments/assets/baba8e21-73c3-4c07-952d-519d25d4125b" />
-
-The dashboard includes:
-
-- Today’s Focus
-- Application Efficiency
-- Pipeline Distribution
-- Success Ratio
-- Active Trials
-- Rejection Rate
-- Total Reach
-
-The dashboard helps users understand:
-
-- How many applications are active
-- How many interviews are in progress
-- How many offers were received
-- Where applications are concentrated
-- Whether the current strategy is working
-
-The design uses a clear visual hierarchy with cards, progress bars, metrics, and status indicators.
-
----
-
-### 8. Career Goals
-
-MyOfferFlow includes a Career Goals section where users can set and track job search targets.
-
-<img width="1918" height="418" alt="image" src="https://github.com/user-attachments/assets/a6092ad5-f831-43cd-b223-f8b45d8b70ab" />
+Career Goals allow users to set and track job search targets.
 
 Supported goal types include:
 
-- Applications
-- Interviews
-- Follow-ups
-- Interview preparation
-- New opportunities
-- Custom goals
+* Applications
+* Interviews
+* Follow-ups
+* Interview preparation
+* Offers
+* Custom goals
 
-Goal periods can include:
+Goal progress can be calculated from current application and planner data where possible.
 
-- This week
-- This month
-- Next 7 days
-- Next 30 days
-- Custom date range
-
-Each goal card can show:
-
-- Goal title
-- Period
-- Progress
-- Percentage
-- Remaining count
-- Deadline
-- Goal status
-- Progress bar
-
-Goal progress is calculated from the current source of truth where possible.
-
-For example:
-
-- Interview goals reflect current jobs in the Interview stage.
-- Application goals reflect applications added or applied within the selected period.
-- Follow-up goals reflect completed follow-up tasks.
-- Custom goals can be manually updated.
-
-This makes the goal system dynamic and connected to real user activity.
-
----
-
-### 9. Light and Dark Themes
+### Themes
 
 MyOfferFlow supports both light and dark themes.
 
-The default theme for new users is light mode.
+Theme behavior includes:
 
-Theme behavior:
+* Light mode as the default experience
+* Persistent theme preference
+* Theme-aware cards, inputs, filters, badges, drawers, and dashboard sections
+* Responsive visual consistency across screen sizes
 
-- New users see light theme by default.
-- Existing saved theme preferences are respected.
-- Theme selection persists after refresh.
-- Invalid saved theme values fallback to light mode.
+### Localization
 
-Both themes are designed with:
+MyOfferFlow supports four interface languages:
 
-- Theme-aware surfaces
-- Accessible text contrast
-- Soft borders
-- Premium shadows
-- Consistent cards
-- Styled scrollbars
-- Status-aware colors
+* English
+* German
+* Russian
+* Ukrainian
 
-The light theme is designed to feel clean, modern, and professional, while the dark theme provides a premium low-light dashboard experience.
+The localized interface covers navigation, filters, forms, drawers, planner views, interview preparation, career goals, insight cards, empty states, validation messages, and footer content.
 
----
+User-generated content such as company names, job titles, notes, job descriptions, and custom tasks is not automatically translated.
 
-### 10. Multilingual Support
+### Responsive and PWA-Ready Experience
 
-MyOfferFlow supports three interface languages:
+MyOfferFlow is designed for:
 
-- English
-- German
-- Russian
+* Desktop
+* Laptop
+* Tablet
+* Mobile browser usage
 
-The language switcher is available in the header.
+The interface includes responsive layouts, touch-friendly controls, horizontal scrolling where appropriate, adaptive drawers, and mobile-safe actions.
 
-The UI is localized across:
-
-- Navigation
-- Buttons
-- Forms
-- Drawers
-- Filters
-- Planner
-- Interview preparation
-- Career goals
-- Dashboard
-- Empty states
-- Validation messages
-- Footer
-
-User-generated data such as company names, roles, notes, and job descriptions are not translated automatically.
-
-The application avoids using translated strings as internal identifiers to prevent data and logic issues across languages.
+Users can also add the deployed web application to their device home screen for an app-like browser experience.
 
 ---
 
-### 11. Footer
+## Technical Overview
 
-MyOfferFlow includes a minimal product footer at the bottom of the dashboard.
+MyOfferFlow is a frontend-focused React application built around a lightweight local-first product architecture.
 
-The footer includes:
+### Core Stack
 
-- Brand mark
-- Product tagline
-- Quick section links
-- Version text
-- Product status line
+* **React** — component-based interface architecture
+* **Vite** — fast development tooling and optimized production builds
+* **Tailwind CSS** — utility-first styling and responsive UI
+* **JavaScript** — application logic and state handling
+* **localStorage** — browser-based persistence for user data and preferences
+* **Custom i18n layer** — multilingual interface support
+* **PWA assets** — home screen installation support
 
-Footer links can navigate to:
+### Data and State
 
-- Board
-- Insights
-- Goals
-- Planner
+Application data is persisted in the browser and acts as the source of truth for multiple product areas:
 
-The footer is intentionally compact and designed as a quiet ending to the dashboard, not as a marketing landing-page footer.
+* Kanban columns
+* Smart filter counts
+* Insight metrics
+* Career goal progress
+* Planner tasks
+* Follow-up reminders
+* Interview preparation shortcuts
 
----
+This keeps the current version lightweight and usable without a backend.
 
-## Design Philosophy
+### Stable Status Logic
 
-MyOfferFlow is designed as a premium productivity dashboard.
+Application stages use stable internal values:
 
-The visual style focuses on:
+```txt
+applied
+screening
+interview
+offer
+rejected
+```
 
-- Clean layout
-- Strong visual hierarchy
-- Soft shadows
-- Rounded cards
-- Muted surfaces
-- Violet brand accents
-- Compact information density
-- Consistent spacing
-- Smooth hover states
-- Light and dark theme parity
+Visible status labels are translated separately through the localization system.
 
-The interface is built to feel calm, organized, and focused.
+This prevents data and logic issues when switching between English, German, Russian, and Ukrainian.
 
-Design priorities:
+### Goal Calculation Logic
 
-1. Clarity over decoration
-2. Productivity over noise
-3. Consistency across all components
-4. Strong readability in all themes
-5. Smooth interactions without layout shifts
-6. Responsive behavior across screen sizes
-
----
-
-## Core User Flow
-
-A typical user flow looks like this:
-
-1. Add a new job application.
-2. Fill in company, role, location, job link, and status.
-3. Set priority and optionally mark it as a Dream Job.
-4. Add a next action or follow-up reminder.
-5. Move the job card through the Kanban pipeline.
-6. Use Smart Planner to manage upcoming tasks.
-7. Generate an interview preparation plan when the job reaches Interview.
-8. Track progress through Insight Dashboard.
-9. Set Career Goals and monitor progress.
-10. Archive or update applications as the search evolves.
-
----
-
-## Application Status Logic
-
-MyOfferFlow tracks applications using status-based stages:
-
-| Status | Purpose |
-|---|---|
-| Applied | Initial application submitted |
-| Screening | Recruiter or company screening stage |
-| Interview | Active interview process |
-| Offer | Offer received |
-| Rejected | Application rejected |
-
-Moving a card between stages updates the current state of the application.
-
-Status-based analytics and goals are derived from the current application data.
-
----
-
-## Smart Planner Logic
-
-The planner can include both manual and automatic tasks.
-
-Auto-generated tasks may depend on:
-
-- Current job status
-- Follow-up dates
-- Interview status
-- Offer status
-- Next action
-- Reminder dates
-
-Completed tasks should remain completed across language changes and page refreshes.
-
-Task identity should be based on stable IDs, not translated labels.
-
----
-
-## Career Goal Logic
-
-Career Goals are calculated from current data whenever possible.
-
-Auto-calculated goals should not store stale progress values.
+Career Goals are connected to the current application and planner data where possible.
 
 Examples:
 
-- Interview goals count jobs currently in Interview.
-- Offer goals count jobs currently in Offer.
-- Application goals count jobs created or applied within the goal date range.
-- Follow-up goals count completed follow-up actions.
-- Custom goals use manual progress.
+* Interview goals count applications currently in the Interview stage.
+* Offer goals count applications currently in the Offer stage.
+* Application goals count jobs added or applied within a selected date range.
+* Follow-up goals can be connected to completed follow-up tasks.
+* Custom goals can use manual progress values.
 
-Archived jobs are excluded from active goal calculations by default.
+Archived applications are excluded from active goal calculations by default.
 
-This ensures that goal progress stays accurate when applications are moved, archived, or updated.
+### Planner Logic
 
----
+The planner supports both manual and application-driven tasks.
 
-## Interview Preparation Logic
+Task generation can depend on:
 
-Interview preparation is generated based on application context.
+* Application status
+* Due dates
+* Follow-up dates
+* Interview status
+* Offer status
+* Next actions
+* Reminder data
 
-The user can provide job or interview context, and the system generates a structured preparation plan.
-
-Validation rules can include:
-
-- Required context
-- Minimum character count
-- English-only job context input
-- Spam or meaningless text prevention
-
-The generated preparation content should be displayed in the selected interface language where applicable.
+Task identity is kept independent from translated UI labels to keep planner behavior stable across language changes.
 
 ---
 
-## Responsive Design
+## Project Access
 
-MyOfferFlow is designed to work across:
+MyOfferFlow is available as a deployed web application:
 
-- Desktop
-- Laptop
-- Tablet
-- Mobile screens
+```txt
+https://myofferflow.pages.dev
+```
 
-Responsive behavior includes:
+This repository is published for portfolio and demonstration purposes only.
 
-- Stacked layouts on smaller screens
-- Horizontal scrolling where appropriate
-- Adaptive drawer footer buttons
-- Compact planner calendar strip
-- Flexible filter row
-- Responsive dashboard cards
-- Mobile-friendly forms
+The source code is available for review, but it is not provided as an open-source template, starter kit, or reusable codebase.
 
-The interface should avoid horizontal page overflow.
+Users are allowed to access and use the official deployed MyOfferFlow application as an end product through the authorized website.
 
 ---
 
 ## Mobile and Tablet Access
 
-MyOfferFlow is currently available as a web application and can be used directly from a browser on desktop, tablet, and mobile devices.
+MyOfferFlow can be used directly from a browser on desktop, tablet, and mobile devices.
 
-At this stage, MyOfferFlow does not have a native app in the Apple App Store or Google Play Store. Native iOS and Android applications may be considered in the future as the project grows and scales.
+At this stage, MyOfferFlow does not have a native application in the Apple App Store or Google Play Store. Native iOS and Android applications may be considered in the future as the project grows.
 
-For now, users can still add MyOfferFlow to their device home screen and use it in an app-like experience.
+### Add to Home Screen
 
-### Add MyOfferFlow to the Home Screen
-
-On mobile and tablet devices, users can add MyOfferFlow to the home screen through the browser.
-
-#### On Android / Google Chrome
+On Android / Google Chrome:
 
 1. Open MyOfferFlow in Google Chrome.
-2. Tap the three-dot menu in the top-right corner.
+2. Tap the three-dot menu.
 3. Select **Add to Home screen** or **Install app** if available.
 4. Confirm the action.
 
-After that, MyOfferFlow will appear on the home screen and can be opened like a regular app.
-
-#### On iPhone or iPad / Safari
+On iPhone or iPad / Safari:
 
 1. Open MyOfferFlow in Safari.
 2. Tap the **Share** button.
 3. Select **Add to Home Screen**.
 4. Confirm the action.
 
-This creates a home screen shortcut for quick access to MyOfferFlow.
+---
 
-### Current Mobile Experience
+## Roadmap
 
-The mobile and tablet versions are optimized for browser-based usage, including:
+Planned future improvements include:
 
-- Responsive layouts
-- Touch-friendly controls
-- Mobile and tablet Kanban interaction
-- Smart Planner access
-- Light and dark themes
-- English, German, Russian, and Ukrainian interface support
+* AI interview preparation agent
+* More advanced analytics and job search insights
+* Optional cloud sync and user accounts
+* Improved notification and reminder workflows
+* More advanced goal templates
+* Native iOS and Android applications in a future scaling phase
 
-Native mobile apps are not available yet, but they are a possible future direction for the project.
+---
+
+## Development Notice
+
+This project is not provided as an open-source template or reusable starter kit.
+
+Local development, production builds, redistribution, self-hosting, or deployment of this codebase are not permitted without explicit written permission from the author.
+
+The repository is shared to demonstrate product design, frontend architecture, UI implementation, localization, responsive behavior, and workflow logic.
 
 ---
 
@@ -553,8 +338,8 @@ Native mobile apps are not available yet, but they are a possible future directi
 
 All rights reserved.
 
-This project is provided for portfolio and demonstration purposes. The source code, design, structure, and implementation may not be copied, modified, distributed, sublicensed, or used in other projects without explicit written permission from the author.
+This project is provided for portfolio and demonstration purposes only. The source code, design, structure, assets, and implementation may not be copied, modified, built, deployed, distributed, sublicensed, reused, or included in other projects without explicit written permission from the author.
 
-Users are allowed to access and use the deployed MyOfferFlow application as an end product through the official website or authorized deployment.
+Users are allowed to access and use the official deployed MyOfferFlow application as an end product through the authorized website.
 
-You may not reverse engineer, reproduce, resell, redistribute, or create derivative works based on the source code or interface without permission.
+You may not reverse engineer, reproduce, resell, redistribute, self-host, publish, or create derivative works based on the source code, design, or interface without permission.
