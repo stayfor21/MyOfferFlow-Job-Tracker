@@ -203,10 +203,6 @@ Users can also add the deployed web application to their device home screen for 
 
 MyOfferFlow includes an analytics dashboard that helps users understand their job search progress, pipeline distribution, active opportunities, offer ratio, and overall application momentum.
 
-<p align="center">
-  <img src="./public/readme/insights.png" alt="MyOfferFlow insights dashboard and career goals preview" width="100%" />
-</p>
-
 The dashboard is connected to the current application state, so metrics update as jobs move through the pipeline. This makes the product more than a simple Kanban board: it becomes a structured workspace for reviewing progress and improving job search strategy.
 
 ---
