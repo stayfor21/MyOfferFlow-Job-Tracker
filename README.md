@@ -209,6 +209,31 @@ MyOfferFlow includes an analytics dashboard that helps users understand their jo
 
 The dashboard is connected to the current application state, so metrics update as jobs move through the pipeline. This makes the product more than a simple Kanban board: it becomes a structured workspace for reviewing progress and improving job search strategy.
 
+### Smart Planner
+
+<table>
+  <tr>
+    <td width="45%" valign="middle">
+      <h3>Plan the next step before it becomes overdue.</h3>
+      <p>
+        The Smart Planner turns the job search into a daily action system. It helps users organize follow-ups, interview preparation, thank-you notes, recruiter responses, offer reviews, and custom tasks in one focused view.
+      </p>
+      <p>
+        Planner tasks can be created manually or generated from application data, keeping daily actions connected to the current hiring pipeline.
+      </p>
+      <ul>
+        <li>Daily and weekly planning views</li>
+        <li>Application-based task context</li>
+        <li>Follow-up and interview preparation tasks</li>
+        <li>Mobile-friendly app-like workflow</li>
+      </ul>
+    </td>
+    <td width="55%" align="center" valign="middle">
+      <img src="./public/readme/planner.png" alt="MyOfferFlow Smart Planner mobile preview" width="420" />
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## Technical Overview
