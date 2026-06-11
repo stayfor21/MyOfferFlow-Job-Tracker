@@ -19,8 +19,8 @@ export default function AppFooter({ onOpenPlanner }) {
 
   return (
     <footer className="app-footer border-t border-[var(--border)] bg-[var(--surface)]">
-      <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-5 px-4 py-8 text-center sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-6 sm:gap-y-[18px] sm:px-6 sm:text-left lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-6">
-        <div className="order-1 flex min-w-0 items-center justify-center gap-3 sm:justify-self-start lg:justify-self-start">
+      <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-center justify-items-center gap-5 px-4 py-8 text-center sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:justify-items-stretch lg:gap-6 lg:text-left">
+        <div className="flex min-w-0 items-center justify-center gap-3 lg:justify-self-start">
           <LogoMark
             className="!h-8 !w-8 !rounded-xl shadow-[0_8px_18px_rgba(0,0,0,0.18)]"
             glyphClassName="!h-7 !w-7"
@@ -33,7 +33,7 @@ export default function AppFooter({ onOpenPlanner }) {
           </div>
         </div>
 
-        <nav className="order-2 flex w-full flex-wrap items-center justify-center gap-x-[18px] gap-y-2 text-sm font-semibold leading-6 text-[var(--text-soft)] sm:order-3 sm:col-span-2 sm:gap-x-6 lg:order-2 lg:col-span-1 lg:justify-self-center">
+        <nav className="flex w-full flex-wrap items-center justify-center gap-x-[18px] gap-y-2 text-sm font-semibold leading-6 text-[var(--text-soft)] sm:gap-x-6 lg:w-auto lg:flex-nowrap lg:justify-self-center">
           {footerLinks.map((link) => (
             <button
               key={link.id}
@@ -62,7 +62,7 @@ export default function AppFooter({ onOpenPlanner }) {
           </a>
         </nav>
 
-        <div className="order-3 min-w-0 text-center text-xs font-medium text-[var(--text-muted)] sm:order-2 sm:justify-self-end sm:text-right lg:order-3 lg:justify-self-end">
+        <div className="min-w-0 text-center text-xs font-medium text-[var(--text-muted)] lg:justify-self-end lg:text-right">
           <p className="truncate">{t('footer.status')}</p>
           <p className="mt-1 text-[11px] text-[var(--text-faint)]">v1.1</p>
         </div>
