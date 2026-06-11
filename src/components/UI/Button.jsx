@@ -18,12 +18,12 @@ export default function Button({
     primary: [
       'border border-[#8B5CF6]/30 bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] text-white',
       'shadow-[var(--shadow-button)]',
-      'hover:-translate-y-0.5 hover:border-[#A78BFA]/45 hover:brightness-110 hover:shadow-[0_16px_34px_rgba(99,91,255,0.30)]',
+      'hover:-translate-y-px hover:border-[#A78BFA]/35 hover:brightness-105 hover:shadow-[var(--shadow-button-hover)]',
       'disabled:hover:brightness-100 disabled:hover:shadow-none'
     ].join(' '),
     secondary: [
       'border border-[var(--button-secondary-border)] bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)] shadow-none',
-      'hover:-translate-y-0.5 hover:border-[#8B5CF6]/25 hover:bg-[var(--button-secondary-hover)] hover:text-[var(--button-secondary-hover-text)] hover:shadow-sm',
+      'hover:-translate-y-px hover:border-[var(--border-strong)] hover:bg-[var(--button-secondary-hover)] hover:text-[var(--button-secondary-hover-text)] hover:shadow-sm',
       'disabled:hover:border-[var(--button-secondary-border)] disabled:hover:bg-[var(--button-secondary-bg)] disabled:hover:text-[var(--button-secondary-text)]'
     ].join(' '),
     danger: [

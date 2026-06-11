@@ -18,11 +18,11 @@ export default function AppFooter({ onOpenPlanner }) {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--surface)]">
+    <footer className="app-footer border-t border-[var(--border)] bg-[var(--surface)]">
       <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-5 px-4 py-8 text-center sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-6 sm:gap-y-[18px] sm:px-6 sm:text-left lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-6">
         <div className="order-1 flex min-w-0 items-center justify-center gap-3 sm:justify-self-start lg:justify-self-start">
           <LogoMark
-            className="!h-8 !w-8 !rounded-xl shadow-[0_8px_18px_rgba(99,91,255,0.14)]"
+            className="!h-8 !w-8 !rounded-xl shadow-[0_8px_18px_rgba(0,0,0,0.18)]"
             glyphClassName="!h-7 !w-7"
           />
           <div className="min-w-0">

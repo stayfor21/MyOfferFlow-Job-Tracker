@@ -281,7 +281,7 @@ export default function App() {
                 'theme-icon-button relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border md:h-11 md:w-11',
                 'transition-[background-color,border-color,box-shadow,color] duration-200 ease-out',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
-                isPlannerOpen ? 'border-[#8B5CF6]/35 text-[var(--text)] shadow-[0_8px_20px_rgba(99,91,255,0.10)]' : ''
+                isPlannerOpen ? 'border-[var(--primary-border)] text-[var(--text)] shadow-[0_8px_18px_rgba(0,0,0,0.16)]' : ''
               ].join(' ')}
             >
               <CalendarDays size={17} />
@@ -308,8 +308,8 @@ export default function App() {
               className={[
                 'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[#8B5CF6]/30 md:h-11 md:w-11',
                 'bg-gradient-to-br from-[#8B5CF6] via-[#6D5DFB] to-[#635BFF] p-0 text-white',
-                'shadow-[0_10px_24px_rgba(99,91,255,0.16)] transition-[transform,background-color,box-shadow,border-color,filter] duration-200 ease-out',
-                'hover:border-[#A78BFA]/45 hover:brightness-105 hover:shadow-[0_12px_28px_rgba(99,91,255,0.20)]',
+                'shadow-[var(--shadow-button)] transition-[transform,background-color,box-shadow,border-color,filter] duration-200 ease-out',
+                'hover:border-[#A78BFA]/35 hover:brightness-105 hover:shadow-[var(--shadow-button-hover)]',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20 active:scale-[0.98]',
                 'xl:w-auto xl:gap-2 xl:px-5'
               ].join(' ')}

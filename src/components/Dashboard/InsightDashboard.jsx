@@ -177,7 +177,7 @@ export default function InsightDashboard({
                   whileInView={{ strokeDashoffset: 503 - (503 * efficiency) / 100 }}
                   transition={{ duration: 1.5, ease: 'easeInOut', delay: 0.2 }}
                   strokeLinecap="round"
-                  className="text-[#635BFF] drop-shadow-[0_8px_14px_rgba(99,91,255,0.12)]"
+                  className="text-[var(--primary)]"
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">

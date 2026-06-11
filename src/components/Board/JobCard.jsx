@@ -304,11 +304,11 @@ function JobCard({
       className={[
         'of-job-card of-premium-card group select-none transform-gpu [touch-action:pan-x_pan-y] rounded-2xl p-4 will-change-transform',
         'transition-[transform,opacity,box-shadow,border-color,background-color] duration-200 ease-out',
-        'hover:-translate-y-px hover:border-[var(--card-accent-border)] hover:bg-[var(--surface)] hover:shadow-[0_10px_24px_var(--card-accent-glow)]',
+        'hover:-translate-y-px hover:border-[var(--card-accent-border)] hover:bg-[var(--surface)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.22)]',
         'focus-visible:border-[var(--card-accent-border)] focus-visible:shadow-[0_0_16px_var(--card-accent-glow)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--card-accent-ring)]',
         'cursor-grab active:cursor-grabbing',
         isDragging
-          ? 'cursor-grabbing border-[var(--card-accent-border)] opacity-90 shadow-[0_10px_26px_var(--card-accent-drag-glow)] ring-1 ring-[var(--card-accent-ring)]'
+          ? 'cursor-grabbing border-[var(--card-accent-border)] opacity-90 shadow-[0_14px_32px_rgba(0,0,0,0.26)] ring-1 ring-[var(--card-accent-ring)]'
           : ''
       ].join(' ')}
     >
@@ -397,7 +397,7 @@ function JobCard({
               e.stopPropagation();
               window.dispatchEvent(new CustomEvent('open-prep-tool', { detail: job }));
             }}
-            className="h-8 min-w-[116px] shrink-0 gap-1.5 whitespace-nowrap px-3 text-[11px] leading-none shadow-[0_8px_18px_rgba(99,91,255,0.10)]"
+            className="h-8 min-w-[116px] shrink-0 gap-1.5 whitespace-nowrap px-3 text-[11px] leading-none shadow-[var(--shadow-button)]"
           >
             <Sparkles size={12} />
             <span className="text-center">{t('card.prep')}</span>

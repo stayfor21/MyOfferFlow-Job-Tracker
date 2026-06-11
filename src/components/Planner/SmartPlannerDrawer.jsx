@@ -578,7 +578,7 @@ export default function SmartPlannerDrawer({
                     className={[
                       'h-9 shrink-0 rounded-xl border px-3 text-xs font-semibold transition-[background-color,border-color,color,box-shadow] duration-150',
                       activeTab === tab.id
-                        ? 'border-[#635BFF]/35 bg-[#635BFF]/15 text-[var(--text)] shadow-[0_8px_22px_rgba(99,91,255,0.12)]'
+                        ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] text-[var(--text)] shadow-[0_8px_18px_rgba(0,0,0,0.14)]'
                         : 'border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)] hover:text-[var(--text)]'
                     ].join(' ')}
                   >

@@ -41,7 +41,7 @@ export default function SmartFilters({
                 'transition-[background-color,border-color,color,box-shadow] duration-150 ease-out',
                 'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#635BFF]/20',
                 isActive
-                  ? 'border-[#8B5CF6]/35 bg-[#635BFF]/15 text-[var(--text)] shadow-[0_8px_22px_rgba(99,91,255,0.14)]'
+                  ? 'border-[var(--primary-border)] bg-[var(--primary-soft)] text-[var(--text)] shadow-[0_8px_18px_rgba(0,0,0,0.14)]'
                   : 'border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-muted)] hover:border-[var(--primary-border)] hover:bg-[var(--primary-soft)] hover:text-[var(--text)]'
               ].join(' ')}
             >

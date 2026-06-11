@@ -103,10 +103,10 @@ function KanbanEmptyState({ columnId, isDragOver, statusStyle, isFiltered, filte
         '--drop-text': statusStyle.text
       }}
       className={[
-        'group/empty box-border min-h-[196px] w-full min-w-0 max-w-full rounded-2xl border border-dashed px-[18px] py-5 text-center',
+        'kanban-empty-state group/empty box-border min-h-[196px] w-full min-w-0 max-w-full rounded-2xl border border-dashed px-[18px] py-5 text-center',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
-          ? 'border-[var(--drop-drag-border)] bg-[var(--drop-drag-bg)] shadow-[0_10px_24px_var(--drop-drag-glow)]'
+          ? 'border-[var(--drop-drag-border)] bg-[var(--drop-drag-bg)] shadow-[inset_0_0_0_1px_var(--drop-drag-glow)]'
           : 'border-[var(--border-subtle)] bg-[var(--surface)] hover:border-[var(--drop-border)] hover:bg-[var(--drop-bg)]'
       ].join(' ')}
     >
@@ -193,7 +193,7 @@ function Column({
         'of-premium-card flex min-h-[520px] w-[86vw] min-w-[300px] max-w-[360px] shrink-0 snap-start flex-col rounded-3xl p-2 sm:w-[320px] xl:min-h-[600px] xl:w-auto xl:min-w-0 xl:max-w-none',
         'transition-[background-color,border-color,box-shadow] duration-150 ease-out',
         isDragOver
-          ? 'border-[var(--column-drag-border)] bg-[var(--column-drag-bg)] shadow-[0_0_0_1px_var(--column-drag-glow)]'
+          ? 'border-[var(--column-drag-border)] bg-[var(--column-drag-bg)] shadow-[inset_0_0_0_1px_var(--column-drag-glow)]'
           : 'hover:border-[var(--border-strong)]'
       ].join(' ')}
     >
